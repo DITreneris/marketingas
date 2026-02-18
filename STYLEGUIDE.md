@@ -23,9 +23,9 @@
 
 | Kintamasis | Hex | Paskirtis | Naudojimas |
 |------------|-----|-----------|------------|
-| `--accent-primary` | `#EA580C` | Pagrindinė oranžinė (aukštesnis CTA) | CTA mygtukai, hero, progreso juosta |
-| `--accent-primary-hover` | `#C2410C` | Tamsesnė oranžinė | Hover būsena CTA |
-| `--accent-gold` | `#EA580C` | Sutapatintas su primary oranžine | Badge, focus ring, paryškinti elementai |
+| `--accent-primary` | `#d14800` | Pagrindinė oranžinė (WCAG2AA 4.5:1) | CTA mygtukai, hero, progreso juosta |
+| `--accent-primary-hover` | `#b33d00` | Tamsesnė oranžinė | Hover būsena CTA |
+| `--accent-gold` | `#d14800` | Sutapatintas su primary oranžine | Badge, focus ring, paryškinti elementai |
 | `--accent-gold-dark` | `#C2410C` | Tamsesnė oranžinė atmaina | Hover, numerio badge |
 | `--accent-dark` | `#3C485A` | Antrinis akcentas (tamsiai pilka) | Outline mygtukai, borders, antraštės |
 | `--accent-dark-hover` | `#2D3848` | Hover būsena | Antrinių mygtukų hover |
@@ -43,11 +43,11 @@
 
 | Kintamasis | Naudojimas |
 |------------|------------|
-| `--cta-bg` | `#EA580C` – pagrindinis CTA fonas (hero mygtukas, „Kopijuoti promptą“) |
+| `--cta-bg` | `#d14800` – pagrindinis CTA fonas (hero mygtukas, „Kopijuoti promptą“); WCAG2AA 4.5:1 |
 | `--cta-hover` | `#C2410C` – CTA hover |
 | `--blue` | Sutapatintas su `--accent-dark` (3C485A) – objektų rėmeliai, antraštės |
 | `--blue-light` | `#E8ECF0` – šviesus fonas gradientuose |
-| `--orange` | `#EA580C` – pagrindinė oranžinė (suderinta su CTA) |
+| `--orange` | `#d14800` – pagrindinė oranžinė (suderinta su CTA, WCAG2AA) |
 | `--orange-light` | `#FFF7ED` – šviesus oranžinės atspalvis (instrukcijos, progreso wrap, code-block hover) |
 | `--green` | `#38A169` – sėkmės būsena (toast, checkbox, „Nukopijuota“) |
 | `--purple` | `#6B5B95` – rezervuota (nenaudojama pagrindiniuose komponentuose) |
@@ -62,7 +62,7 @@
 - **Hero (header):** Horizontalus gradientas (to right): šilta oranžinė atmaina – suderinta su CTA.  
   - `--hero-gradient-start: #C2410C`, `--hero-gradient-mid: #EA580C`, `--hero-gradient-end: #F97316`.
   - **Overlay:** 10% tamsesnis sluoksnis (`rgba(0,0,0,0.1)`) – tekstas aiškesnis, premium pojūtis.
-- **CTA:** `--cta-bg: #EA580C` (oranžinė) – pagrindinis veiksmas; hover `--cta-hover: #C2410C`. Baltas tekstas ant oranžinės atitinka WCAG AA.
+- **CTA:** `--cta-bg: #d14800` (oranžinė) – pagrindinis veiksmas; hover `--cta-hover: #b33d00`. Baltas tekstas ant oranžinės atitinka WCAG2AA 4.5:1.
 - **Prompt kortelės header:** `linear-gradient(to right, var(--blue-light), var(--orange-light))`, apatinis border: `--accent-dark`.
 
 ---

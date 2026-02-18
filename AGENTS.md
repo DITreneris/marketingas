@@ -30,7 +30,7 @@ ORCHESTRATOR AGENT (koordinacija)
 
 ### Curriculum Agent
 - **Tikslas:** Nustato turinio struktūrą ir mokymosi logiką
-- **Įvestis:** Tikslai, auditorija (roadmap – backlog vėlesniems etapams)
+- **Įvestis:** Tikslai, auditorija, MVP_ROADMAP.md
 - **Išvestis:** Promptų seka, priklausomybių modelis
 
 ### UI/UX & Usability Agent
@@ -40,7 +40,7 @@ ORCHESTRATOR AGENT (koordinacija)
 
 ### QA Agent
 - **Tikslas:** Tikrina kokybę – kodas ir turinys
-- **Įvestis:** Pakeitimų diff, test scenarijai
+- **Įvestis:** Pakeitimų diff, MUST_TODO.md, test scenarijai
 - **Išvestis:** Klaidų ataskaitos, acceptance checklist
 - **Dokumentacija:** Prieš merge tikrina, ar pakeitimams atitinka dokumentacijos atnaujinimai (žr. [docs/DOCUMENTATION.md](docs/DOCUMENTATION.md)). Prieš release – ar CHANGELOG.md atnaujintas ir versija atitinka SemVer.
 
@@ -103,7 +103,7 @@ Prieš PR įsitikinti, kad `npm test` praeina. A11y tikrinimas – per CI arba l
 
 ## 7. Release seka
 
-1. Orchestrator → Curriculum: release scope (backlog / roadmap vėlesniems etapams).
+1. Orchestrator → Curriculum: release scope (MUST_TODO, roadmap).
 2. Orchestrator → Content / UI/UX: reikiai (jei yra).
 3. Orchestrator → QA: release validacija.
 4. QA: `npm test`, CHANGELOG atnaujintas (SemVer), rankinis QA (naršyklės, mobilus, kopijavimas, a11y).
@@ -119,8 +119,8 @@ Prieš PR įsitikinti, kad `npm test` praeina. A11y tikrinimas – per CI arba l
 - [docs/TESTAVIMAS.md](docs/TESTAVIMAS.md) – gyvo testavimo scenarijai ir žurnalas
 - [DEPLOYMENT.md](DEPLOYMENT.md) – deploy (GitHub Pages), post-deploy testavimas
 - [CHANGELOG.md](CHANGELOG.md) – versijų pakeitimų istorija (Keep a Changelog)
-- [docs/archive/MUST_TODO.md](docs/archive/MUST_TODO.md) – MVP užduotys (archyvas)
-- [docs/archive/MVP_ROADMAP.md](docs/archive/MVP_ROADMAP.md) – roadmap (archyvas)
+- [MUST_TODO.md](MUST_TODO.md) – MVP kritinės užduotys
+- [MVP_ROADMAP.md](MVP_ROADMAP.md) – roadmap
 - [feedback-schema.md](feedback-schema.md) – Feedback Store schema
 - [docs/LEGACY_GOLDEN_STANDARD.md](docs/LEGACY_GOLDEN_STANDARD.md) – atskaitos kodas ir taisyklės keičiant turinį
 
@@ -132,11 +132,11 @@ Keičiant **turinį** – atsakingas Content Agent; keičiant **struktūrą arba
 
 | Etapas | Agentas | Užduotis | Įvestis | Išvestis |
 |--------|---------|----------|---------|----------|
-| 1 | **Orchestrator** | Prioritizuoja užduotį, nustato scope | Verslo užduotis | Užduočių eilė, prioritetai |
+| 1 | **Orchestrator** | Prioritizuoja užduotį, nustato scope | Verslo užduotis, MUST_TODO | Užduočių eilė, prioritetai |
 | 2 | **Curriculum** | Nustato promptų seką, priklausomybes, mokymosi tikslus | Scope iš Orchestrator | Specifikacija: ką keisti, kokia seka |
 | 3 | **Content** | Redaguoja tik turinį (promptai, antraštės, aprašymai, info boksai); **privalo laikytis** [docs/LEGACY_GOLDEN_STANDARD.md](docs/LEGACY_GOLDEN_STANDARD.md) | Specifikacija | Pakeisti tekstai; nekeičia id/klasės/JS |
 | 4 | **UI/UX** | Keičia tik išvaizdą/a11y (CSS, ARIA, layout) – ne promptų teksto | Reikalavimai; golden standard struktūra | CSS/HTML pakeitimai, a11y patikros |
-| 5 | **QA** | Vykdo `npm test`, pa11y, dokumentacijos atitikimą; prieš merge – diff vs golden standard | Pakeitimų diff, docs/DOCUMENTATION.md | Ataskaita: pass / grąžinti Content/UI |
+| 5 | **QA** | Vykdo `npm test`, pa11y, dokumentacijos atitikimą; prieš merge – diff vs golden standard | Pakeitimų diff, MUST_TODO, docs/DOCUMENTATION.md | Ataskaita: pass / grąžinti Content/UI |
 
 ---
 

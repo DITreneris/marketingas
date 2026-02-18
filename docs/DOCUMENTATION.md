@@ -12,8 +12,8 @@
 | AGENTS.md | Agentų rolės, workflow, commit prefiksai | Orchestrator | Workflow / rolės pakeitimai |
 | .cursorrules | Saugumas, kokybė, dokumentacijos taisyklės | QA + Orchestrator | Taisyklų pakeitimai, nauji reikalavimai |
 | CHANGELOG.md | Versijų pakeitimų istorija | Kiekvienas (pagal pakeitimą) | Kiekvienas release ir reikšmingi pakeitimai |
-| docs/archive/MUST_TODO.md | MVP kritinės užduotys (archyvas) | — | Netaikoma aktyviai; archyve |
-| docs/archive/MVP_ROADMAP.md | Roadmap (archyvas) | — | Netaikoma aktyviai; archyve |
+| MUST_TODO.md | MVP kritinės užduotys | Orchestrator / Curriculum | Užduočių atnaujinimas, nauji P0 |
+| MVP_ROADMAP.md | Roadmap, tikslai | Curriculum / Orchestrator | Etapų pasikeitimas, prioritetai |
 | INTEGRACIJA.md | Google Sheets, formos | Content / QA | Integracijos žingsniai, konfigūracija |
 | feedback-schema.md | Feedback Store schema | Orchestrator | Schema pakeitimai |
 | privatumas.html | Privatumo politika | Content (juridinė peržiūra atskirai) | Duomenų rinkimo pakeitimai, GDPR |

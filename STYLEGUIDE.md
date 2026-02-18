@@ -1,10 +1,10 @@
-# DI Promptų Biblioteka – stiliaus gidas (Promptų anatomija spin-off)
+# DI Promptų Biblioteka – stiliaus gidas (SOT_Marketingas)
 
-**Versija:** 1.0  
+**Versija:** 1.1  
 **Data:** 2026-02-18  
 **Kalba:** LT
 
-Šis dokumentas aprašo spalvų gamą, tipografiją ir komponentų stilius projekte „DI Promptų Biblioteka“, pritaikytame kaip „Promptų anatomija“ spin-off.
+Šis dokumentas aprašo spalvų gamą, tipografiją ir komponentų stilius projekte – SOT_Marketingas (Rinkodaros vadovo AI operacinė sistema). Oranžinė pagrindinė paletė pasirinkta dėl aukštesnio CTA.
 
 ---
 
@@ -17,18 +17,20 @@
 | `--bg` | `#F7F8FA` | Puslapio fonas | Tekstas `--text` ant jo atitinka AA |
 | `--text` | `#1A202C` | Pagrindinis tekstas, antraštės | Kontrastas ant `--bg` > 4.5:1 |
 | `--text-light` | `#4A5568` | Antrinis tekstas, meta | Kontrastas ant `--bg` > 4.5:1 |
-| `--white` | `#FFFFFF` | Kortelių fonas, mygtukų tekstas | Naudoti ant tamsių fonų |
+| `--white` | `#FFFFFF` | Kortelių fonas, mygtukų tekstas | Naudoti ant tamsių fonų (ant oranžinės CTA atitinka AA) |
 
-### 1.2 Akcentai (brand)
+### 1.2 Akcentai (brand) – oranžinė CTA paletė
 
 | Kintamasis | Hex | Paskirtis | Naudojimas |
 |------------|-----|-----------|------------|
-| `--accent-gold` | `#D9A441` | Muted amber/mustard (ramesnė edukacinei platformai) | Progreso juosta, badge, paryškinti elementai, focus ring |
-| `--accent-gold-dark` | `#C7922E` | Tamsesnė amber atmaina | Hover, numerio badge (kartu su tamsiu tekstu) |
-| `--accent-dark` | `#3C485A` | Antrinis akcentas (tamsiai mėlyna/pilka) | CTA mygtukai, hero gradientas, borders, antraštės |
-| `--accent-dark-hover` | `#2D3848` | Hover būsena | Mygtukų hover |
+| `--accent-primary` | `#EA580C` | Pagrindinė oranžinė (aukštesnis CTA) | CTA mygtukai, hero, progreso juosta |
+| `--accent-primary-hover` | `#C2410C` | Tamsesnė oranžinė | Hover būsena CTA |
+| `--accent-gold` | `#EA580C` | Sutapatintas su primary oranžine | Badge, focus ring, paryškinti elementai |
+| `--accent-gold-dark` | `#C2410C` | Tamsesnė oranžinė atmaina | Hover, numerio badge |
+| `--accent-dark` | `#3C485A` | Antrinis akcentas (tamsiai pilka) | Outline mygtukai, borders, antraštės |
+| `--accent-dark-hover` | `#2D3848` | Hover būsena | Antrinių mygtukų hover |
 
-**Kontrastas:** Ant `--accent-gold` naudoti tik **tamsų tekstą** (`--text`) arba mažus baltus elementus. Ant `--accent-dark` – **baltas tekstas** (`--white`). Muted gold sumažina saturaciją – vizualas ramesnis, ne hiperaktyvus.
+**Kontrastas:** Ant oranžinės (`--accent-primary`, `--cta-bg`) naudoti **baltą tekstą** (`--white`) – atitinka WCAG AA. Ant `--accent-dark` – **baltas tekstas** (`--white`).
 
 ### 1.3 Tertiarinė (bibliotekos identitetas)
 
@@ -41,24 +43,26 @@
 
 | Kintamasis | Naudojimas |
 |------------|------------|
+| `--cta-bg` | `#EA580C` – pagrindinis CTA fonas (hero mygtukas, „Kopijuoti promptą“) |
+| `--cta-hover` | `#C2410C` – CTA hover |
 | `--blue` | Sutapatintas su `--accent-dark` (3C485A) – objektų rėmeliai, antraštės |
 | `--blue-light` | `#E8ECF0` – šviesus fonas gradientuose |
-| `--orange` | `#C7922E` – muted gold (sąrašai, instrukcijos) |
-| `--orange-light` | `#FBF6EB` – šviesus amber atspalvis (instrukcijos, progreso wrap, code-block hover) |
+| `--orange` | `#EA580C` – pagrindinė oranžinė (suderinta su CTA) |
+| `--orange-light` | `#FFF7ED` – šviesus oranžinės atspalvis (instrukcijos, progreso wrap, code-block hover) |
 | `--green` | `#38A169` – sėkmės būsena (toast, checkbox, „Nukopijuota“) |
 | `--purple` | `#6B5B95` – rezervuota (nenaudojama pagrindiniuose komponentuose) |
 | `--border` | `#CBD5E0` – rėmeliai, atskyrimai |
-| `--community-cta-green` | `#0E7A33` – bendruomenės pagrindinis CTA (vienas brand green, be glow) |
+| `--community-cta-green` | `#0E7A33` – bendruomenės CTA (hierarchija – atskirti nuo pagrindinio oranžinio) |
 | `--community-cta-green-hover` | `#0B6B2D` – hover būsena |
 
 ---
 
 ## 2. Hero ir gradientai
 
-- **Hero (header):** Horizontalus gradientas (to right): kairė tamsiai pilkai melsva → dešinė subtili šilta šviesa (mažiau promo, daugiau SaaS).  
-  - `--hero-gradient-start: #3C485A`, `--hero-gradient-mid: #4A5568`, `--hero-gradient-end: #5C6370` (šalta pilka, švaresnis tech).
-  - **Overlay:** 10% tamsesnis sluoksnis (`rgba(0,0,0,0.1)`) per visą hero – tekstas aiškesnis, spalva nusėda, premium pojūtis.
-- **CTA:** `--cta-bg: #445260` (4–6% šviesesnis už hero) – atsiranda nuo fono; hover – šviesus glow (`0 0 20px rgba(255,255,255,0.12)`).
+- **Hero (header):** Horizontalus gradientas (to right): šilta oranžinė atmaina – suderinta su CTA.  
+  - `--hero-gradient-start: #C2410C`, `--hero-gradient-mid: #EA580C`, `--hero-gradient-end: #F97316`.
+  - **Overlay:** 10% tamsesnis sluoksnis (`rgba(0,0,0,0.1)`) – tekstas aiškesnis, premium pojūtis.
+- **CTA:** `--cta-bg: #EA580C` (oranžinė) – pagrindinis veiksmas; hover `--cta-hover: #C2410C`. Baltas tekstas ant oranžinės atitinka WCAG AA.
 - **Prompt kortelės header:** `linear-gradient(to right, var(--blue-light), var(--orange-light))`, apatinis border: `--accent-dark`.
 
 ---
@@ -79,9 +83,9 @@
 
 ### 4.1 Mygtukai
 
-- **Pagrindinis (CTA):** `background: var(--accent-dark)`, `color: white`, `border-radius: 12px`, hover – `--accent-dark-hover`, `translateY(-2px)`, focus-visible – `outline 3px var(--accent-gold)`.
+- **Pagrindinis (CTA):** `background: var(--cta-bg)` (oranžinė), `color: white`, `border-radius: 12px`, hover – `--cta-hover`, `translateY(-2px)`, focus-visible – `outline 3px var(--accent-gold)`.
 - **Sėkmės būsena:** `background: var(--green)` (pvz. „Nukopijuota“).
-- **Antrinis (nuorodos „Kas toliau?“):** `background: var(--tertiary)`, hover `#0f766e`, focus-visible – aukso ringas.
+- **Antrinis (nuorodos „Kas toliau?“):** `background: var(--tertiary)`, hover `#0f766e`, focus-visible – oranžinio ringas.
 
 ### 4.2 Badge ir žymos
 

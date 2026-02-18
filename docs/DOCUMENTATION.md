@@ -23,6 +23,7 @@
 | DEPLOYMENT.md | Deploy instrukcijos, troubleshooting | QA / Orchestrator | Platforma, URL, post-deploy |
 | docs/QA_STANDARTAS.md | QA standartas (nuoroda spinoff01) | QA | Kriterijai, komandos, spinoff01 |
 | docs/TESTAVIMAS.md | Gyvo testavimo scenarijai ir žurnalas | QA | Po deploy testavimas, rezultatai |
+| docs/LEGACY_GOLDEN_STANDARD.md | Atskaitos kodas ir taisyklės keičiant turinį | QA / Orchestrator | Golden standard atnaujinimas, struktūros pakeitimai |
 
 ---
 

@@ -1,6 +1,6 @@
 /**
  * Struktūriniai testai – index.html
- * Tikrina, kad puslapyje yra visi būtini elementai (8 promptai, a11y, nuorodos).
+ * Tikrina, kad puslapyje yra visi būtini elementai (10 promptų, a11y, nuorodos).
  * Paleisti: node tests/structure.test.js (arba npm test)
  */
 'use strict';
@@ -38,29 +38,29 @@ function run() {
     process.exit(1);
   }
 
-  // --- 8 promptai ---
-  for (let i = 1; i <= 8; i++) {
+  // --- 10 promptų ---
+  for (let i = 1; i <= 10; i++) {
     if (assert(html.includes(`id="prompt${i}"`), `Prompt ${i} ID (prompt${i}) egzistuoja`)) passed++;
     else failed++;
   }
-  for (let i = 1; i <= 8; i++) {
+  for (let i = 1; i <= 10; i++) {
     if (assert(html.includes(`id="block${i}"`), `Anchor block${i} egzistuoja`)) passed++;
     else failed++;
   }
 
-  // --- Kopijuoti mygtukai (8) ---
+  // --- Kopijuoti mygtukai (10) ---
   const copyButtons = (html.match(/Kopijuoti promptą/g) || []).length;
-  if (assert(copyButtons >= 8, `Kopijuoti promptą mygtukų: ${copyButtons} (>= 8)`)) passed++;
+  if (assert(copyButtons >= 10, `Kopijuoti promptą mygtukų: ${copyButtons} (>= 10)`)) passed++;
   else failed++;
 
-  // --- Code-block (8) ---
+  // --- Code-block (10) ---
   const codeBlocks = (html.match(/class="[^"]*code-block[^"]*"/g) || []).length;
-  if (assert(codeBlocks >= 8, `Code-block elementų: ${codeBlocks} (>= 8)`)) passed++;
+  if (assert(codeBlocks >= 10, `Code-block elementų: ${codeBlocks} (>= 10)`)) passed++;
   else failed++;
 
-  // --- Pažymėjau kaip atlikau (8 checkbox) ---
+  // --- Pažymėjau kaip atlikau (10 checkbox) ---
   const checkboxes = (html.match(/class="[^"]*prompt-done[^"]*"/g) || []).length;
-  if (assert(checkboxes >= 8, `Prompt-done checkbox: ${checkboxes} (>= 8)`)) passed++;
+  if (assert(checkboxes >= 10, `Prompt-done checkbox: ${checkboxes} (>= 10)`)) passed++;
   else failed++;
 
   // --- Prieinamumas / semantika ---

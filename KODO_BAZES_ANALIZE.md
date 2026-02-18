@@ -82,7 +82,7 @@
 
 ### 4.1 Funkcionalumas
 
-- **8 promptai:** Visi 8 promptai egzistuoja su teisingais `id="prompt1"` … `id="prompt8"` ir `id="block1"` … `id="block8"`.
+- **10 promptų:** Visi 10 promptų egzistuoja su teisingais `id="prompt1"` … `id="prompt10"` ir `id="block1"` … `id="block10"`.
 - **Kopijavimas:** Naudojamas `navigator.clipboard.writeText` + `fallbackCopy` (execCommand) – atitinka README ir .cursorrules.
 - **Progresas:** „Pažymėjau kaip atlikau“ saugoma `localStorage` su raktais `di_prompt_done_1` … `di_prompt_done_8` – atitinka privatumas.html aprašymą.
 - **Klaviatūra:** Code-block turi `tabindex="0"`, `role="button"`, `onkeydown` (Enter/Space) – atitinka a11y reikalavimus.
@@ -106,7 +106,7 @@ Pridėta siekiant **garantuoti, kad sistema veikia** po pakeitimų:
 
 | Testas              | Failas / komanda        | Ką tikrina |
 |---------------------|-------------------------|------------|
-| Struktūra (HTML)    | `tests/structure.test.js` | 8 promptų ID, 8 code-block, skip link, main, progress, toast, footer nuoroda į privatumas.html |
+| Struktūra (HTML)    | `tests/structure.test.js` | 10 promptų ID, 10 code-block, skip link, main, progress, toast, footer nuoroda į privatumas.html |
 | Lint HTML           | `npm run lint:html`     | W3C HTML validacija |
 | Lint JS             | `npm run lint:js`       | ESLint .js failams |
 | A11y (CI)           | pa11y                   | WCAG2AA index.html (ir rekomenduojama privatumas.html) |
@@ -144,13 +144,22 @@ CI workflow rekomenduojama papildyti `npm test` (kad būtų vykdomi ir struktūr
 
 Po šios analizės ir pridėtų testų:
 
-- [x] Struktūriniai testai – 8 promptai, semantika, nuorodos.
+- [x] Struktūriniai testai – 10 promptų, semantika, nuorodos.
 - [x] Lint (HTML + JS) – įtraukti į `npm test`.
 - [x] CI – `npm test` + pa11y (index.html + privatumas.html).
 - [x] Production console – pašalinti `console.error` / `console.warn` iš index.html (2026-02-18).
 - [x] Dead CSS – dokumentuota komentaru (modal/forma rezervuota būsimai).
 - [x] HTML validacija – pataisytos ARIA klaidos (span/p + aria-label → pridėtas role="status").
 - [ ] Rankinis QA – MUST_TODO Basic Testing (naršyklės, mobilus, kopijavimas, klaviatūra) – rekomenduojama kartoti prieš release.
+
+---
+
+## 8. Legacy Golden Standard
+
+Dabartinis kodas įrašytas kaip **legacy golden standard**. Toliau keičiame **tik turinį** (promptų tekstus, antraštes, aprašymus, info boksus), laikydamiesi fiksuotos struktūros, ID, CSS klasių ir JavaScript API.
+
+- **Dokumentas:** [docs/LEGACY_GOLDEN_STANDARD.md](docs/LEGACY_GOLDEN_STANDARD.md) – kas fiksuota, ką leidžiama keisti, struktūros schema, checklist prieš commit.
+- **Taisyklė:** Content Agent redaguoja tik turinį; pakeitimai struktūrai arba JS reikalauja QA patvirtinimo ir (jei reikia) šio standarto dokumento atnaujinimo.
 
 ---
 

@@ -1,29 +1,31 @@
-# DI Promptų Biblioteka – Verslo Mokymų Platforma
+# SOT_Marketingas – Rinkodaros vadovo AI operacinė sistema
 
-📚 **8 promptai organizacijos analizei ir optimizavimui su dirbtinio intelekto pagalba**
+📚 **10 promptų rinkodaros sistemai: kasdienis turinys, lead'ai, metrikos. Plan → Kurk → Distribuok → Matuok → Spręsk.**
 
 ## Apie projektą
 
-Šis projektas yra interaktyvi HTML platforma, skirta verslo analitikams ir vadovams, kurie nori efektyviai naudoti dirbtinį intelektą (DI) savo organizacijos analizei ir optimizavimui.
+Šis projektas yra interaktyvi HTML platforma (SOT_Marketingas) – Rinkodaros vadovo AI operacinė sistema. Integruota turinio ir distribucijos sistema: 30 dienų planas, repurpose mašina, LinkedIn, video, performance analizė, objection handling, lead magnet, case study, topical cluster ir MASTER PROMPT.
 
 ### Funkcijos
 
-- ✅ **8 specializuoti promptai** organizacijos analizei
-- 🎯 **Interaktyvus dizainas** su lengvu kopijavimu
+- ✅ **10 specializuotų promptų** rinkodaros sistemai (MUST, SHOULD, WANT, MASTER)
+- 🎯 **Interaktyvus dizainas** su oranžine CTA palete (aukštesnis CTA)
 - 📋 **Automatinis tekstų kopijavimas** į mainų atmintinę
 - 📱 **Responsive dizainas** – veikia visuose įrenginiuose (Mobile UI First)
-- 🎨 **Minimali aplikacija** – **nerinkime jokių vartotojų duomenų**; kontaktų forma ir Google Sheets integracija šiame etape išjungta (galima įjungti vėliau)
+- 🎨 **Minimali aplikacija** – **nerinkime jokių vartotojų duomenų**; kontaktų forma šiame etape išjungta
 
 ## Promptų sąrašas
 
-1. **DI Konteksto Patikra** - Patikrinkite, ką ChatGPT žino apie jūsų organizaciją
-2. **Organizacijos Portretas** - Sukurkite išsamų organizacijos profilį
-3. **Mano Rolė Organizacijoje** - Apibrėžkite savo rolės tikslą ir atsakomybes
-4. **Pareigybės Instrukcija + KPI** - Praktiškas pareigybės aprašas su KPI
-5. **Pagrindiniai Darbo Procesai** - Identifikuokite pagrindinius procesus (Pareto 80/20)
-6. **DI Pagalba ir Optimizavimas** - Paverskite DI realiu darbo asistentu
-7. **Kasdienė Promptų Biblioteka** - Paruošti promptai kasdieniniams darbams
-8. **Kritinių Situacijų Simuliacija** - Pasiruoškite spaudimui iš anksto
+1. **30 dienų turinio sistema** – 4 kolonos (Autoritetas, Problema, Case, Pasiūlymas)
+2. **One Insight → 7 formatai** – Repurpose mašina (LinkedIn, carousel, video, email, landing, ad, hook)
+3. **LinkedIn Authority Post** – 150–200 žodžių su hook, proof, CTA
+4. **30s Short-Form Video scenarijus** – Hook, 3 punktai, pavyzdys, CTA
+5. **Performance → Sprendimas** – Kasdienė analizė: kas neveikia, ką testuoti, ką stabdyti
+6. **Objection Handling Generatorius** – 10 turinio vienetų iš klientų objection'ų
+7. **Lead Magnet Post + DM seka** – Postas + 4 žinučių follow-up (deliver → kvalifikacija → vertė → pasiūlymas)
+8. **Case Study struktūra** – Problema, sprendimas, procesas, rezultatas, pamokos, CTA
+9. **Topical Cluster (SEO autoritetas)** – 1 pillar + 8 supporting temas, vidinės nuorodos, CTA
+10. **MASTER PROMPT** – Vienas valdymo centras: 30 d. struktūra, 5 turinio vienetai, repurpose, hipotezės, veiksmai
 
 ## Kaip naudoti
 
@@ -31,7 +33,7 @@
 2. Pasirinkite promptą ir spauskite ant jo – tekstas automatiškai pažymėsis
 3. Spauskite mygtuką **"Kopijuoti promptą"** arba naudokite `Ctrl+C` / `Cmd+C`
 4. Įklijuokite į ChatGPT, Claude ar kitą DI įrankį
-5. Pakeiskite `[ĮMONĖ]` ir `[MANO ROLĖ]` savo duomenimis
+5. Pakeiskite `[auditorija]`, `[skausmas]`, `[USP]`, `[kanalas]` ir kitus laukus savo duomenimis
 
 ## Technologijos
 
@@ -88,8 +90,8 @@ Dabartinė versija minimali – kontaktų formos nėra. Jei vėliau reikės rink
 
 ## Autorius
 
-Sukurta verslo analitikams ir vadovams, kurie nori efektyviai integruoti dirbtinį intelektą į savo darbo procesus.
+Sukurta rinkodaros vadovams ir komandoms, kurios nori sistemingai generuoti turinį, kurti lead'us ir matuoti rezultatus.
 
 ---
 
-**Sėkmingos analizės! 🚀**
+**Sėkmės rinkodaroje! 🚀**

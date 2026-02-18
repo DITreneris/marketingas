@@ -122,6 +122,21 @@ Prieš PR įsitikinti, kad `npm test` praeina. A11y tikrinimas – per CI arba l
 - [MUST_TODO.md](MUST_TODO.md) – MVP kritinės užduotys
 - [MVP_ROADMAP.md](MVP_ROADMAP.md) – roadmap
 - [feedback-schema.md](feedback-schema.md) – Feedback Store schema
+- [docs/LEGACY_GOLDEN_STANDARD.md](docs/LEGACY_GOLDEN_STANDARD.md) – atskaitos kodas ir taisyklės keičiant turinį
+
+---
+
+## 9. Užduočių seka ir golden standard
+
+Keičiant **turinį** – atsakingas Content Agent; keičiant **struktūrą arba JS** – reikia QA patvirtinimo, kad nepažeidžiamas golden standard (arba [docs/LEGACY_GOLDEN_STANDARD.md](docs/LEGACY_GOLDEN_STANDARD.md) atnaujinamas sąmoningai).
+
+| Etapas | Agentas | Užduotis | Įvestis | Išvestis |
+|--------|---------|----------|---------|----------|
+| 1 | **Orchestrator** | Prioritizuoja užduotį, nustato scope | Verslo užduotis, MUST_TODO | Užduočių eilė, prioritetai |
+| 2 | **Curriculum** | Nustato promptų seką, priklausomybes, mokymosi tikslus | Scope iš Orchestrator | Specifikacija: ką keisti, kokia seka |
+| 3 | **Content** | Redaguoja tik turinį (promptai, antraštės, aprašymai, info boksai); **privalo laikytis** [docs/LEGACY_GOLDEN_STANDARD.md](docs/LEGACY_GOLDEN_STANDARD.md) | Specifikacija | Pakeisti tekstai; nekeičia id/klasės/JS |
+| 4 | **UI/UX** | Keičia tik išvaizdą/a11y (CSS, ARIA, layout) – ne promptų teksto | Reikalavimai; golden standard struktūra | CSS/HTML pakeitimai, a11y patikros |
+| 5 | **QA** | Vykdo `npm test`, pa11y, dokumentacijos atitikimą; prieš merge – diff vs golden standard | Pakeitimų diff, MUST_TODO, docs/DOCUMENTATION.md | Ataskaita: pass / grąžinti Content/UI |
 
 ---
 

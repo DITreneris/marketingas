@@ -21,7 +21,7 @@ Po kiekvieno deploy atlikti gyvą testavimą ir rezultatus įrašyti čia (arba 
 
 ### Funkcionalumas
 
-- [ ] **Kopijavimas:** Visi 8 promptai – pasirinkti → „Kopijuoti promptą“ → įklijuoti į DI (pvz. ChatGPT) – tekstas teisingas.
+- [ ] **Kopijavimas:** Visi 10 promptų – pasirinkti → „Kopijuoti promptą“ → įklijuoti į DI (pvz. ChatGPT) – tekstas teisingas.
 - [ ] **Progresas:** „Pažymėjau kaip atlikau“ – varnelė įrašoma; perkrovus puslapį – progresas išsaugotas (localStorage).
 - [ ] **Skip link:** Tab iki „Praleisti į turinį“ – Enter – fokusas pereina į pagrindinį turinį.
 - [ ] **Privatumas:** Nuoroda į privatumas.html veikia; privatumas.html atsidaro ir rodo turinį.

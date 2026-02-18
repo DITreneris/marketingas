@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leisk DI atlikti 30–50% tavo kasdienių užduočių – Promptų anatomija</title>
+    <title>Rinkodaros vadovo AI operacinė sistema – SOT_Marketingas</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>html { scroll-behavior: smooth; }</style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,42 +17,44 @@
         }
 
         :root {
-            /* Promptų anatomija spin-off – spalvų gama */
+            /* SOT_Marketingas – oranžinė CTA paletė (aukštesnis CTA) */
             --bg: #F7F8FA;
             --white: #FFFFFF;
             --text: #1A202C;
             --text-light: #4A5568;
             --border: #CBD5E0;
 
-            /* Pagrindinis akcentas (muted amber/mustard – ramesnė edukacinei platformai) */
-            --accent-gold: #D9A441;
-            --accent-gold-dark: #C7922E;
+            /* Pagrindinis akcentas – oranžinė (CTA, mygtukai, progresas) */
+            --accent-primary: #EA580C;
+            --accent-primary-hover: #C2410C;
+            --accent-gold: #EA580C;
+            --accent-gold-dark: #C2410C;
 
-            /* Antrinis akcentas (tamsiai mėlyna/pilka) – CTA, hero */
+            /* Antrinis akcentas (tamsiai pilka) – hero, outline mygtukai */
             --accent-dark: #3C485A;
             --accent-dark-hover: #2D3848;
 
-            /* Hero gradientas: kairė tamsiai pilkai melsva → dešinė šalta pilka (švaresnis tech) */
-            --hero-gradient-start: #3C485A;
-            --hero-gradient-mid: #4A5568;
-            --hero-gradient-end: #5C6370;
-            --cta-bg: #445260;
+            /* Hero gradientas: šilta oranžinė atmaina (suderinta su CTA) */
+            --hero-gradient-start: #C2410C;
+            --hero-gradient-mid: #EA580C;
+            --hero-gradient-end: #F97316;
+            --cta-bg: #EA580C;
             --cta-text: #FFFFFF;
-            --cta-hover: var(--accent-dark-hover);
+            --cta-hover: var(--accent-primary-hover);
 
             /* Tertiarinė (bibliotekos identitetas) – teal */
             --tertiary: #0D9488;
             --tertiary-light: #CCFBF1;
 
-            /* Semantiniai – suderinti su palete (muted gold) */
+            /* Semantiniai – suderinti su oranžine palete */
             --blue: #3C485A;
             --blue-light: #E8ECF0;
-            --orange: #C7922E;
-            --orange-light: #FBF6EB;
+            --orange: #EA580C;
+            --orange-light: #FFF7ED;
             --green: #38A169;
             --purple: #6B5B95;
 
-            /* Community CTA – vienas brand green, be glow */
+            /* Community CTA – palikta green (hierarchija) arba suderinta */
             --community-cta-green: #0E7A33;
             --community-cta-green-hover: #0B6B2D;
         }
@@ -699,6 +701,7 @@
             border: 3px solid var(--accent-dark);
             border-radius: 12px;
             padding: 32px;
+            margin-top: 20px;
             margin-bottom: 24px;
             cursor: pointer;
             transition: all 0.2s;
@@ -722,8 +725,9 @@
         .code-block::before {
             content: '💡 Spausk čia ir nukopijuok';
             position: absolute;
-            top: -12px;
+            top: 12px;
             right: 20px;
+            z-index: 1;
             background: var(--accent-dark);
             color: white;
             padding: 6px 14px;
@@ -802,7 +806,7 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: var(--accent-dark);
+            background: var(--cta-bg);
             color: white;
             padding: 18px 36px;
             min-height: 44px;
@@ -814,7 +818,7 @@
             cursor: pointer;
             transition: all 0.2s;
             font-family: 'Inter', sans-serif;
-            box-shadow: 0 4px 12px rgba(60, 72, 90, 0.35);
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
             outline: none;
         }
 
@@ -829,9 +833,9 @@
         }
 
         .btn:hover {
-            background: var(--accent-dark-hover);
+            background: var(--cta-hover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(60, 72, 90, 0.4);
+            box-shadow: 0 8px 20px rgba(234, 88, 12, 0.4);
         }
 
         .btn:active {
@@ -1411,11 +1415,11 @@
         <header class="header">
             <div class="header-badges">
                 <a href="https://ditreneris.github.io/anatomija/" class="badge" target="_blank" rel="noopener noreferrer" aria-label="Pilna Promptų anatomija – interaktyvus mokymas (atidaroma naujame lange)">Promptų anatomija</a>
-                <span class="badge badge-spinoff" role="status" aria-label="Promptų anatomijos spin-off projektas">Spin-off Nr. 1</span>
+                <span class="badge badge-spinoff" role="status" aria-label="Rinkodaros AI operacinė sistema">SOT_Marketingas</span>
             </div>
-            <h1>Leisk DI atlikti 30–50% tavo kasdienių užduočių</h1>
-            <p>8 pratimai su paruoštais šablonais – rezultatai per kelias minutes.</p>
-            <p class="header-meta" role="status" aria-label="Orientacinis laikas">~30 min</p>
+            <h1>Rinkodaros vadovo AI operacinė sistema</h1>
+            <p>10 promptų – kasdienis turinys, lead’ai, metrikos. Plan → Kurk → Distribuok → Matuok → Spręsk.</p>
+            <p class="header-meta" role="status" aria-label="Orientacinis laikas">~45–60 min</p>
             <div class="header-cta">
                 <a href="#block1" class="cta-button" aria-label="Pradėti nemokamai – pereiti prie pirmo prompto">Pradėti nemokamai</a>
                 <a href="#community" class="cta-button-outline" aria-label="Prisijunk prie bendruomenės – WhatsApp grupė">Prisijunk prie bendruomenės</a>
@@ -1426,10 +1430,10 @@
         <section class="objectives" aria-labelledby="objectives-title">
             <h2 id="objectives-title"><span aria-hidden="true">🎯</span> Ką realiai gausi</h2>
             <ul>
-                <li>Sutaupysi 3–5 valandas per savaitę</li>
-                <li>Sumažinsi klaidas DI atsakymuose</li>
-                <li>Turėsi 8 kopijuojamų šablonų kasdieniam darbui</li>
-                <li>Suprasi, kaip valdyti DI kontekstą, o ne tik „rašyti promptus“</li>
+                <li>Generuosi kasdienį turinį pagal 4 kolonas (Autoritetas, Problema, Case, Pasiūlymas)</li>
+                <li>Didinsi autoritetą ir kursi lead’us su paruoštais promptais</li>
+                <li>Testuosi ir optimizuosi – performance metrikos → konkretūs veiksmai</li>
+                <li>Veiksi uždaru ciklu: Plan → Kurk → Distribuok → Matuok → Spręsk</li>
             </ul>
         </section>
 
@@ -1444,14 +1448,14 @@
                 <li>Pasirink promptą ir spausk ant jo – tekstas pažymėsis</li>
                 <li>Spausk <strong>„Kopijuoti promptą“</strong> arba <code>Ctrl+C</code> / <code>Cmd+C</code></li>
                 <li>Įklijuok į ChatGPT, Claude ar kitą DI įrankį</li>
-                <li>Pakeisk <code>[ĮMONĖ]</code> ir <code>[MANO ROLĖ]</code> savo duomenimis – ir gauk rezultatą</li>
+                <li>Pakeisk <code>[auditorija]</code>, <code>[skausmas]</code>, <code>[USP]</code>, <code>[kanalas]</code> ir kitus laukus savo duomenimis – ir gauk rezultatą</li>
             </ol>
         </section>
 
         <!-- PROGRESS INDICATOR (S1) -->
         <div class="progress-wrap" id="progressIndicator" aria-live="polite" aria-atomic="true">
-            <p id="progressText">Panaudojai 0 iš 8 promptų</p>
-            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="8" aria-label="Progresas">
+            <p id="progressText">Panaudojai 0 iš 10 promptų</p>
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" aria-label="Progresas">
                 <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
             </div>
         </div>
@@ -1461,11 +1465,11 @@
             <div class="prompt-header">
                 <div class="prompt-meta">
                     <div class="number">1</div>
-                    <div class="category">Pagrindas</div>
-                    <span class="prompt-time">~3–5 min</span>
+                    <div class="category">MUST</div>
+                    <span class="prompt-time">~5–10 min</span>
                 </div>
-                <h2 class="prompt-title">DI Konteksto Patikra</h2>
-                <p class="prompt-desc">Patikrink, ką ChatGPT žino apie tavo organizaciją ir kur gali suklaidinti</p>
+                <h2 class="prompt-title">30 dienų turinio sistema</h2>
+                <p class="prompt-desc">Sukurk 30 dienų turinio planą pagal 4 turinio kolonas</p>
             </div>
             <div class="prompt-body">
                 <div class="code-block" 
@@ -1475,24 +1479,26 @@
                      aria-label="Pasirinkti ir kopijuoti promptą 1"
                      onclick="selectText(this)"
                      onkeydown="handleCodeBlockKeydown(event, this)">
-                    <pre class="code-text" id="prompt1">Rolė – kritiškas verslo analitikas.
+                    <pre class="code-text" id="prompt1">Sukurk 30 dienų turinio planą pagal 4 turinio kolonas:
+(1) Autoritetas
+(2) Problema
+(3) Case / Proof
+(4) Pasiūlymas
 
-Remdamasis tik viešai prieinama informacija ir bendromis rinkos žiniomis,
-aprašyk, kaip TU supranti įmonę [ĮMONĖ].
+Kiekvienai dienai pateik:
+- Tema
+- Hook
+- Formatas
+- CTA
+- KPI
 
-Struktūra:
-1) Ką žinai užtikrintai
-2) Kokias prielaidas darai
-3) Kur trūksta informacijos ir rizikuoji klysti
-
-Pabaigoje aiškiai pažymėk:
-„Šios vietos reikalauja patikslinimo iš vartotojo".</pre>
+Remkis: [auditorija], [skausmas], [USP], [kanalas].</pre>
                 </div>
                 <div class="info-box" role="note" aria-label="Informacija apie promptą">
                     <div class="info-icon" aria-hidden="true">💡</div>
                     <div class="info-content">
-                        <strong>Kodėl tai svarbu?</strong>
-                        <p>Sumažina DI „haliucinacijas“ ir klaidingus sprendimus – aiškiai matai, ką DI tikrai žino apie tavo kontekstą.</p>
+                        <strong>Branduolys:</strong>
+                        <p>Be šios sistemos nėra nuoseklaus turinio – 4 kolonos užtikrina balansą tarp autoriteto, problemos, įrodymo ir pasiūlymo.</p>
                     </div>
                 </div>
             </div>
@@ -1517,11 +1523,11 @@ Pabaigoje aiškiai pažymėk:
             <div class="prompt-header">
                 <div class="prompt-meta">
                     <div class="number">2</div>
-                    <div class="category">Analizė</div>
-                    <span class="prompt-time">~3–5 min</span>
+                    <div class="category">MUST</div>
+                    <span class="prompt-time">~5–10 min</span>
                 </div>
-                <h2 class="prompt-title">Organizacijos Portretas</h2>
-                <p class="prompt-desc">Sukurk išsamų savo organizacijos profilį ir kontekstą</p>
+                <h2 class="prompt-title">One Insight → 7 formatai (Repurpose mašina)</h2>
+                <p class="prompt-desc">Vieną insight’ą paversk į 7 skirtingus formatus</p>
             </div>
             <div class="prompt-body">
                 <div class="code-block" 
@@ -1531,24 +1537,22 @@ Pabaigoje aiškiai pažymėk:
                      aria-label="Pasirinkti ir kopijuoti promptą 2"
                      onclick="selectText(this)"
                      onkeydown="handleCodeBlockKeydown(event, this)">
-                    <pre class="code-text" id="prompt2">Rolė – patyręs verslo analitikas.
+                    <pre class="code-text" id="prompt2">Paimk šį insight'ą: [ ].
 
-Išanalizuok įmonę [ĮMONĖ].
-
-Aprašyk:
-- apytikslį dydį (darbuotojai, apyvarta);
-- pagrindines veiklos sritis;
-- valdymo / organizacinį modelį;
-- tipinius iššūkius šiame sektoriuje Lietuvoje.
-
-Atsakymas – trumpas, struktūruotas.
-Pažymėk, kur daromos prielaidos.</pre>
+Sugeneruok:
+- LinkedIn post
+- Carousel outline
+- 30s video
+- Email
+- Landing hero
+- Ad copy
+- 3 hook variantus</pre>
                 </div>
                 <div class="info-box" role="note" aria-label="Informacija apie promptą">
                     <div class="info-icon" aria-hidden="true">💡</div>
                     <div class="info-content">
-                        <strong>Taikymas:</strong>
-                        <p>Šis promptas sukuria organizacijos kontekstą, kuris bus naudojamas visuose kituose promptuose.</p>
+                        <strong>Repurpose:</strong>
+                        <p>Vienas stiprus insight’as tampa 7 turinio vienetais – sutaupai laiko ir išlaikai nuoseklumą kanaluose.</p>
                     </div>
                 </div>
             </div>
@@ -1573,11 +1577,11 @@ Pažymėk, kur daromos prielaidos.</pre>
             <div class="prompt-header">
                 <div class="prompt-meta">
                     <div class="number">3</div>
-                    <div class="category">Rolė</div>
+                    <div class="category">MUST</div>
                     <span class="prompt-time">~3–5 min</span>
                 </div>
-                <h2 class="prompt-title">Mano Rolė Organizacijoje</h2>
-                <p class="prompt-desc">Aiškiai apibrėžk savo rolės tikslą, atsakomybes ir įtaką</p>
+                <h2 class="prompt-title">LinkedIn Authority Post</h2>
+                <p class="prompt-desc">150–200 žodžių postas su hook, 3 punktais, pavyzdžiu ir CTA</p>
             </div>
             <div class="prompt-body">
                 <div class="code-block" 
@@ -1587,24 +1591,17 @@ Pažymėk, kur daromos prielaidos.</pre>
                      aria-label="Pasirinkti ir kopijuoti promptą 3"
                      onclick="selectText(this)"
                      onkeydown="handleCodeBlockKeydown(event, this)">
-                    <pre class="code-text" id="prompt3">Rolė – organizacijų dizaino konsultantas.
-
-Remdamasis organizacijos analize,
-aprašyk rolę [MANO ROLĖ] įmonėje [ĮMONĖ].
-
-Įtrauk:
-- pagrindinį rolės tikslą;
-- 5–7 pagrindines atsakomybes;
-- sprendimų lygį (operacinis / taktinis / strateginis);
-- kam atsiskaito ir su kuo dirba kasdien.
-
-Rašyk glaustai, be teorijos.</pre>
+                    <pre class="code-text" id="prompt3">Parašyk 150–200 žodžių postą:
+- Stiprus hook
+- 3 konkretūs punktai
+- Realus pavyzdys / skaičius
+- Aiškus CTA</pre>
                 </div>
                 <div class="info-box" role="note" aria-label="Informacija apie promptą">
                     <div class="info-icon" aria-hidden="true">💡</div>
                     <div class="info-content">
-                        <strong>Rezultatas:</strong>
-                        <p>Gausi aiškų rolės aprašymą – naudok kaip atskaitos tašką tolesniems žingsniams.</p>
+                        <strong>Autoritetas:</strong>
+                        <p>LinkedIn postai su proof ir konkrečiais punktais didina pasitikėjimą ir engagement.</p>
                     </div>
                 </div>
             </div>
@@ -1629,11 +1626,11 @@ Rašyk glaustai, be teorijos.</pre>
             <div class="prompt-header">
                 <div class="prompt-meta">
                     <div class="number">4</div>
-                    <div class="category">Dokumentas</div>
+                    <div class="category">MUST</div>
                     <span class="prompt-time">~3–5 min</span>
                 </div>
-                <h2 class="prompt-title">Pareigybės Instrukcija + KPI</h2>
-                <p class="prompt-desc">Sukurk praktišką pareigybių aprašą su KPI</p>
+                <h2 class="prompt-title">30s Short-Form Video scenarijus</h2>
+                <p class="prompt-desc">Scenarijus 30s videokontentu su hook ir CTA</p>
             </div>
             <div class="prompt-body">
                 <div class="code-block" 
@@ -1643,23 +1640,17 @@ Rašyk glaustai, be teorijos.</pre>
                      aria-label="Pasirinkti ir kopijuoti promptą 4"
                      onclick="selectText(this)"
                      onkeydown="handleCodeBlockKeydown(event, this)">
-                    <pre class="code-text" id="prompt4">Rolė – patyręs vadovas.
-
-Sukurk pareigybės instrukciją rolei [MANO ROLĖ] įmonėje [ĮMONĖ].
-
-Įtrauk:
-- pagrindines atsakomybes;
-- reikalingas kompetencijas;
-- 5–7 pamatuojamus KPI;
-- kaip atrodo „gera veikla" po 6 mėn.
-
-Orientacija – realus darbas, ne HR formalizmas.</pre>
+                    <pre class="code-text" id="prompt4">Sukurk 30s scenarijų:
+- 0–2s hook
+- 3 konkretūs punktai
+- 1 realus pavyzdys
+- Aiškus CTA</pre>
                 </div>
                 <div class="info-box" role="note" aria-label="Informacija apie promptą">
                     <div class="info-icon" aria-hidden="true">💡</div>
                     <div class="info-content">
-                        <strong>Praktinė vertė:</strong>
-                        <p>Šis dokumentas gali būti naudojamas tiek asmeniniam vertinimui, tiek naujo darbuotojo įvedimui.</p>
+                        <strong>Short-form:</strong>
+                        <p>Pirmos 2 sekundės nusprendžia, ar žiūrovas liks – hook turi sustabdyti scroll’inimą.</p>
                     </div>
                 </div>
             </div>
@@ -1684,11 +1675,11 @@ Orientacija – realus darbas, ne HR formalizmas.</pre>
             <div class="prompt-header">
                 <div class="prompt-meta">
                     <div class="number">5</div>
-                    <div class="category">Procesai</div>
+                    <div class="category">MUST</div>
                     <span class="prompt-time">~3–5 min</span>
                 </div>
-                <h2 class="prompt-title">Pagrindiniai Darbo Procesai</h2>
-                <p class="prompt-desc">Identifikuok, kur dingsta laikas ir energija (Pareto 80/20)</p>
+                <h2 class="prompt-title">Performance → Sprendimas (kasdienė analizė)</h2>
+                <p class="prompt-desc">Iš metrikų gauk: kas neveikia, priežastis, ką testuoti, ką stabdyti</p>
             </div>
             <div class="prompt-body">
                 <div class="code-block" 
@@ -1698,22 +1689,17 @@ Orientacija – realus darbas, ne HR formalizmas.</pre>
                      aria-label="Pasirinkti ir kopijuoti promptą 5"
                      onclick="selectText(this)"
                      onkeydown="handleCodeBlockKeydown(event, this)">
-                    <pre class="code-text" id="prompt5">Aprašyk 5 svarbiausius procesus,
-kuriuos realiai vykdo rolė [MANO ROLĖ] įmonėje [ĮMONĖ].
-
-Kiekvienam procesui:
-- tikslas;
-- pagrindiniai žingsniai;
-- įtrauktos rolės;
-- kur dažniausiai stringa.
-
-80 % – veiksmai, 20 % – paaiškinimai.</pre>
+                    <pre class="code-text" id="prompt5">Remiantis šiomis metrikomis [ ], pateik:
+1. Kas neveikia
+2. Galima priežastis
+3. Ką testuoti rytoj
+4. Ką stabdyti</pre>
                 </div>
                 <div class="info-box" role="note" aria-label="Informacija apie promptą">
                     <div class="info-icon" aria-hidden="true">💡</div>
                     <div class="info-content">
-                        <strong>Optimizacija:</strong>
-                        <p>Supratus procesus, gali nustatyti, kur DI padarys didžiausią įtaką.</p>
+                        <strong>Uždaras ciklas:</strong>
+                        <p>Metrikų stebėjimas be veiksmų plano – viena iš 3 kritinių klaidų. Šis promptas verčia duomenis į sprendimus.</p>
                     </div>
                 </div>
             </div>
@@ -1738,11 +1724,11 @@ Kiekvienam procesui:
             <div class="prompt-header">
                 <div class="prompt-meta">
                     <div class="number">6</div>
-                    <div class="category">DI Integracija</div>
-                    <span class="prompt-time">~3–5 min</span>
+                    <div class="category">SHOULD</div>
+                    <span class="prompt-time">~5 min</span>
                 </div>
-                <h2 class="prompt-title">DI Pagalba ir Optimizavimas</h2>
-                <p class="prompt-desc">Paversk DI</p>
+                <h2 class="prompt-title">Objection Handling Generatorius</h2>
+                <p class="prompt-desc">Iš klientų objection’ų sukurk turinį, kuris juos neutralizuoja</p>
             </div>
             <div class="prompt-body">
                 <div class="code-block" 
@@ -1752,24 +1738,13 @@ Kiekvienam procesui:
                      aria-label="Pasirinkti ir kopijuoti promptą 6"
                      onclick="selectText(this)"
                      onkeydown="handleCodeBlockKeydown(event, this)">
-                    <pre class="code-text" id="prompt6">Rolė – DI diegimo konsultantas.
-
-Įvertink aprašytus procesus ir pateik 8–10 būdų,
-kaip juos pagerinti naudojant ChatGPT ar kitus DI įrankius.
-
-Kiekvienam:
-- ką daro DI;
-- kurią vietą procese palengvina;
-- reali nauda (laikas / kokybė / kaštai);
-- diegimo sudėtingumas (lengva / vidutinė / sudėtinga).
-
-Rašyk non-tech vartotojui.</pre>
+                    <pre class="code-text" id="prompt6">Iš šių klientų objection'ų [ ], sukurk 10 turinio vienetų, kurie juos neutralizuoja.</pre>
                 </div>
                 <div class="info-box" role="note" aria-label="Informacija apie promptą">
                     <div class="info-icon" aria-hidden="true">💡</div>
                     <div class="info-content">
-                        <strong>Tikras poveikis:</strong>
-                        <p>Šis promptas padės identifikuoti konkrečias vietas, kur DI gali sutaupyti valandų per savaitę.</p>
+                        <strong>Konversija:</strong>
+                        <p>Turinys, adresuojantis realius klausimus ir abejonės, mažina trintį ir didina pasitikėjimą.</p>
                     </div>
                 </div>
             </div>
@@ -1794,11 +1769,11 @@ Rašyk non-tech vartotojui.</pre>
             <div class="prompt-header">
                 <div class="prompt-meta">
                     <div class="number">7</div>
-                    <div class="category">Biblioteka</div>
-                    <span class="prompt-time">~3–5 min</span>
+                    <div class="category">SHOULD</div>
+                    <span class="prompt-time">~5–10 min</span>
                 </div>
-                <h2 class="prompt-title">Kasdienė Promptų Biblioteka</h2>
-                <p class="prompt-desc">Paruošti promptai kasdieniniams darbams ir iššūkiams</p>
+                <h2 class="prompt-title">Lead Magnet Post + DM seka</h2>
+                <p class="prompt-desc">Postas, parduodantis lead magnet, ir 4 žinučių follow-up seka</p>
             </div>
             <div class="prompt-body">
                 <div class="code-block" 
@@ -1808,24 +1783,15 @@ Rašyk non-tech vartotojui.</pre>
                      aria-label="Pasirinkti ir kopijuoti promptą 7"
                      onclick="selectText(this)"
                      onkeydown="handleCodeBlockKeydown(event, this)">
-                    <pre class="code-text" id="prompt7">Rolė – promptų inžinierius.
-
-Sukurk 10–12 trumpų, kasdien naudojamų promptų rolei [MANO ROLĖ] įmonėje [ĮMONĖ].
-
-Promptai turi padėti:
-- planuoti;
-- spręsti problemas;
-- komunikuoti;
-- priimti sprendimus.
-
-Pateik lentelę:
-[PROMPTAS] | [KADA NAUDOJU] | [KOKIĄ PROBLEMĄ SPRENDŽIA].</pre>
+                    <pre class="code-text" id="prompt7">Sukurk:
+- Postą, kuris parduoda lead magnet
+- 4 žinučių follow-up seką (deliver → kvalifikacija → vertė → pasiūlymas)</pre>
                 </div>
                 <div class="info-box" role="note" aria-label="Informacija apie promptą">
                     <div class="info-icon" aria-hidden="true">💡</div>
                     <div class="info-content">
-                        <strong>Kasdienybės patobulinimas:</strong>
-                        <p>Gausi asmeninę promptų kolekciją – naudok kasdien be papildomo galvojimo.</p>
+                        <strong>Lead’ai:</strong>
+                        <p>Struktūruota seka didina konversiją iš follower’io į kvalifikuotą lead’ą.</p>
                     </div>
                 </div>
             </div>
@@ -1850,11 +1816,11 @@ Pateik lentelę:
             <div class="prompt-header">
                 <div class="prompt-meta">
                     <div class="number">8</div>
-                    <div class="category">Simuliacija</div>
-                    <span class="prompt-time">~3–5 min</span>
+                    <div class="category">SHOULD</div>
+                    <span class="prompt-time">~5–10 min</span>
                 </div>
-                <h2 class="prompt-title">Kritinių Situacijų Simuliacija</h2>
-                <p class="prompt-desc">Pasiruošk spaudimui ir neapibrėžtumui iš anksto</p>
+                <h2 class="prompt-title">Case Study struktūra</h2>
+                <p class="prompt-desc">Iš duomenų sukurk case: problema, sprendimas, procesas, rezultatas, pamokos, CTA</p>
             </div>
             <div class="prompt-body">
                 <div class="code-block" 
@@ -1864,20 +1830,19 @@ Pateik lentelę:
                      aria-label="Pasirinkti ir kopijuoti promptą 8"
                      onclick="selectText(this)"
                      onkeydown="handleCodeBlockKeydown(event, this)">
-                    <pre class="code-text" id="prompt8">Įsivaizduok kritinę situaciją įmonėje [ĮMONĖ],
-kuriai tiesiogiai įtaką daro rolė [MANO ROLĖ].
-
-Pateik:
-- 2 realistiškus scenarijus;
-- veiksmų planą pirmoms 14 dienų;
-- kaip DI gali padėti;
-- pagrindines rizikas ir sėkmės kriterijus.</pre>
+                    <pre class="code-text" id="prompt8">Iš šių duomenų [ ], sukurk case:
+- Problema
+- Sprendimas
+- Procesas
+- Rezultatas
+- Pamokos
+- CTA</pre>
                 </div>
                 <div class="info-box" role="note" aria-label="Informacija apie promptą">
                     <div class="info-icon" aria-hidden="true">💡</div>
                     <div class="info-content">
-                        <strong>Pasirengimas:</strong>
-                        <p>Simuliacijos padeda išmokti valdyti krizes, kol jų dar nėra. Geriau praktikuoti DI, nei realioje situacijoje.</p>
+                        <strong>Proof:</strong>
+                        <p>Case study’s su realiais skaičiais ir procesu didina kredibilitetą ir konversiją.</p>
                     </div>
                 </div>
             </div>
@@ -1897,19 +1862,140 @@ Pateik:
             </div>
         </article>
 
+        <!-- PROMPT 9 -->
+        <article class="prompt">
+            <div class="prompt-header">
+                <div class="prompt-meta">
+                    <div class="number">9</div>
+                    <div class="category">WANT</div>
+                    <span class="prompt-time">~3–5 min</span>
+                </div>
+                <h2 class="prompt-title">Topical Cluster (SEO autoritetas)</h2>
+                <p class="prompt-desc">Sukurk pillar ir supporting temas su vidinių nuorodų logika ir CTA</p>
+            </div>
+            <div class="prompt-body">
+                <div class="code-block"
+                     id="block9"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Pasirinkti ir kopijuoti promptą 9"
+                     onclick="selectText(this)"
+                     onkeydown="handleCodeBlockKeydown(event, this)">
+                    <pre class="code-text" id="prompt9">Sukurk:
+- 1 pillar temą
+- 8 supporting temas
+- Vidinių nuorodų logiką
+- CTA kiekvienam lygiui</pre>
+                </div>
+                <div class="info-box" role="note" aria-label="Informacija apie promptą">
+                    <div class="info-icon" aria-hidden="true">💡</div>
+                    <div class="info-content">
+                        <strong>Autoritetas:</strong>
+                        <p>Topical cluster didina organinį pasiekiamumą ir pozicionuoja tave kaip ekspertą temoje.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="prompt-footer">
+                <p class="prompt-cta">Nukopijuok ir įklijuok į ChatGPT arba Claude – tai šio žingsnio tikslas.</p>
+                <button class="btn"
+                        onclick="copyPrompt(this, 'prompt9')"
+                        aria-label="Kopijuoti promptą 9 į mainų atmintinę"
+                        data-prompt-id="prompt9">
+                    <span aria-hidden="true">📋</span>
+                    <span>Kopijuoti promptą</span>
+                </button>
+                <label class="prompt-done-wrap">
+                    <input type="checkbox" class="prompt-done" data-prompt-id="9" aria-label="Pažymėti, kad atlikai šį žingsnį">
+                    <span>Pažymėjau kaip atlikau</span>
+                </label>
+            </div>
+        </article>
+
+        <!-- PROMPT 10 -->
+        <article class="prompt">
+            <div class="prompt-header">
+                <div class="prompt-meta">
+                    <div class="number">10</div>
+                    <div class="category">MASTER</div>
+                    <span class="prompt-time">~5–10 min</span>
+                </div>
+                <h2 class="prompt-title">MASTER PROMPT (valdymo centras)</h2>
+                <p class="prompt-desc">Vienas integruotas planas: turinys, repurpose, testavimas, veiksmai</p>
+            </div>
+            <div class="prompt-body">
+                <div class="code-block"
+                     id="block10"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Pasirinkti ir kopijuoti promptą 10"
+                     onclick="selectText(this)"
+                     onkeydown="handleCodeBlockKeydown(event, this)">
+                    <pre class="code-text" id="prompt10">ROLE: Tu esi CMO lygio rinkodaros strategas su performance ir turinio sistemų patirtimi.
+
+TASK: Sukurk integruotą turinio ir distribucijos veiksmų planą, kuris generuoja kasdienį turinį ir didina [KPI].
+
+CONTEXT:
+Verslas: [ ]
+Auditorija: [ ]
+Didžiausias skausmas: [ ]
+USP: [ ]
+Tikslas: [lead'ai / reach / pardavimai / autoritetas]
+Kanalai: [LinkedIn / Video / Blog / Email / Ads]
+Turimi duomenys: [metrikos, objection'ai, case'ai]
+
+OUTPUT:
+1. 30 dienų turinio struktūra (4 kolonos)
+2. Šios savaitės 5 konkretūs turinio vienetai (pilnai paruošti)
+3. 1 insight → 7 formatų repurpose
+4. 3 testavimo hipotezės
+5. Performance interpretavimo taisyklės
+6. 3 prioritetiniai veiksmai rytoj
+
+APRIBOJIMAI:
+- Jokių bendrinių frazių be proof
+- Visi teiginiai paremti pavyzdžiu arba mechanizmu
+- CTA konkretus ir matuojamas
+- Aiški struktūra, be marketinginio „fluff"</pre>
+                </div>
+                <div class="info-box" role="note" aria-label="Informacija apie promptą">
+                    <div class="info-icon" aria-hidden="true">💡</div>
+                    <div class="info-content">
+                        <strong>Valdymo centras:</strong>
+                        <p>Naudok šį promptą vietoj visų – jis apima 30 d. planą, repurpose, testavimą ir prioritetus.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="prompt-footer">
+                <p class="prompt-cta">Nukopijuok ir įklijuok į ChatGPT arba Claude – tai šio žingsnio tikslas.</p>
+                <button class="btn"
+                        onclick="copyPrompt(this, 'prompt10')"
+                        aria-label="Kopijuoti promptą 10 į mainų atmintinę"
+                        data-prompt-id="prompt10">
+                    <span aria-hidden="true">📋</span>
+                    <span>Kopijuoti promptą</span>
+                </button>
+                <label class="prompt-done-wrap">
+                    <input type="checkbox" class="prompt-done" data-prompt-id="10" aria-label="Pažymėti, kad atlikai šį žingsnį">
+                    <span>Pažymėjau kaip atlikau</span>
+                </label>
+            </div>
+        </article>
+
         <!-- KAS TOLIAU? (S2) -->
         <section class="next-steps" aria-labelledby="next-steps-title">
             <h2 id="next-steps-title">Kas toliau?</h2>
-            <p>Geriausia eiti iš eilės nuo 1 iki 8. Paspaudę nuorodą pereisi prie atitinkamo prompto.</p>
+            <p>Geriausia eiti iš eilės nuo 1 iki 10. Paspaudę nuorodą pereisi prie atitinkamo prompto.</p>
             <div class="next-steps-links">
-                <a href="#block1">1. Konteksto patikra</a>
-                <a href="#block2">2. Organizacijos portretas</a>
-                <a href="#block3">3. Mano rolė</a>
-                <a href="#block4">4. Pareigybės + KPI</a>
-                <a href="#block5">5. Darbo procesai</a>
-                <a href="#block6">6. DI optimizavimas</a>
-                <a href="#block7">7. Kasdienė biblioteka</a>
-                <a href="#block8">8. Kritinių situacijų simuliacija</a>
+                <a href="#block1">1. 30 dienų turinio sistema</a>
+                <a href="#block2">2. One Insight → 7 formatai</a>
+                <a href="#block3">3. LinkedIn Authority Post</a>
+                <a href="#block4">4. 30s Video scenarijus</a>
+                <a href="#block5">5. Performance → Sprendimas</a>
+                <a href="#block6">6. Objection Handling</a>
+                <a href="#block7">7. Lead Magnet + DM seka</a>
+                <a href="#block8">8. Case Study struktūra</a>
+                <a href="#block9">9. Topical Cluster</a>
+                <a href="#block10">10. MASTER PROMPT</a>
             </div>
         </section>
 
@@ -1923,14 +2009,14 @@ Pateik:
         </section>
 
         <footer class="footer">
-            <h3>Sėkmės analizėms <span aria-hidden="true">🚀</span></h3>
-            <p>Nepamiršk pakeisti <strong>[ĮMONĖ]</strong> ir <strong>[MANO ROLĖ]</strong> savo duomenimis</p>
-            <p class="footer-product-link">Tai <strong>Spin-off Nr. 1</strong> iš „Promptų anatomijos“. Pilnas interaktyvus mokymas ir kiti kursai: <a href="https://ditreneris.github.io/anatomija/" target="_blank" rel="noopener noreferrer">Promptų anatomija →</a></p>
+            <h3>Sėkmės rinkodaroje <span aria-hidden="true">🚀</span></h3>
+            <p>Nepamiršk pakeisti <strong>[auditorija]</strong>, <strong>[skausmas]</strong>, <strong>[USP]</strong>, <strong>[kanalas]</strong> ir kitus laukus savo duomenimis</p>
+            <p class="footer-product-link">Tai <strong>SOT_Marketingas</strong> – rinkodaros vadovo AI operacinė sistema. Pilnas interaktyvus mokymas: <a href="https://ditreneris.github.io/anatomija/" target="_blank" rel="noopener noreferrer">Promptų anatomija →</a></p>
             <div class="tags" role="list">
-                <span class="tag" role="listitem"><span aria-hidden="true">🤖</span> DI optimizuota</span>
-                <span class="tag" role="listitem"><span aria-hidden="true">📚</span> 8 promptai</span>
-                <span class="tag" role="listitem"><span aria-hidden="true">⚡</span> Greitas startas</span>
-                <span class="tag" role="listitem"><span aria-hidden="true">🎯</span> Rezultatai</span>
+                <span class="tag" role="listitem"><span aria-hidden="true">📣</span> Rinkodara</span>
+                <span class="tag" role="listitem"><span aria-hidden="true">📚</span> 10 promptų</span>
+                <span class="tag" role="listitem"><span aria-hidden="true">⚡</span> CTA fokusas</span>
+                <span class="tag" role="listitem"><span aria-hidden="true">🎯</span> Lead'ai ir metrikos</span>
             </div>
             <div class="copyright">
                 <p>&copy; 2026 Tomas Staniulis. Mokymų medžiaga. Visos teisės saugomos. <a href="privatumas.html">Privatumas</a></p>
@@ -2218,7 +2304,7 @@ Pateik:
             function getPromptDoneCount() {
                 var count = 0;
                 try {
-                    for (var i = 1; i <= 8; i++) {
+                    for (var i = 1; i <= 10; i++) {
                         if (localStorage.getItem(PROMPT_DONE_KEY_PREFIX + i) === 'true') count++;
                     }
                 } catch (e) { /* ignore */ }
@@ -2230,8 +2316,8 @@ Pateik:
                 var textEl = document.getElementById('progressText');
                 var fillEl = document.getElementById('progressBarFill');
                 var barEl = document.querySelector('.progress-bar[role="progressbar"]');
-                if (textEl) textEl.textContent = count === 8 ? 'Puiku – panaudojai visus 8.' : 'Panaudojai ' + count + ' iš 8 promptų.';
-                if (fillEl) fillEl.style.width = (count / 8 * 100) + '%';
+                if (textEl) textEl.textContent = count === 10 ? 'Puiku – panaudojai visus 10.' : 'Panaudojai ' + count + ' iš 10 promptų.';
+                if (fillEl) fillEl.style.width = (count / 10 * 100) + '%';
                 if (barEl) {
                     barEl.setAttribute('aria-valuenow', count);
                 }

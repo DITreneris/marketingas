@@ -51,6 +51,10 @@
             --orange-light: #FBF6EB;
             --green: #38A169;
             --purple: #6B5B95;
+
+            /* Community CTA – vienas brand green, be glow */
+            --community-cta-green: #0E7A33;
+            --community-cta-green-hover: #0B6B2D;
         }
 
         /* Skip link – prieinamumas (matomas tik su focus) */
@@ -999,12 +1003,12 @@
         /* ===== BENDRUOMENĖ (puslapio pabaiga) ===== */
         .community {
             margin-top: 48px;
-            padding: 40px;
+            padding: 32px 40px;
             background: linear-gradient(to right, var(--blue-light), var(--orange-light));
-            border: 3px solid var(--accent-dark);
-            border-radius: 20px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
         }
 
         .community h2 {
@@ -1012,6 +1016,7 @@
             font-weight: 800;
             color: var(--text);
             margin-bottom: 16px;
+            line-height: 1.3;
         }
 
         .community p {
@@ -1020,42 +1025,60 @@
             margin-bottom: 24px;
             line-height: 1.5;
         }
-        .community p a {
-            color: #040404;
-            font-weight: 700;
+
+        /* Pagrindinis CTA – vienas brand green, be glow, subtilus shadow */
+        .community-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--community-cta-green);
+            color: var(--white);
+            padding: 16px 32px;
+            min-height: 48px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
             text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
         }
-        .community p a:hover,
-        .community p a:focus-visible {
-            color: #000;
-            text-decoration: underline;
-            outline: 2px solid #040404;
+
+        .community-cta-primary:hover {
+            background: var(--community-cta-green-hover);
+            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .community-cta-primary:focus-visible {
+            outline: 3px solid var(--accent-gold);
             outline-offset: 2px;
         }
 
-        .community a {
+        /* Antrinis CTA – outline, ne konkuruoja su pagrindiniu */
+        .community-cta-secondary {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: #008933;
-            color: white;
-            padding: 16px 28px;
+            margin-top: 16px;
+            padding: 12px 20px;
+            border: 2px solid var(--accent-dark);
             border-radius: 12px;
-            font-size: 17px;
-            font-weight: 700;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-dark);
+            background: transparent;
             text-decoration: none;
-            transition: all 0.2s;
-            box-shadow: 0 4px 14px rgba(0, 137, 51, 0.35);
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
         }
 
-        .community a:hover {
-            background: #007a2e;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+        .community-cta-secondary:hover {
+            background: var(--blue-light);
+            color: var(--text);
+            border-color: var(--text);
         }
 
-        .community a:focus-visible {
-            outline: 3px solid var(--accent-dark);
+        .community-cta-secondary:focus-visible {
+            outline: 3px solid var(--accent-gold);
             outline-offset: 2px;
         }
 
@@ -1719,7 +1742,7 @@ Kiekvienam procesui:
                     <span class="prompt-time">~3–5 min</span>
                 </div>
                 <h2 class="prompt-title">DI Pagalba ir Optimizavimas</h2>
-                <p class="prompt-desc">Paverk DI realiu darbo asistentu</p>
+                <p class="prompt-desc">Paversk DI realiu darbo asistentu</p>
             </div>
             <div class="prompt-body">
                 <div class="code-block" 
@@ -1893,9 +1916,10 @@ Pateik:
         <!-- FOOTER -->
         <!-- BENDRUOMENĖ -->
         <section class="community" id="community" aria-labelledby="community-title">
-            <h2 id="community-title">Nori daugiau? Prisijunk prie Promptų anatomija WhatsApp grupės!</h2>
-            <p>Bendros diskusijos, patarimai ir naujienos apie promptus ir DI. Pilnas interaktyvus mokymas: <a href="https://ditreneris.github.io/anatomija/" target="_blank" rel="noopener noreferrer">Promptų anatomija</a>.</p>
-            <a href="https://chat.whatsapp.com/It49fzTl1n90huRCoWWkwu?mode=gi_t" target="_blank" rel="noopener noreferrer" aria-label="Atidaryti Promptų anatomija WhatsApp grupę naujame lange">👉 Prisijungti prie WhatsApp grupės</a>
+            <h2 id="community-title">Nori daugiau?<br>Prisijunk prie WhatsApp grupės.</h2>
+            <p>Bendros diskusijos, patarimai ir naujienos apie promptus ir DI.</p>
+            <a href="https://chat.whatsapp.com/It49fzTl1n90huRCoWWkwu?mode=gi_t" class="community-cta-primary" target="_blank" rel="noopener noreferrer" aria-label="Atidaryti Promptų anatomija WhatsApp grupę naujame lange">Prisijungti prie WhatsApp grupės</a>
+            <a href="https://ditreneris.github.io/anatomija/" class="community-cta-secondary" target="_blank" rel="noopener noreferrer" aria-label="Pilna Promptų anatomija – interaktyvus mokymas (atidaroma naujame lange)">Promptų anatomija →</a>
         </section>
 
         <footer class="footer">

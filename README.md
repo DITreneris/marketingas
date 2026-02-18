@@ -21,7 +21,7 @@
 3. **Mano Rolė Organizacijoje** - Apibrėžkite savo rolės tikslą ir atsakomybes
 4. **Pareigybės Instrukcija + KPI** - Praktiškas pareigybės aprašas su KPI
 5. **Pagrindiniai Darbo Procesai** - Identifikuokite pagrindinius procesus (Pareto 80/20)
-6. **DI Pagalba ir Optimizavimas** - Pavertkite DI realiu darbo asistentu
+6. **DI Pagalba ir Optimizavimas** - Paverskite DI realiu darbo asistentu
 7. **Kasdienė Promptų Biblioteka** - Paruošti promptai kasdieniniams darbams
 8. **Kritinių Situacijų Simuliacija** - Pasiruoškite spaudimui iš anksto
 

@@ -11,7 +11,7 @@ Po kiekvieno deploy atlikti gyvą testavimą ir rezultatus įrašyti čia (arba 
 
 | Laukas | Reikšmė |
 |--------|--------|
-| Production URL | _užpildyti po pirmo deploy, pvz. https://DITreneris.github.io/03_uzduotys/_ |
+| Production URL | https://ditreneris.github.io/marketingas/ |
 | Naršyklė(ės) | Chrome, Firefox, Safari, Edge |
 | Mobilus | iOS Safari / Chrome Mobile (pasirinktinai) |
 

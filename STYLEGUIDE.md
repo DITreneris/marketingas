@@ -1,10 +1,10 @@
-# DI Promptų Biblioteka – stiliaus gidas (SOT_Marketingas)
+# DI Promptų Biblioteka – stiliaus gidas (Spin-off Nr. 2)
 
-**Versija:** 1.1  
-**Data:** 2026-02-18  
+**Versija:** 1.2  
+**Data:** 2026-02-19  
 **Kalba:** LT
 
-Šis dokumentas aprašo spalvų gamą, tipografiją ir komponentų stilius projekte – SOT_Marketingas (Rinkodaros vadovo AI operacinė sistema). Oranžinė pagrindinė paletė pasirinkta dėl aukštesnio CTA.
+Šis dokumentas aprašo spalvų gamą, tipografiją ir komponentų stilius projekte – Spin-off Nr. 2 (Rinkodaros vadovo AI operacinė sistema). Oranžinė pagrindinė paletė pasirinkta dėl aukštesnio CTA.
 
 ---
 
@@ -23,10 +23,10 @@
 
 | Kintamasis | Hex | Paskirtis | Naudojimas |
 |------------|-----|-----------|------------|
-| `--accent-primary` | `#d14800` | Pagrindinė oranžinė (WCAG2AA 4.5:1) | CTA mygtukai, hero, progreso juosta |
-| `--accent-primary-hover` | `#b33d00` | Tamsesnė oranžinė | Hover būsena CTA |
-| `--accent-gold` | `#d14800` | Sutapatintas su primary oranžine | Badge, focus ring, paryškinti elementai |
-| `--accent-gold-dark` | `#C2410C` | Tamsesnė oranžinė atmaina | Hover, numerio badge |
+| `--accent-primary` | `#c75515` | Pagrindinė oranžinė (WCAG2AA 4.5:1, mažesnė saturation) | CTA mygtukai, hero, progreso juosta |
+| `--accent-primary-hover` | `#b54f14` | Tamsesnė oranžinė | Hover būsena CTA |
+| `--accent-gold` | `#c75515` | Sutapatintas su primary oranžine | Badge, focus ring, paryškinti elementai |
+| `--accent-gold-dark` | `#b54f14` | Sutapatintas su accent-primary-hover | Hover, numerio badge |
 | `--accent-dark` | `#3C485A` | Antrinis akcentas (tamsiai pilka) | Outline mygtukai, borders, antraštės |
 | `--accent-dark-hover` | `#2D3848` | Hover būsena | Antrinių mygtukų hover |
 
@@ -37,20 +37,24 @@
 | Kintamasis | Hex | Paskirtis |
 |------------|-----|-----------|
 | `--tertiary` | `#0D9488` | Teal – kategorijos, „Kas toliau?“ blokas, info box |
+| `--tertiary-dark` | `#0a5c54` | Tamsesnė teal – info-box strong, kategorija |
+| `--tertiary-hover` | `#0f766e` | Hover būsena – next-steps nuorodos |
 | `--tertiary-light` | `#CCFBF1` | Šviesus teal fonas |
 
 ### 1.4 Semantinės ir pagalbinės
 
 | Kintamasis | Naudojimas |
 |------------|------------|
-| `--cta-bg` | `#d14800` – pagrindinis CTA fonas (hero mygtukas, „Kopijuoti promptą“); WCAG2AA 4.5:1 |
-| `--cta-hover` | `#C2410C` – CTA hover |
+| `--cta-bg` | `#c75515` – pagrindinis CTA fonas (hero mygtukas, „Kopijuoti promptą“); WCAG2AA 4.5:1 |
+| `--cta-hover` | Sutapatintas su `--accent-primary-hover` (#b54f14) – CTA hover |
 | `--blue` | Sutapatintas su `--accent-dark` (3C485A) – objektų rėmeliai, antraštės |
 | `--blue-light` | `#E8ECF0` – šviesus fonas gradientuose |
-| `--orange` | `#d14800` – pagrindinė oranžinė (suderinta su CTA, WCAG2AA) |
+| `--orange` | `#c75515` – pagrindinė oranžinė (suderinta su CTA, WCAG2AA) |
 | `--orange-light` | `#FFF7ED` – šviesus oranžinės atspalvis (instrukcijos, progreso wrap, code-block hover) |
 | `--green` | `#38A169` – sėkmės būsena (toast, checkbox, „Nukopijuota“) |
-| `--purple` | `#6B5B95` – rezervuota (nenaudojama pagrindiniuose komponentuose) |
+| `--green-dark` | `#2F855A` – btn.success hover |
+| `--error` | `#E53E3E` – klaidos (form-input.error, form-error) |
+| `--bg-subtle` | `#F7FAFC` – prompt-footer fonas |
 | `--border` | `#CBD5E0` – rėmeliai, atskyrimai |
 | `--community-cta-green` | `#0E7A33` – bendruomenės CTA (hierarchija – atskirti nuo pagrindinio oranžinio) |
 | `--community-cta-green-hover` | `#0B6B2D` – hover būsena |
@@ -59,10 +63,10 @@
 
 ## 2. Hero ir gradientai
 
-- **Hero (header):** Horizontalus gradientas (to right): šilta oranžinė atmaina – suderinta su CTA.  
-  - `--hero-gradient-start: #C2410C`, `--hero-gradient-mid: #EA580C`, `--hero-gradient-end: #F97316`.
-  - **Overlay:** 10% tamsesnis sluoksnis (`rgba(0,0,0,0.1)`) – tekstas aiškesnis, premium pojūtis.
-- **CTA:** `--cta-bg: #d14800` (oranžinė) – pagrindinis veiksmas; hover `--cta-hover: #b33d00`. Baltas tekstas ant oranžinės atitinka WCAG2AA 4.5:1.
+- **Hero (header):** Vertikalus gradientas (180deg): tamsesnis viršuje, šviesesnis apačioje – mažesnė saturation.  
+  - `--hero-gradient-start: #a85c32`, `--hero-gradient-mid: #c46d3d`, `--hero-gradient-end: #dc8f5e`.
+  - **Overlay:** 8% tamsesnis sluoksnis (`rgba(0,0,0,0.08)`) – tekstas aiškesnis.
+- **CTA:** `--cta-bg: #c75515` (oranžinė) – pagrindinis veiksmas; hover `--accent-primary-hover` (#b54f14). Baltas tekstas ant oranžinės atitinka WCAG2AA 4.5:1.
 - **Prompt kortelės header:** `linear-gradient(to right, var(--blue-light), var(--orange-light))`, apatinis border: `--accent-dark`.
 
 ---
@@ -83,15 +87,15 @@
 
 ### 4.1 Mygtukai
 
-- **Pagrindinis (CTA):** `background: var(--cta-bg)` (oranžinė), `color: white`, `border-radius: 12px`, hover – `--cta-hover`, `translateY(-2px)`, focus-visible – `outline 3px var(--accent-gold)`.
+- **Pagrindinis (CTA):** `background: var(--cta-bg)` (oranžinė), `color: white`, `border-radius: 12px`, hover – `--cta-hover`, `translateY(-1px)`, focus-visible – `outline 3px` (hero baltas, kitur `--accent-gold`), `outline-offset: 2px`.
 - **Sėkmės būsena:** `background: var(--green)` (pvz. „Nukopijuota“).
-- **Antrinis (nuorodos „Kas toliau?“):** `background: var(--tertiary)`, hover `#0f766e`, focus-visible – oranžinio ringas.
+- **Antrinis (nuorodos „Kas toliau?“):** `background: var(--tertiary)`, hover `var(--tertiary-hover)`, focus-visible – oranžinio ringas.
 
 ### 4.2 Badge ir žymos
 
 - **Hero badge:** pusiau skaidrus baltas fonas, baltas tekstas.
 - **Kategorija (prompt kortelėje):** `background: var(--tertiary-light)`, `color/border: var(--tertiary)`.
-- **Numeris (prompt kortelėje):** `background: var(--accent-gold)`, `color: var(--text)` (tamsus tekstas dėl kontrasto).
+- **Numeris (prompt kortelėje):** `background: var(--accent-gold)`, `color: var(--white)` (baltas tekstas ant oranžinės – WCAG AA).
 
 ### 4.3 Progreso juosta
 
@@ -117,10 +121,19 @@
 ### 4.7 Bendruomenė (community) CTA
 
 - **Hierarchija:** vienas pagrindinis CTA (WhatsApp), antrinis – outline („Promptų anatomija“). Jokio glow – tik subtilus šešėlis.
-- **Pagrindinis CTA (`.community-cta-primary`):** vienas brand green – `--community-cta-green: #0E7A33`, hover `--community-cta-green-hover: #0B6B2D`. Šešėlis: `0 6px 16px rgba(0,0,0,0.12)` (be glow). `border-radius: 12px`, font 18px / 600. Hover: `scale(1.02)`. Focus-visible – `outline 3px var(--accent-gold)`.
+- **Pagrindinis CTA (`.community-cta-primary`):** vienas brand green – `--community-cta-green: #0E7A33`, hover `--community-cta-green-hover: #0B6B2D`. Šešėlis: `0 6px 16px rgba(0,0,0,0.12)` (be glow). `border-radius: 12px`, font 18px / 600. Hover: `translateY(-1px)`. Focus-visible – `outline 3px var(--accent-gold)`, `outline-offset: 2px`.
 - **Antrinis CTA (`.community-cta-secondary`):** outline stilius – `border: 2px solid var(--accent-dark)`, permatomas fonas, `margin-top: 16px`. Hover – šviesus fonas (`--blue-light`).
 - **Kortelė:** `border: 1px solid var(--border)`, `border-radius: 16px`, šviesus šešėlis. Vertikalūs tarpai: h2 → 16px → subtext → 24px → primary CTA → 16px → secondary link.
 - **Antraštė:** dvi eilutės („Nori daugiau?“ / „Prisijunk prie WhatsApp grupės.“) – mažesnis skaitymo tankis.
+
+### 4.8 Border-radius skalė
+
+- **20px:** hero (header), prompt kortelė (`.prompt`), modal, footer – dideli blokai.
+- **16px:** objectives, instructions, next-steps, community – sekcijų kortelės.
+- **12px:** mygtukai (CTA, .btn), code-block, progress-wrap, toast, next-steps nuorodos, community CTA.
+- **8px:** badge, kategorija (`.category`), progress-bar.
+- **6px:** code-block hint, prompt-time, progress-bar vidus; **4px:** progress-bar track.
+- **50%:** apvalūs elementai (modal-close, toast icon).
 
 ---
 
@@ -140,4 +153,4 @@
 
 ---
 
-**Paskutinis atnaujinimas:** 2026-02-18
+**Paskutinis atnaujinimas:** 2026-02-19

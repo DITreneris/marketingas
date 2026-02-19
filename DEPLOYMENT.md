@@ -2,24 +2,43 @@
 
 **QA standartas:** [DITreneris/spinoff01](https://github.com/DITreneris/spinoff01)
 
+**Production URL (šis projektas):** https://ditreneris.github.io/marketingas/
+
+---
+
+## Įspėjimas: į kurią repo keliama
+
+- Šis projektas deploy'inamas **tik** į repo **marketingas** → URL `https://ditreneris.github.io/marketingas/`.
+- Lokaliai yra keli remotes: `marketing` (biblioteka), `spinoff01`, **`marketingas`**.
+- **Nepushinti į kitas repozitorijas** per klaidą. Naudoti tik: `git push marketingas main`.
+
 ---
 
 ## 1. GitHub Pages (rekomenduojama)
 
-### Pirmą kartą
+### Pirmą kartą – deploy į marketingas
 
-1. **Repozitorijos nustatymai:** GitHub → Settings → Pages  
-2. **Build and deployment:** pasirinkti **GitHub Actions**.  
-3. Po `push` į `main` paleidžiamas workflow [.github/workflows/deploy.yml](.github/workflows/deploy.yml):
-   - vykdomi testai (`npm test`);
-   - jei praeina – deploy į GitHub Pages.
+1. **GitHub:** sukurti repozitoriją **marketingas** (jei dar nėra) organizacijoje/vartotoje DITreneris. Repo pavadinimas turi būti būtent **marketingas**, kad URL būtų `https://ditreneris.github.io/marketingas/`.
+2. **Lokaliai:** įsitikinti, kad remote `marketingas` nurodo į teisingą repo:
+   ```bash
+   git remote -v
+   # marketingas  https://github.com/DITreneris/marketingas.git (fetch)
+   # marketingas  https://github.com/DITreneris/marketingas.git (push)
+   ```
+3. **Push tik į marketingas:** `git push marketingas main` (ne `git push marketing main` ir ne `git push` be remote vardo).
+4. **GitHub (repo marketingas):** Settings → Pages → **Build and deployment** → Source: **GitHub Actions**.
+5. Po pirmo push workflow [.github/workflows/deploy.yml](.github/workflows/deploy.yml) paleidžiamas automatiškai: testai → deploy.
+
+### Vėlesni deploy
+
+- Kiekvienas `git push marketingas main` paleidžia testus ir deploy į https://ditreneris.github.io/marketingas/.
 
 ### URL
 
-- Svetainė: `https://<org-or-username>.github.io/<repo-name>/`  
-- Pvz.: `https://DITreneris.github.io/03_uzduotys/` (jei repo `03_uzduotys` organizacijoje `DITreneris`).
+- Šis projektas: `https://ditreneris.github.io/marketingas/`
+- Bendrai: `https://<org-or-username>.github.io/<repo-name>/`
 
-### Rankinis deploy
+### Rankinis deploy (repo marketingas)
 
 - **Actions** → workflow **Deploy to GitHub Pages** → **Run workflow** (branch: `main`).
 

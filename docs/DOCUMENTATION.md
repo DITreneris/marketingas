@@ -4,6 +4,20 @@
 
 ---
 
+## 0. Greita schema – kas kur ir kam
+
+| Sritis | Dokumentas | Kam skirta |
+|--------|------------|------------|
+| **Verslas ir procesai** | [AGENTS.md](../AGENTS.md) | Agentų rolės, workflow (Content, Curriculum, UI/UX, QA, Orchestrator) |
+| **Kodas ir turinys** | [docs/LEGACY_GOLDEN_STANDARD.md](LEGACY_GOLDEN_STANDARD.md) | Ką galima keisti keičiant turinį; HTML/JS struktūra |
+| **Dizainas** | [STYLEGUIDE.md](../STYLEGUIDE.md) | Spalvos, tipografija, komponentai |
+| **Kokybė** | [docs/QA_STANDARTAS.md](QA_STANDARTAS.md) | QA kriterijai, komandos (`npm test`, pa11y) |
+| **Testavimas** | [docs/TESTAVIMAS.md](TESTAVIMAS.md) | Gyvo testavimo scenarijai ir žurnalas |
+| **Taisyklės** | [.cursorrules](../.cursorrules) | Saugumas, kokybė, commit formatas |
+| **Versijos** | [CHANGELOG.md](../CHANGELOG.md) | Pakeitimų istorija (Keep a Changelog, SemVer) |
+
+---
+
 ## 1. Dokumentų inventorius ir atsakomybės
 
 | Dokumentas | Paskirtis | Atsakingas agentas / tipas | Kada atnaujinti |
@@ -24,6 +38,8 @@
 | docs/QA_STANDARTAS.md | QA standartas (nuoroda spinoff01) | QA | Kriterijai, komandos, spinoff01 |
 | docs/TESTAVIMAS.md | Gyvo testavimo scenarijai ir žurnalas | QA | Po deploy testavimas, rezultatai |
 | docs/LEGACY_GOLDEN_STANDARD.md | Atskaitos kodas ir taisyklės keičiant turinį | QA / Orchestrator | Golden standard atnaujinimas, struktūros pakeitimai |
+| docs/PEDAGOGINES_SPECIFIKACIJA.md | Pedagoginiai tikslai, auditorija, terminologija, paprasta kalba | Curriculum / Content | Kriterijų ar terminologijos pakeitimai |
+| docs/TURINIO_AUDITAS_DETALUS.md | Detalus turinio auditas (eilutė po eilutės) | Content | Atnaujinti po turinio pakeitimų |
 
 ---
 

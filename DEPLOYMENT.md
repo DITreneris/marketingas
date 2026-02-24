@@ -77,6 +77,7 @@ npx pa11y http://localhost:3000/privatumas.html --standard WCAG2AA --ignore "war
 | Workflow nepaleidžiamas | Patikrinti, ar failas `.github/workflows/deploy.yml` yra `main` šakoje. |
 | **Deploy workflow failed** | Actions → atidaryti nepavykusį run → žiūrėti **test** job: jei nepraėjo `npm test`, lokaliai paleisti `npm test` ir taisyti; jei nepraėjo **deploy** job – tikrinti environment/permissions. |
 | **CI workflow failed** | Dažniausiai `pa11y` (a11y klaidos) arba `npm test`. Lokaliai: `npm test`, tada `npx serve -s . -l 3000` ir `npx pa11y http://localhost:3000/ --standard WCAG2AA`. |
+| **pa11y: No usable sandbox** (CI) | Chromium GitHub Actions aplinkoje reikalauja `--no-sandbox`. Projektas turi `.pa11yrc.json` su `launchOptions.args`. Jei vis tiek nepavyksta – pabandykite `chromeLaunchOptions` vietoj `launchOptions` tame faile. |
 | Svetainė tuščia / neteisingas kelias | Projektas – statinis iš root; `path: .` – teisingas. Jei naudojate subfolderį, pakeisti `path`. |
 
 ---

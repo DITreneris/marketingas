@@ -18,13 +18,13 @@
 
 1. **30 dienų turinio sistema** – 4 kolonos (Autoritetas, Problema, Pavyzdys, Pasiūlymas)
 2. **Viena idėja → 7 formatai** – Vienos idėjos daug formatų (LinkedIn, karuselė, video, el. laiškas, titulinis ekranas, reklama, įžūgis)
-3. **Linkedin Autoriteto Kūrimas** – 150–200 žodžių su įžūgiu, įrodymais, CTA
-4. **30 sek. video scenarijus** – Įžūgis, 3 punktai, pavyzdys, CTA
+3. **Linkedin Autoriteto Kūrimas** – 150–200 žodžių su įžanginiu kabliuku, įrodymais, raginimu veikti
+4. **30 sek. video scenarijus** – Įžanginis kabliukas, 3 punktai, pavyzdys, raginimas veikti
 5. **Kasdienė analizė (Veikla→Sprendimas)** – Iš rodiklių suprask: kas neveikia, kodėl, ką daryti
 6. **Prieštaravimų apdorojimas** – 10 turinio vienetų iš klientų prieštaravimų
 7. **Lead generator postas + DM seka** – Postas + 4 žinučių seka (pristatyti → kvalifikacija → vertė → pasiūlymas)
-8. **Kliento istorijos struktūra** – Problema, sprendimas, procesas, rezultatas, pagrindinės mintys, CTA
-9. **Temų grupė (SEO autoritetas)** – 1 pagrindinė tema + 8 subtemos, vidinės nuorodos, CTA
+8. **Kliento istorijos struktūra** – Problema, sprendimas, procesas, rezultatas, pagrindinės mintys, raginimas veikti
+9. **Temų grupė (SEO autoritetas)** – 1 pagrindinė tema + 8 subtemos, vidinės nuorodos, raginimas veikti
 10. **Pagrindinis promptas (valdymo centras)** – Vienas valdymo centras: 30 d. struktūra, 5 turinio vienetai, vienos idėjos daug formatų, hipotezės, veiksmai
 
 ## Kaip naudoti
@@ -33,7 +33,7 @@
 2. Pasirinkite promptą ir spauskite ant jo – tekstas automatiškai pažymėsis
 3. Spauskite mygtuką **"Kopijuoti promptą"** arba naudokite `Ctrl+C` / `Cmd+C`
 4. Įklijuokite į ChatGPT, Claude ar kitą DI (dirbtinio intelekto) įrankį
-5. Pakeiskite `[auditorija]`, `[galvos skausmas]`, `[USP]`, `[kanalas]` ir kitus laukus savo duomenimis
+5. Pakeiskite `[auditorija]`, `[galvos skausmas]`, `[unikalus pardavimo pasiūlymas]`, `[kanalas]` ir kitus laukus savo duomenimis
 
 ## Technologijos
 

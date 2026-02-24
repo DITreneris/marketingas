@@ -40,9 +40,9 @@
 
 | Terminas | Vartotojui matomame tekste | Pastaba |
 |----------|----------------------------|---------|
-| USP | Unikali pardavimo idėja (kuo skiriesi) | Jau yra žodynėlyje |
+| Unikalus pardavimo pasiūlymas | (anksčiau USP) – kuo skiriesi nuo kitų | Jau yra žodynėlyje |
 | CTA | Kvietimas veikti (pvz. „Parašyk“, „Parsisiųsk“) | Jau yra |
-| KPI | Pagrindiniai rezultatų rodikliai (pvz. paspaudimai, konversijos) | Jau yra |
+| Matavimo rodikliai | (anksčiau KPI) – pvz. paspaudimai, konversijos | Jau yra |
 | hook | Pirmoji frazė, traukianti dėmesį | Pridėti į žodynėlį |
 | CTR | Paspaudimų santykis | Pridėti |
 | reach | Pasiekiamumas | Pridėti |
@@ -67,7 +67,7 @@
 ## 5. Vartotojo kelionė (žingsniai)
 
 1. **Atėjimas** → Hero („ką gausi per 45 min“) → „Ką realiai gausi“ (konkretūs naudos punktai).
-2. **Instrukcijos** – ~3–5 min per žingsnį; žodynėlis (USP, CTA, KPI + hook, CTR, reach, B2B pagal poreikį). Aiškus pirmas žingsnis: „Pasirink pirmą promptą ir nukopijuok.“
+2. **Instrukcijos** – ~3–5 min per žingsnį; žodynėlis (unikalus pardavimo pasiūlymas, raginimas veikti, matavimo rodikliai ir kt. pagal poreikį). Aiškus pirmas žingsnis: „Pasirink pirmą promptą ir nukopijuok.“
 3. **Progresas** (0/10) → eina per promptus 1–10. Kiekvienas: aiški antraštė, paprastas aprašymas, promptas (kopijuoti), info-boksas („kodėl tai naudinga“), vienas CTA + „Pažymėjau kaip atlikau“.
 4. **Kas toliau?** – nuorodos į promptus; bendruomenė; footer su priminimu pakeisti [auditorija], [galvos skausmas] ir kt.
 

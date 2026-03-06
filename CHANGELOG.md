@@ -8,6 +8,7 @@ Formatas pagal [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), versija
 
 ### Prideta
 
+- Mikroteksto auditas EN UI: docs/MICROCOPY_AUDIT_EN.md (inventorius, rekomendacijos, backlog §7). EN stringų sinchronizacijos pastaba docs/MULTILINGUAL_STRUCTURE.md §4 – LT tekstus atnaujinti, kai keičiami EN.
 - Daugiakalbiška architektūra (LT/EN): folder-based URL (`/lt/`, `/en/`), kalbos jungiklis (Lietuvių | English) visuose puslapiuose, root redirect pagal `navigator.language` arba localStorage, hreflang ir `x-default` SEO. EN turinys: en/index.html (library), en/privacy.html. Žr. docs/MULTILINGUAL_STRUCTURE.md, MUST_TODO.md skyrių „Multilingual“.
 - Bullet-proof promptų standartas: docs/BULLET_PROOF_PROMPTS.md (META/INPUT/OUTPUT struktūra, reikalavimai, „Naudok kai“ taksonomija). Dokumentų inventoriuje – docs/DOCUMENTATION.md.
 - Kiekviename prompte: META/INPUT/OUTPUT blokai, „Pakeisk prieš naudodamas:“, „Rezultatas:“, „Naudok kai:“. Pirmame prompte – „Tai nėra klausimynas. Nukopijuok šį tekstą ir įklijuok į ChatGPT arba Claude.“
@@ -22,6 +23,7 @@ Formatas pagal [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), versija
 
 ### Pakeista
 
+- EN mikrotekstas (aukšta prioritetas): hero „For?“ → „Who it's for:“; visos JS klaidos pakeistos vartotojui suprantamu tekstu („Something went wrong. Try copying again.“, manual copy hint kai clipboard nepavyksta); vardas vienodas – „Prompt Anatomy“ (privacy title, root redirect title, privacy „Back to library“). Vidutinio/žemo prioriteto punktai – backlog docs/MICROCOPY_AUDIT_EN.md §7.
 - Root redirect: base path išvedamas iš `location.pathname`, kai meta `base-path` tuščias – veikia GitHub Pages project site (`https://DITreneris.github.io/biblioteka/`). DEPLOYMENT.md – nurodytas production URL.
 - Instrukcijos „Kaip naudoti“ ir footer: aiškinama, kad [ĮMONĖ]/[MANO ROLĖ] keičiami savo duomenimis; DI rolė (pvz. „kritiškas analitikas“) jau nurodyta prompte – jos keisti nereikia. README.md „Kaip naudoti“ atnaujintas atitinkamai.
 - Visi 8 promptai perrašyti į META/INPUT/OUTPUT struktūrą; „Rolė – X“ pakeista į „Tu esi X“ (META). DI rolė atskirta nuo vartotojo rolės [MANO ROLĖ].

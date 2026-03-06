@@ -7,6 +7,21 @@
 
 ---
 
+## 🌐 Multilingual (LT/EN) – folder-based architektūra
+
+**Sprendimai (Orchestrator):**
+
+- **URL schema:** `/lt/` (lietuvių), `/en/` (anglų). Root `/` – redirect į `/lt/` arba `/en/` pagal `navigator.language` arba localStorage.
+- **Failų pavadinimai:** LT: `index.html` (biblioteka), `privatumas.html`. EN: `index.html` (library), `privacy.html`.
+- **Kalbos jungiklis:** Tekstas „Lietuvių | English“ (ne vėliavos), header dešinėje; nuorodos į atitinkamą puslapį kita kalba (path mapping: lt/index ↔ en/index, lt/privatumas ↔ en/privacy).
+- **SEO:** `hreflang` kiekviename puslapyje; `x-default` nurodo EN arba LT pagal prioritetą.
+
+**Užduočių eilė:** Curriculum (path atitikmenys) → Orchestrator/UI (katalogai, root redirect) → Content (EN turinys) → UI/UX (switcher, hreflang) → QA (testai, CI, docs).
+
+Žr. [docs/MULTILINGUAL_STRUCTURE.md](docs/MULTILINGUAL_STRUCTURE.md) (Curriculum išvestis).
+
+---
+
 ## 🎯 MVP Kritinės Užduotys (P0 - Must Have)
 
 ### ⚠️ SVARBU: Prieš pradedant

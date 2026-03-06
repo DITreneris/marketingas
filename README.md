@@ -27,7 +27,7 @@
 
 ## Kaip naudoti
 
-1. Atidarykite `index.html` naršyklėje
+1. Atidarykite svetainę naršyklėje. Root (`/`) nukreips į lietuvių (`/lt/`) arba anglų (`/en/`) pagal naršyklės kalbą; kalbą galima keisti jungikliu (Lietuvių | English) viršuje.
 2. Pasirinkite promptą ir spauskite ant jo – tekstas automatiškai pažymėsis
 3. Spauskite mygtuką **"Kopijuoti promptą"** arba naudokite `Ctrl+C` / `Cmd+C`
 4. Įklijuokite į ChatGPT, Claude ar kitą DI įrankį
@@ -44,14 +44,20 @@
 
 ```
 .
-├── index.html          # Pagrindinis puslapis
+├── index.html          # Root: redirect į /lt/ arba /en/
+├── lt/
+│   ├── index.html      # Biblioteka (lietuvių)
+│   └── privatumas.html # Privatumo politika (LT)
+├── en/
+│   ├── index.html      # Library (English)
+│   └── privacy.html    # Privacy policy (EN)
 ├── README.md           # Dokumentacija
 ├── CHANGELOG.md        # Versijų istorija (Keep a Changelog)
-├── privatumas.html     # Privatumo politika
 ├── package.json        # Dev: lint, testai, a11y
 ├── DEPLOYMENT.md       # Deploy instrukcijos (GitHub Pages)
 ├── docs/
 │   ├── DOCUMENTATION.md
+│   ├── MULTILINGUAL_STRUCTURE.md  # Path atitikmenys LT/EN
 │   ├── QA_STANDARTAS.md   # QA standartas (spinoff01)
 │   └── TESTAVIMAS.md      # Gyvo testavimo žurnalas
 ├── .github/
@@ -65,7 +71,7 @@
 ## Privatumas
 
 - **Minimali aplikacija:** šiuo metu **nerinkime jokių asmens duomenų**. Visas naudojimas vyksta tik tavo įrenginyje (kopijavimas, „Pažymėjau kaip atlikau“ – localStorage).
-- **Privatumo politika:** [privatumas.html](privatumas.html) – aprašymas, kad duomenų nerinkime; jei vėliau bus įjungta kontaktų forma, bus atnaujinta.
+- **Privatumo politika:** LT [lt/privatumas.html](lt/privatumas.html), EN [en/privacy.html](en/privacy.html) – aprašymas, kad duomenų nerinkime; jei vėliau bus įjungta kontaktų forma, bus atnaujinta.
 
 ## Deployment ir gyvas testavimas
 

@@ -10,6 +10,8 @@ const path = require('path');
 
 const INDEX_PATH = path.join(__dirname, '..', 'index.html');
 const PRIVATUMAS_PATH = path.join(__dirname, '..', 'privatumas.html');
+const LT_INDEX_PATH = path.join(__dirname, '..', 'lt', 'index.html');
+const EN_INDEX_PATH = path.join(__dirname, '..', 'en', 'index.html');
 
 function readFile(filePath) {
   try {
@@ -90,6 +92,18 @@ function run() {
 
   // --- Lang ir prieinamumas ---
   if (assert(html.includes('lang="lt"'), 'HTML lang="lt"')) passed++;
+  else failed++;
+
+  // --- LT/EN locale puslapiai (generuojami per npm run build) ---
+  const ltHtml = readFile(LT_INDEX_PATH);
+  if (assert(ltHtml !== null && ltHtml.includes('lang="lt"'), 'lt/index.html egzistuoja ir turi lang="lt"')) passed++;
+  else failed++;
+  const enHtml = readFile(EN_INDEX_PATH);
+  if (assert(enHtml !== null && enHtml.includes('lang="en"'), 'en/index.html egzistuoja ir turi lang="en"')) passed++;
+  else failed++;
+  if (ltHtml && assert(ltHtml.includes('rel="canonical"') && ltHtml.includes('hreflang="lt"'), 'lt/index.html turi canonical ir hreflang')) passed++;
+  else failed++;
+  if (enHtml && assert(enHtml.includes('rel="canonical"') && enHtml.includes('hreflang="en"'), 'en/index.html turi canonical ir hreflang')) passed++;
   else failed++;
 
   console.log('\n---');

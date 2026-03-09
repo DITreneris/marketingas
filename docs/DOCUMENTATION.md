@@ -34,6 +34,8 @@
 | .github/PULL_REQUEST_TEMPLATE.md | PR šablonas | Orchestrator / QA | Checklist pakeitimai |
 | .github/workflows/ci.yml | CI | QA / Orchestrator | Nauji testai, lint, a11y |
 | .github/workflows/deploy.yml | GitHub Pages deploy | QA / Orchestrator | Deploy žingsniai, environment |
+| scripts/build-locale-pages.js | Generuoja lt/index.html ir en/index.html iš root index.html | QA / Orchestrator | LT/EN replace sąrašas, BASE_PATH, canonical/hreflang |
+| lt/index.html, en/index.html | Generuojami locale puslapiai (path-based) | (build output) | Po kiekvieno `npm run build`; deploy reikalauja build prieš upload |
 | DEPLOYMENT.md | Deploy instrukcijos, troubleshooting | QA / Orchestrator | Platforma, URL, post-deploy |
 | docs/QA_STANDARTAS.md | QA standartas (nuoroda spinoff01) | QA | Kriterijai, komandos, spinoff01 |
 | docs/TESTAVIMAS.md | Gyvo testavimo scenarijai ir žurnalas | QA | Po deploy testavimas, rezultatai |
@@ -46,7 +48,7 @@
 ## 2. Kada ką atnaujinti
 
 - **Kodas keičiamas** → atnaujinti susijusią dokumentaciją (README, INTEGRACIJA ir pan.). Žr. [.cursorrules](../.cursorrules) skyrių „Dokumentacijos valdymas“.
-- **Release** → būtina atnaujinti CHANGELOG: sekciją „Nereleisuota“ perkelti į naują versiją `## [X.Y.Z] - YYYY-MM-DD`. Versijavimas – [Semantic Versioning](https://semver.org/).
+- **Release / deploy** → prieš deploy paleisti `npm run build`, kad būtų sugeneruoti atnaujinti `lt/` ir `en/` failai. Būtina atnaujinti CHANGELOG: sekciją „Nereleisuota“ perkelti į naują versiją `## [X.Y.Z] - YYYY-MM-DD`. Versijavimas – [Semantic Versioning](https://semver.org/).
 - **PR:** prieš merge patikrinti, ar „Susiję dokumentai“ (PR šablone) atnaujinti; jei release – ar CHANGELOG ir versija nurodyta.
 
 ---

@@ -1,6 +1,6 @@
 # Turinio DI sistema – rinkodaros vadovams
 
-**Spin-off Nr. 2** iš [Promptų anatomijos](https://ditreneris.github.io/anatomija/). Per 45 min. susikursi turinio variklį, kuris dirba kasdien: aiški turinio sistema, 100 turinio vienetų, 30 d. planas. Planuok → Kurk → Platink → Matuok → Spręsk.
+**Spin-off Nr. 2** iš [Promptų anatomijos](https://www.promptanatomy.app/). Per 45 min. susikursi turinio variklį, kuris dirba kasdien: aiški turinio sistema, 100 turinio vienetų, 30 d. planas. Planuok → Kurk → Platink → Matuok → Spręsk.
 
 ## Apie projektą
 
@@ -93,7 +93,7 @@ Dabartinė versija minimali – kontaktų formos nėra. Jei vėliau reikės rink
 
 ## Autorius
 
-Sukurta rinkodaros vadovams ir komandoms – sistemingai generuoti turinį, kurti potencialius klientus ir matuoti rezultatus. Pilnas interaktyvus mokymas: [Promptų anatomija](https://ditreneris.github.io/anatomija/).
+Sukurta rinkodaros vadovams ir komandoms – sistemingai generuoti turinį, kurti potencialius klientus ir matuoti rezultatus. Pilnas interaktyvus mokymas: [Promptų anatomija](https://www.promptanatomy.app/).
 
 ---
 

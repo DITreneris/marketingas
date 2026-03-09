@@ -2,9 +2,11 @@
 
 **Tikslas:** Dabartinis kodas yra atskaitos taškas (legacy golden standard). Keičiant **turinį** (promptus, antraštes, aprašymus) – būtina laikytis šios struktūros ir konvencijų. Struktūros, ID, CSS klasių ir JavaScript API nekeičiame be QA patvirtinimo ir dokumento atnaujinimo. Projektas: Spin-off Nr. 2 (10 promptų rinkodaros sistemai).
 
-**Versija:** 1.4  
-**Data:** 2026-02-19  
+**Versija:** 1.5  
+**Data:** 2026-03  
 **Kalba:** LT
+
+**LT/EN lokalizacija:** Keičiant tik turinio tekstus ir `lang`/meta – DOM (id, class, data-*), a11y struktūra (role, aria-* pavadinimai) lieka tie patys abiem kalbom. **Terminologija:** LT – naudoti **DI** (dirbtinis intelektas), EN – naudoti **AI** (Artificial Intelligence). Žr. [LT_EN_UI_UX_REPORT.md](../LT_EN_UI_UX_REPORT.md), [docs/GILI_ANALIZE_LT_EN_TERMINOLOGIJA.md](GILI_ANALIZE_LT_EN_TERMINOLOGIJA.md).
 
 **Sinchronizuota su kodu (2026-02-19):** skip-link „Pereiti prie turinio“, hero (Turinio DI sistema / rinkodaros vadovams, Spin-off Nr. 2, Gauti nemokamai), progress bar `aria-label` pradžia ir JS atnaujinimas, info-box `aria-label` „Informacija: promptas N“, puslapio title „Turinio DI sistema – rinkodaros vadovams“.
 
@@ -16,7 +18,7 @@
 |------------|----------------------------------------|----------------------------|
 | **HTML** | Struktūra: `<main id="main-content">`, sekcijos, 10× `<article class="prompt">`, id `block1`–`block10`, `prompt1`–`prompt10`, data-* atributai | Tekstai: hero h1/p, .objectives sąrašas, instrukcijos, .prompt-title, .prompt-desc, `<pre class="code-text">` turinys, .info-content, .next-steps, .community, .footer, privatumas.html |
 | **CSS** | `:root` kintamieji, komponentų klasės (.code-block, .btn, .toast, .progress-bar ir kt.) – žr. [STYLEGUIDE.md](../STYLEGUIDE.md) | Nėra (turinio keitimas neturi keisti klasių ar layout) |
-| **JS** | IIFE, CONFIG, selectText, copyPrompt, handleCodeBlockKeydown, fallbackCopy, showSuccess/showError/showToast, localStorage raktai `di_prompt_done_1`…`10`, debounce; HTML kviečia onclick/onkeydown | Nėra |
+| **JS** | IIFE, CONFIG, selectText, copyPrompt, handleCodeBlockKeydown, fallbackCopy, showSuccess/showError/showToast, localStorage raktai `di_prompt_done_1`…`10`, debounce; locale resolve, uiText, applyStaticLocaleText, LANG_KEY `di_promptu_biblioteka_lang`; HTML kviečia onclick/onkeydown | Nėra |
 | **A11y** | Skip link `#main-content`, role="button"/tabindex="0" ant .code-block, aria-label mygtukams ir checkbox, aria-live/role="progressbar", toast role="status" | Nėra (prieinamumo atributų reikšmes keisti tik pagal reikalavimus, nekeičiant struktūros) |
 
 **Promptų turinio formatas:** Kiekvieno prompto tekstas `<pre class="code-text">` laikosi šablono: **META** (vaidmuo su patirtimi, tikslas, auditorija, kontekstas), **INPUT** (konkretūs duomenys/placeholderiai, apribojimai), **OUTPUT** (formatas, struktūra, kalba, tonas). Keičiant turinį – išlaikyti šią struktūrą siekiant vienodo praktiškumo.

@@ -169,6 +169,36 @@
             border: 1px solid rgba(217, 164, 65, 0.5);
         }
 
+        .lang-switcher {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: inherit;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 6px 12px;
+            min-width: 44px;
+            min-height: 44px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .lang-btn:hover,
+        .lang-btn:focus-visible {
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.9);
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+        .lang-btn.is-active {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: white;
+        }
+
         /* Promptų anatomija – mažesnis kontrastas ir padding, kad nekonkuruotų su hero */
         .header-badges a.badge {
             position: relative;
@@ -1138,6 +1168,21 @@
             outline-offset: 2px;
         }
 
+        .footer-email {
+            margin-bottom: 24px;
+        }
+        .footer-email a {
+            color: var(--tertiary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .footer-email a:hover,
+        .footer-email a:focus-visible {
+            text-decoration: underline;
+            outline: 2px solid var(--tertiary);
+            outline-offset: 2px;
+        }
+
         .tags {
             display: flex;
             justify-content: center;
@@ -1430,8 +1475,12 @@
         <!-- HERO -->
         <header class="header">
             <div class="header-badges">
-                <a href="https://ditreneris.github.io/anatomija/" class="badge" target="_blank" rel="noopener noreferrer" aria-label="Pilna Promptų anatomija – interaktyvus mokymas (atidaroma naujame lange)">Promptų anatomija</a>
-                <span class="badge badge-spinoff" role="status" aria-label="Mini rinkodaros AI sistema, Lead generator versija">Spin-off Nr. 2</span>
+                <a href="https://www.promptanatomy.app/" class="badge" target="_blank" rel="noopener noreferrer" aria-label="Pilna Promptų anatomija – interaktyvus mokymas (atidaroma naujame lange)">Promptų anatomija</a>
+                <span class="badge badge-spinoff" role="status" aria-label="Mini rinkodaros DI sistema, Lead generator versija">Spin-off Nr. 2</span>
+                <div class="lang-switcher" role="group" aria-label="Kalbos pasirinkimas">
+                    <button type="button" class="lang-btn is-active" id="langLtBtn" aria-label="Perjungti į lietuvių kalbą" aria-pressed="true">LT</button>
+                    <button type="button" class="lang-btn" id="langEnBtn" aria-label="Switch to English" aria-pressed="false">EN</button>
+                </div>
             </div>
             <h1>Turinio DI sistema<br>rinkodaros vadovams</h1>
             <p>Per 45 min. susikursi turinio variklį, kuris dirba kasdien.</p>
@@ -1581,7 +1630,7 @@ OUTPUT: 7 blokai – LinkedIn, karuselė, 30s video, el. laiškas, titulinis ekr
                     <div class="category">Pradžia</div>
                     <span class="prompt-time">~3–5 min</span>
                 </div>
-                <h2 class="prompt-title">Linkedin Autoriteto Kūrimas</h2>
+                <h2 class="prompt-title">LinkedIn Autoriteto Kūrimas</h2>
                 <p class="prompt-desc">150–200 žodžių postas su įžanginiu kabliuku, 3 punktais, pavyzdžiu ir raginimu veikti</p>
             </div>
             <div class="prompt-body">
@@ -1972,7 +2021,7 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
             <div class="next-steps-links">
                 <a href="#block1">1. 30 dienų turinio sistema</a>
                 <a href="#block2">2. Viena idėja → 7 formatai</a>
-                <a href="#block3">3. Linkedin Autoriteto Kūrimas</a>
+                <a href="#block3">3. LinkedIn Autoriteto Kūrimas</a>
                 <a href="#block4">4. 30 sek. video scenarijus</a>
                 <a href="#block5">5. Kasdienė analizė (Veikla→Sprendimas)</a>
                 <a href="#block6">6. Prieštaravimų apdorojimas</a>
@@ -1989,13 +2038,14 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
             <h2 id="community-title">Nori daugiau?<br>Prisijunk prie WhatsApp grupės.</h2>
             <p>Bendros diskusijos, patarimai ir naujienos apie promptus ir DI.</p>
             <a href="https://chat.whatsapp.com/It49fzTl1n90huRCoWWkwu?mode=gi_t" class="community-cta-primary" target="_blank" rel="noopener noreferrer" aria-label="Atidaryti Promptų anatomija WhatsApp grupę naujame lange">Prisijungti prie WhatsApp grupės</a>
-            <a href="https://ditreneris.github.io/anatomija/" class="community-cta-secondary" target="_blank" rel="noopener noreferrer" aria-label="Pilna Promptų anatomija – interaktyvus mokymas (atidaroma naujame lange)">Promptų anatomija →</a>
+            <a href="https://www.promptanatomy.app/" class="community-cta-secondary" target="_blank" rel="noopener noreferrer" aria-label="Pilna Promptų anatomija – interaktyvus mokymas (atidaroma naujame lange)">Promptų anatomija →</a>
         </section>
 
         <footer class="footer">
             <h3>Sėkmės rinkodaroje <span aria-hidden="true">🚀</span></h3>
             <p>Nepamiršk pakeisti <strong>[auditorija]</strong>, <strong>[galvos skausmas]</strong>, <strong>[unikalus pardavimo pasiūlymas]</strong>, <strong>[kanalas]</strong> ir kitus laukus savo duomenimis</p>
-            <p class="footer-product-link">Tai Spin-off Nr. 2 iš „Promptų anatomijos“. Pilnas interaktyvus mokymas ir kiti kursai: <a href="https://ditreneris.github.io/anatomija/" target="_blank" rel="noopener noreferrer">Promptų anatomija →</a></p>
+            <p class="footer-product-link">Tai Spin-off Nr. 2 iš „Promptų anatomijos“. Pilnas interaktyvus mokymas ir kiti kursai: <a href="https://www.promptanatomy.app/" target="_blank" rel="noopener noreferrer">Promptų anatomija →</a></p>
+            <p class="footer-email"><span id="footer-email-label">El. paštas:</span> <a href="mailto:info@promptanatomy.app">info@promptanatomy.app</a></p>
             <div class="tags" role="list">
                 <span class="tag" role="listitem"><span aria-hidden="true">📣</span> Rinkodara</span>
                 <span class="tag" role="listitem"><span aria-hidden="true">📚</span> 10 promptų</span>
@@ -2025,6 +2075,175 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
     <script>
         (function() {
             'use strict';
+
+            // ===== LOCALE (LT/EN) =====
+            var LANG_KEY = 'di_promptu_biblioteka_lang';
+            var locale = 'lt';
+
+            function getLocaleFromPathname() {
+                var path = (window.location.pathname || '').toLowerCase();
+                if (/\/lt(?:\/|$)/.test(path)) return 'lt';
+                if (/\/en(?:\/|$)/.test(path)) return 'en';
+                return '';
+            }
+            function getLocaleFromQuery() {
+                var q = window.location.search && new URLSearchParams(window.location.search);
+                if (q && (q.get('lang') === 'lt' || q.get('lang') === 'en')) return q.get('lang');
+                return null;
+            }
+            function resolveLocale() {
+                var fromPath = getLocaleFromPathname();
+                if (fromPath) { locale = fromPath; return; }
+                var fromQuery = getLocaleFromQuery();
+                if (fromQuery) { locale = fromQuery; return; }
+                try {
+                    var stored = localStorage.getItem(LANG_KEY);
+                    if (stored === 'lt' || stored === 'en') { locale = stored; return; }
+                } catch (e) { /* ignore */ }
+                locale = (navigator.language && navigator.language.toLowerCase().indexOf('lt') === 0) ? 'lt' : 'en';
+            }
+            resolveLocale();
+
+            function uiText(lt, en) {
+                return locale === 'lt' ? lt : en;
+            }
+
+            function applyStaticLocaleText() {
+                if (locale !== 'en') return;
+                var el = function(id) { return document.getElementById(id); };
+                var q = function(sel) { return document.querySelector(sel); };
+                var qa = function(sel) { return document.querySelectorAll(sel); };
+                var setText = function(sel, text) { var n = typeof sel === 'string' ? q(sel) : sel; if (n) n.textContent = text; };
+                var setLabel = function(sel, text) { var n = typeof sel === 'string' ? q(sel) : sel; if (n) n.setAttribute('aria-label', text); };
+
+                var skip = document.querySelector('.skip-link');
+                if (skip) skip.textContent = 'Skip to content';
+                var h1 = q('.header h1');
+                if (h1) h1.innerHTML = 'Content AI System<br>for Marketing Leads';
+                var headerP = q('.header p');
+                if (headerP) headerP.textContent = "In 45 min you'll build a content engine that works every day.";
+                var badgeLink = q('.header-badges a.badge');
+                if (badgeLink) { badgeLink.textContent = 'Prompt Anatomy'; setLabel(badgeLink, 'Full Prompt Anatomy – interactive training (opens in new tab)'); }
+                var badgeSpin = q('.badge-spinoff');
+                if (badgeSpin) setLabel(badgeSpin, 'Mini marketing AI system, Lead generator version');
+                var cta1 = q('.header-cta .cta-button');
+                if (cta1) { cta1.textContent = 'Get free'; setLabel(cta1, 'Get free – go to prompts'); }
+                var cta2 = q('.header-cta .cta-button-outline');
+                if (cta2) { cta2.textContent = 'Join the community'; setLabel(cta2, 'Join community – go to WhatsApp and links'); }
+
+                var objTitle = el('objectives-title');
+                if (objTitle) objTitle.innerHTML = '<span aria-hidden="true">🎯</span> What you actually get';
+                var objLi = qa('.objectives ul li');
+                if (objLi.length >= 4) {
+                    objLi[0].textContent = "In 3/4 h you'll have a clear content system, 100 content units and a 30-day plan";
+                    objLi[1].textContent = 'Generate content by 4 principles';
+                    objLi[2].textContent = 'Test and optimize by clear metrics';
+                    objLi[3].textContent = 'Work in a closed loop: Plan → Create → Distribute → Measure → Decide';
+                }
+                var instrTitle = el('instructions-title');
+                if (instrTitle) {
+                    var spanNote = instrTitle.querySelector('.prompt-time');
+                    if (spanNote) setLabel(spanNote, 'Estimated time: 3–5 min per step');
+                    var spanText = instrTitle.querySelectorAll('span')[1];
+                    if (spanText) spanText.textContent = 'How to use this library';
+                }
+                var instrOl = qa('.instructions ol li');
+                if (instrOl.length >= 4) {
+                    instrOl[0].textContent = 'Select a prompt and click it – text will be selected';
+                    instrOl[1].innerHTML = 'Click <strong>"Copy prompt"</strong> or <code>Ctrl+C</code> / <code>Cmd+C</code>';
+                    instrOl[2].textContent = 'Paste into ChatGPT, Claude or another AI tool';
+                    instrOl[3].textContent = 'Replace [audience], [pain point], [unique selling proposition], [channel] and other placeholders with your data – and get the result';
+                }
+                var progressText = el('progressText');
+                if (progressText) progressText.textContent = 'You used 0 of 10 prompts';
+                var progressBar = q('.progress-bar[role="progressbar"]');
+                if (progressBar) progressBar.setAttribute('aria-label', 'Progress: 0 of 10 prompts');
+
+                var prompts = qa('article.prompt');
+                var promptData = [
+                    { category: 'Start', title: '30-day content system', desc: 'Create a 30-day content plan by 4 content principles', infoStrong: 'Core:', infoP: '4 principles = balance: authority, problem, proof, offer.', cta: "Copy and paste into ChatGPT or Claude – that's the goal of this step.", copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 1', infoAria: 'Information: prompt 1', btnAria: 'Copy prompt 1 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' },
+                    { category: 'Start', title: 'One idea → 7 formats', desc: 'Turn one idea into 7 different formats', infoStrong: 'One idea, many formats:', infoP: '1 idea = 7 units. Time saved, consistency kept.', cta: 'Paste into ChatGPT or Claude and replace placeholders with your data.', copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 2', infoAria: 'Information: prompt 2', btnAria: 'Copy prompt 2 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' },
+                    { category: 'Start', title: 'LinkedIn authority building', desc: '150–200 word post with hook, 3 points, example and call to action', infoStrong: 'Authority:', infoP: 'Proof + concrete points = trust and engagement.', cta: "Copy and paste into ChatGPT or Claude – that's the goal of this step.", copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 3', infoAria: 'Information: prompt 3', btnAria: 'Copy prompt 3 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' },
+                    { category: 'Start', title: '30 sec video script', desc: 'Create video – easier than ever!', infoStrong: 'Short format:', infoP: '2 seconds = stay or scroll. The hook is key.', cta: 'Copy, paste into AI tool and replace [topic], [example] with your data.', copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 4', infoAria: 'Information: prompt 4', btnAria: 'Copy prompt 4 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' },
+                    { category: 'Start', title: 'Daily analysis (Action→Decision)', desc: "From metrics understand: what doesn't work, why, what to do", infoStrong: 'Closed loop:', infoP: 'Metrics without action = standing still. Data → decisions.', cta: "Copy and paste into ChatGPT or Claude – that's the goal of this step.", copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 5', infoAria: 'Information: prompt 5', btnAria: 'Copy prompt 5 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' },
+                    { category: 'Skills', title: 'Objection handling tool', desc: 'From customer objections create content that neutralises them', infoStrong: 'Conversion:', infoP: 'Real questions + answers = less friction, more trust.', cta: 'Paste into ChatGPT or Claude – replace objections and context.', copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 6', infoAria: 'Information: prompt 6', btnAria: 'Copy prompt 6 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' },
+                    { category: 'Skills', title: 'Lead generator post + DM sequence', desc: 'Lead generator post + 4-message sequence', infoStrong: 'Leads:', infoP: 'Sequence: follower → customer. Structure increases conversion.', cta: "Copy and paste into ChatGPT or Claude – that's the goal of this step.", copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 7', infoAria: 'Information: prompt 7', btnAria: 'Copy prompt 7 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' },
+                    { category: 'Skills', title: 'Customer story structure', desc: 'From data create a customer story', infoStrong: 'Proof:', infoP: 'Numbers + process = credibility and conversion.', cta: 'Copy and paste – enter customer data and get a structured story.', copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 8', infoAria: 'Information: prompt 8', btnAria: 'Copy prompt 8 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' },
+                    { category: 'Growth', title: 'Topic cluster', desc: 'Main topic + 8 subtopics, internal links', infoStrong: 'Authority:', infoP: 'Main topic + subtopics = reach and expert position.', cta: "Copy and paste into ChatGPT or Claude – that's the goal of this step.", copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 9', infoAria: 'Information: prompt 9', btnAria: 'Copy prompt 9 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' },
+                    { category: 'All together', title: 'Main prompt (control centre)', desc: 'One integrated plan: content, one idea many formats, testing, actions', infoStrong: 'Control centre:', infoP: 'Everything in one place: 30-day plan, 1→7, testing, priorities.', cta: 'This prompt covers everything – copy, paste and fill your business fields.', copyBtn: 'Copy prompt', codeAria: 'Select and copy prompt 10', infoAria: 'Information: prompt 10', btnAria: 'Copy prompt 10 to clipboard', doneAria: 'Mark as done', doneLabel: 'Mark as done' }
+                ];
+                prompts.forEach(function(art, i) {
+                    if (!promptData[i]) return;
+                    var d = promptData[i];
+                    var cat = art.querySelector('.category');
+                    if (cat) cat.textContent = d.category;
+                    var tit = art.querySelector('.prompt-title');
+                    if (tit) tit.textContent = d.title;
+                    var desc = art.querySelector('.prompt-desc');
+                    if (desc) desc.textContent = d.desc;
+                    var codeBlock = art.querySelector('.code-block');
+                    if (codeBlock) setLabel(codeBlock, d.codeAria);
+                    var infoBox = art.querySelector('.info-box');
+                    if (infoBox) { setLabel(infoBox, d.infoAria); var strong = infoBox.querySelector('.info-content strong'); if (strong) strong.textContent = d.infoStrong; var p = infoBox.querySelector('.info-content p'); if (p) p.textContent = d.infoP; }
+                    var ctaP = art.querySelector('.prompt-cta');
+                    if (ctaP) ctaP.textContent = d.cta;
+                    var btn = art.querySelector('.btn');
+                    if (btn) { var span = btn.querySelector('span:last-of-type'); if (span) span.textContent = d.copyBtn; setLabel(btn, d.btnAria); }
+                    var cb = art.querySelector('.prompt-done');
+                    if (cb) setLabel(cb, d.doneAria);
+                    var doneWrap = art.querySelector('.prompt-done-wrap span');
+                    if (doneWrap) doneWrap.textContent = d.doneLabel;
+                });
+
+                var nextTitle = el('next-steps-title');
+                if (nextTitle) nextTitle.textContent = 'What next?';
+                var nextP = q('.next-steps p');
+                if (nextP) nextP.textContent = 'Best to go in order from 1 to 10. Click a link to jump to that prompt.';
+                var nextLinks = qa('.next-steps-links a');
+                var nextTitles = ['1. 30-day content system', '2. One idea → 7 formats', '3. LinkedIn authority building', '4. 30 sec video script', '5. Daily analysis (Action→Decision)', '6. Objection handling', '7. Lead generator post + DM sequence', '8. Customer story structure', '9. Topic cluster', '10. Main prompt (control centre)'];
+                nextLinks.forEach(function(a, i) { if (nextTitles[i]) a.textContent = nextTitles[i]; });
+
+                var commTitle = el('community-title');
+                if (commTitle) commTitle.innerHTML = 'Want more?<br>Join the WhatsApp group.';
+                var commP = q('.community p');
+                if (commP) commP.textContent = 'Shared discussions, tips and news about prompts and AI.';
+                var commPrimary = q('.community-cta-primary');
+                if (commPrimary) { commPrimary.textContent = 'Join WhatsApp group'; setLabel(commPrimary, 'Open Prompt Anatomy WhatsApp group in new tab'); }
+                var commSecondary = q('.community-cta-secondary');
+                if (commSecondary) { commSecondary.textContent = 'Prompt Anatomy →'; setLabel(commSecondary, 'Full Prompt Anatomy – interactive training (opens in new tab)'); }
+
+                var footH3 = q('.footer h3');
+                if (footH3) footH3.innerHTML = 'Success in marketing <span aria-hidden="true">🚀</span>';
+                var footP = qa('.footer p');
+                if (footP.length >= 1) footP[0].textContent = 'Remember to replace [audience], [pain point], [unique selling proposition], [channel] and other placeholders with your data';
+                if (footP.length >= 2) footP[1].innerHTML = 'This is Spin-off No. 2 from Prompt Anatomy. Full interactive training and other courses: <a href="https://www.promptanatomy.app/" target="_blank" rel="noopener noreferrer">Prompt Anatomy →</a>';
+                var tags = qa('.footer .tag');
+                var tagTexts = ['Marketing', '10 prompts', 'Action focus', 'Leads and metrics'];
+                tags.forEach(function(t, i) {
+                    if (tagTexts[i]) {
+                        var em = t.querySelector('span[aria-hidden="true"]');
+                        t.innerHTML = (em ? '<span aria-hidden="true">' + em.textContent + '</span> ' : '') + tagTexts[i];
+                    }
+                });
+                var emailLabel = el('footer-email-label');
+                if (emailLabel) emailLabel.textContent = 'Email:';
+                var copyright = q('.copyright p');
+                if (copyright) {
+                    var path = (window.location.pathname || '').toLowerCase();
+                    var privacyHref = (/\/lt(?:\/|$)/.test(path) || /\/en(?:\/|$)/.test(path)) ? '../privatumas.html' : 'privatumas.html';
+                    copyright.innerHTML = '&copy; 2026 Tomas Staniulis. Training material. All rights reserved. <a href="' + privacyHref + '">Privacy</a>';
+                }
+                var toast = el('toast');
+                if (toast) { var ts = toast.querySelector('span'); if (ts) ts.textContent = 'Copied.'; setLabel(toast, 'Copy notification'); }
+                var hiddenTa = el('hiddenTextarea');
+                if (hiddenTa) setLabel(hiddenTa, 'Text to copy field');
+                var langGroup = q('.lang-switcher');
+                if (langGroup) setLabel(langGroup, 'Language selection');
+                var langLt = el('langLtBtn');
+                if (langLt) setLabel(langLt, 'Switch to Lithuanian');
+                var langEn = el('langEnBtn');
+                if (langEn) setLabel(langEn, 'Switch to English');
+            }
 
             // ===== KONFIGŪRACIJA =====
             const CONFIG = {
@@ -2104,19 +2323,19 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
                 }
 
                 if (!button || !promptId) {
-                    showError(button, 'Klaida: trūksta parametrų');
+                    showError(button, uiText('Klaida: trūksta parametrų', 'Error: missing parameters'));
                     return;
                 }
 
                 const promptElement = document.getElementById(promptId);
                 if (!promptElement) {
-                    showError(button, 'Promptas nerastas');
+                    showError(button, uiText('Promptas nerastas', 'Prompt not found'));
                     return;
                 }
 
                 const promptText = promptElement.textContent?.trim();
                 if (!promptText) {
-                    showError(button, 'Promptas tuščias');
+                    showError(button, uiText('Promptas tuščias', 'Prompt is empty'));
                     return;
                 }
 
@@ -2144,7 +2363,7 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
             function fallbackCopy(text, button) {
                 const textarea = document.getElementById('hiddenTextarea');
                 if (!textarea) {
-                    showError(button, 'Kopijavimas nepavyko');
+                    showError(button, uiText('Kopijavimas nepavyko', 'Copy failed'));
                     isCopying = false;
                     return;
                 }
@@ -2176,7 +2395,7 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
                         throw new Error('execCommand copy nepavyko');
                     }
                 } catch (_) {
-                    showError(button, 'Nepavyko. Pažymėk tekstą ranka ir nukopijuok.');
+                    showError(button, uiText('Nepavyko. Pažymėk tekstą ranka ir nukopijuok.', 'Failed. Select the text manually and copy.'));
                 } finally {
                     isCopying = false;
                 }
@@ -2189,9 +2408,9 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
                 if (!button) return;
 
                 const original = button.innerHTML;
-                button.innerHTML = '<span aria-hidden="true">✓</span><span>Nukopijuota!</span>';
+                button.innerHTML = '<span aria-hidden="true">✓</span><span>' + uiText('Nukopijuota!', 'Copied!') + '</span>';
                 button.classList.add('success');
-                button.setAttribute('aria-label', 'Promptas sėkmingai nukopijuotas');
+                button.setAttribute('aria-label', uiText('Promptas sėkmingai nukopijuotas', 'Prompt copied successfully'));
                 showToast();
                 
                 setTimeout(() => {
@@ -2199,7 +2418,8 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
                     button.classList.remove('success');
                     const promptId = button.getAttribute('data-prompt-id');
                     if (promptId) {
-                        button.setAttribute('aria-label', `Kopijuoti promptą ${promptId.replace('prompt', '')} į mainų atmintinę`);
+                        var n = promptId.replace('prompt', '');
+                        button.setAttribute('aria-label', uiText('Kopijuoti promptą ' + n + ' į mainų atmintinę', 'Copy prompt ' + n + ' to clipboard'));
                     }
                 }, CONFIG.BUTTON_RESET_TIMEOUT);
             }
@@ -2211,15 +2431,16 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
                 if (!button) return;
 
                 const original = button.innerHTML;
-                const errorMessage = message || 'Pažymėk tekstą';
-                button.innerHTML = `<span aria-hidden="true">⚠</span><span>${errorMessage}</span>`;
-                button.setAttribute('aria-label', `Klaida: ${errorMessage}`);
+                const errorMessage = message || uiText('Pažymėk tekstą', 'Select text');
+                button.innerHTML = '<span aria-hidden="true">⚠</span><span>' + errorMessage + '</span>';
+                button.setAttribute('aria-label', uiText('Klaida: ', 'Error: ') + errorMessage);
                 
                 setTimeout(() => {
                     button.innerHTML = original;
                     const promptId = button.getAttribute('data-prompt-id');
                     if (promptId) {
-                        button.setAttribute('aria-label', `Kopijuoti promptą ${promptId.replace('prompt', '')} į mainų atmintinę`);
+                        var n = promptId.replace('prompt', '');
+                        button.setAttribute('aria-label', uiText('Kopijuoti promptą ' + n + ' į mainų atmintinę', 'Copy prompt ' + n + ' to clipboard'));
                     }
                 }, CONFIG.ERROR_TIMEOUT);
             }
@@ -2300,11 +2521,11 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
                 var textEl = document.getElementById('progressText');
                 var fillEl = document.getElementById('progressBarFill');
                 var barEl = document.querySelector('.progress-bar[role="progressbar"]');
-                if (textEl) textEl.textContent = count === 10 ? 'Puiku – panaudojai visus 10.' : 'Panaudojai ' + count + ' iš 10 promptų.';
+                if (textEl) textEl.textContent = count === 10 ? uiText('Puiku – panaudojai visus 10.', 'Great – you used all 10.') : uiText('Panaudojai ' + count + ' iš 10 promptų.', 'You used ' + count + ' of 10 prompts.');
                 if (fillEl) fillEl.style.width = (count / 10 * 100) + '%';
                 if (barEl) {
                     barEl.setAttribute('aria-valuenow', count);
-                    barEl.setAttribute('aria-label', 'Progresas: ' + count + ' iš 10 promptų');
+                    barEl.setAttribute('aria-label', uiText('Progresas: ' + count + ' iš 10 promptų', 'Progress: ' + count + ' of 10 prompts'));
                 }
             }
 
@@ -2330,6 +2551,41 @@ OUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei
 
                 // S1: progreso indikatorius
                 updateProgressIndicator();
+
+                // LT/EN: atnaujinti statinį tekstą pagal locale
+                applyStaticLocaleText();
+
+                // Kalbos perjungiklis: active būsena ir paspaudimai
+                var langLtBtn = document.getElementById('langLtBtn');
+                var langEnBtn = document.getElementById('langEnBtn');
+                if (langLtBtn && langEnBtn) {
+                    langLtBtn.classList.toggle('is-active', locale === 'lt');
+                    langLtBtn.setAttribute('aria-pressed', locale === 'lt' ? 'true' : 'false');
+                    langEnBtn.classList.toggle('is-active', locale === 'en');
+                    langEnBtn.setAttribute('aria-pressed', locale === 'en' ? 'true' : 'false');
+                    langLtBtn.addEventListener('click', function() {
+                        if (locale === 'lt') return;
+                        try { localStorage.setItem(LANG_KEY, 'lt'); } catch (e) { /* ignore */ }
+                        var hash = window.location.hash || '';
+                        var path = (window.location.pathname || '').toLowerCase();
+                        if (/\/en(?:\/|$)/.test(path)) {
+                            window.location.href = window.location.pathname.replace(/\/en(?:\/|$)/, '/lt/') + hash;
+                        } else {
+                            window.location.href = window.location.pathname + '?lang=lt' + hash;
+                        }
+                    });
+                    langEnBtn.addEventListener('click', function() {
+                        if (locale === 'en') return;
+                        try { localStorage.setItem(LANG_KEY, 'en'); } catch (e) { /* ignore */ }
+                        var hash = window.location.hash || '';
+                        var path = (window.location.pathname || '').toLowerCase();
+                        if (/\/lt(?:\/|$)/.test(path)) {
+                            window.location.href = window.location.pathname.replace(/\/lt(?:\/|$)/, '/en/') + hash;
+                        } else {
+                            window.location.href = window.location.pathname + '?lang=en' + hash;
+                        }
+                    });
+                }
 
             });
         })();

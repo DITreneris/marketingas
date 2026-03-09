@@ -1,6 +1,6 @@
 # Gili kodo bazės analizė – DI Promptų Biblioteka
 
-**Data:** 2026-02-18  
+**Data:** 2026-02-18 (atnaujinta 2026-03-09)  
 **Tikslas:** Klaidų, neatitikimų, trūkumų identifikavimas ir testų rinkinio pridėjimas, kad būtų garantuojamas sistemos veikimas.
 
 ---
@@ -10,41 +10,35 @@
 | Kategorija        | Rasta | Kritiška | Pastabos |
 |-------------------|-------|----------|----------|
 | Klaidos / bug'ai  | 0     | 0        | Logika atitinka specifikaciją |
-| Neatitikimai      | 5     | 2        | Console, dead CSS, dokumentacija |
-| Trūkumai          | 4     | 2        | Testų automatizavimas, pa11y privatumas.html |
-| Rekomendacijos    | 6     | –        | Ilgalaikis priežiūra |
+| Neatitikimai      | 2     | 0        | Dead CSS (pasirinktinai), inline JS nelintinamas |
+| Trūkumai          | 0     | 0        | DEPLOYMENT.md, pa11y privatumas, console – išspręsta; BASE_PATH deploy – išspręsta (2026-03-09) |
+| Rekomendacijos    | 4     | –        | Ilgalaikis priežiūra (dead CSS, privatumas atgal, lint) |
 
 ---
 
 ## 2. Rastos klaidos ir neatitikimai
 
-### 2.1 Console naudojimas production kode (KRITINĖ – .cursorrules / MUST_TODO)
+### 2.1 Console naudojimas production kode — **IŠSPRĘSTA (2026-02-18)**
 
-- **Vieta:** `index.html` – inline `<script>` (apie 10 vietų).
-- **Problema:** `.cursorrules` (eil. 184) ir MUST_TODO Final Check reikalauja: *„Įsitikinkite, kad nėra console.error arba warning production kode“*. `index.html` vis dar naudoja `console.error` ir `console.warn`.
-- **Poveikis:** Galima informacijos nutekėjimas į konsolę; neatitikimas su projekto taisyklėmis.
-- **Siūlomas sprendimas:** Naudoti vieną iš:
-  - **A)** Pašalinti visus `console.error` / `console.warn` iš production build, arba
-  - **B)** Apgaubti juos sąlyga, pvz. `if (typeof window !== 'undefined' && window.DI_DEBUG) { ... }`, ir production neįjungti `DI_DEBUG`.
+- **Buvusi problema:** `.cursorrules` ir MUST_TODO reikalavo nebenaudoti `console.error` / `console.warn` production kode.
+- **Dabartinė būklė:** `index.html` inline skripte **nėra** `console.log` / `console.warn` / `console.error`. Testai (`tests/structure.test.js`) ir build skriptas (`scripts/build-locale-pages.js`) naudoja `console` tik Node aplinkoje – tai priimtina.
 
-### 2.2 Nenaudojamas (dead) CSS – modal ir forma
+### 2.2 Nenaudojamas (dead) CSS – modal ir forma (likęs, neblokuoja deploy)
 
 - **Vieta:** `index.html` – ~200 eilučių CSS (`.modal-overlay`, `.modal`, `.form-group`, `.form-input`, `.form-submit` ir kt.).
-- **Problema:** Kontaktų forma ir modal šiuo metu išjungti – atitinkamos HTML struktūros nėra. Šie stiliai niekada nėra taikomi.
-- **Poveikis:** Didesnis failo dydis, painiau prižiūrėti; galima klaidinga nuomonė, kad forma „beveik įjungta“.
-- **Siūlomas sprendimas:** Arba (A) perkelti modal/form CSS į atskirą failą, pvz. `form-modal.css`, ir įtraukti tik kai forma bus įjungta, arba (B) pašalinti iš `index.html` ir atkurti iš INTEGRACIJA.md / backup, kai reikės.
+- **Problema:** Kontaktų forma ir modal šiuo metu išjungti (MUST_TODO) – atitinkamos HTML struktūros nėra. Šie stiliai niekada nėra taikomi.
+- **Poveikis:** Didesnis failo dydis; neblokuoja release. Palikta kaip paruošimas būsimam etapui (kai bus įjungta forma).
+- **Siūlomas sprendimas (pasirinktinai):** Perkelti į `form-modal.css` ir įtraukti tik įjungus formą, arba dokumentuoti ir palikti.
 
-### 2.3 README vs faktinė struktūra
+### 2.3 README vs faktinė struktūra — **IŠSPRĘSTA**
 
-- **README.md** (Struktūra) mini: `DEPLOYMENT.md`, `package.json`, `.github/workflows/ci.yml`.
-- **Faktas:** `DEPLOYMENT.md` neegzistuoja (MUST_TODO jį planuoja, bet neįgyvendintas).
-- **Siūlomas sprendimas:** README struktūroje pašalinti nuorodą į `DEPLOYMENT.md` arba sukurti minimalų `DEPLOYMENT.md` (pvz. „Deployment instrukcijos bus čia“ + nuoroda į INTEGRACIJA.md).
+- **Buvusi problema:** `DEPLOYMENT.md` neegzistavo.
+- **Dabartinė būklė:** `DEPLOYMENT.md` egzistuoja – GitHub Pages deploy instrukcijos, troubleshooting, post-deploy testavimas. README struktūra atitinka faktą.
 
-### 2.4 CI – tik pagrindinis puslapis a11y
+### 2.4 CI – tik pagrindinis puslapis a11y — **IŠSPRĘSTA**
 
-- **Vieta:** `.github/workflows/ci.yml` – pa11y paleidžiamas tik su `http://localhost:3000/`.
-- **Problema:** `privatumas.html` nėra tikrinamas prieinamumo (a11y) požiūriu.
-- **Siūlomas sprendimas:** CI pridėti antrą pa11y žingsnį: `npx pa11y http://localhost:3000/privatumas.html --standard WCAG2AA --ignore "warning"`.
+- **Buvusi problema:** `privatumas.html` nebuvo tikrinamas pa11y.
+- **Dabartinė būklė:** `.github/workflows/ci.yml` jau turi antrą pa11y žingsnį: `npx pa11y http://127.0.0.1:3000/privatumas.html --standard WCAG2AA --ignore "warning"`.
 
 ### 2.5 JavaScript lint – tik atskiri .js failai
 
@@ -68,9 +62,9 @@
 - **Faktas:** `package.json` neturi `"test"` skripto. CI vykdo tik `lint:html` ir `lint:js`.
 - **Įgyvendinimas:** Pridėtas `npm test`, kuris paleidžia struktūrinius testus + lint (arba atskirai `npm run test:structure`).
 
-### 3.3 DEPLOYMENT.md
+### 3.3 DEPLOYMENT.md — **IŠSPRĘSTA**
 
-- MUST_TODO ir README planuoja deployment instrukcijas. Failas dar nesukurtas – dokumentuota kaip trūkumas skyriuje 2.3.
+- `DEPLOYMENT.md` egzistuoja; GitHub Pages, lokalus tikrinimas, post-deploy testavimas, troubleshooting dokumentuoti.
 
 ### 3.4 Nuorodos / privatumas.html
 
@@ -84,7 +78,7 @@
 
 - **10 promptų:** Visi 10 promptų egzistuoja su teisingais `id="prompt1"` … `id="prompt10"` ir `id="block1"` … `id="block10"`.
 - **Kopijavimas:** Naudojamas `navigator.clipboard.writeText` + `fallbackCopy` (execCommand) – atitinka README ir .cursorrules.
-- **Progresas:** „Pažymėjau kaip atlikau“ saugoma `localStorage` su raktais `di_prompt_done_1` … `di_prompt_done_8` – atitinka privatumas.html aprašymą.
+- **Progresas:** „Pažymėjau kaip atlikau“ saugoma `localStorage` su raktais `di_prompt_done_1` … `di_prompt_done_10` – atitinka privatumas.html aprašymą.
 - **Klaviatūra:** Code-block turi `tabindex="0"`, `role="button"`, `onkeydown` (Enter/Space) – atitinka a11y reikalavimus.
 - **Skip link:** `href="#main-content"`, `<main id="main-content">` – teisingai.
 
@@ -131,12 +125,12 @@ CI workflow rekomenduojama papildyti `npm test` (kad būtų vykdomi ir struktūr
 
 ## 6. Rekomendacijos (prioritetas)
 
-1. **Dabar:** Pridėti `npm test` į CI (`.github/workflows/ci.yml`) – žingsnis „Run tests“ su `npm test`.
-2. **Dabar:** Nuspręsti dėl console: arba pašalinti `console.error`/`console.warn` iš production, arba apgaubti `DI_DEBUG` sąlyga.
-3. **Trumpuoju laikotarpiu:** Pašalinti arba išskirti nenaudojamą modal/form CSS iš `index.html`.
-4. **Trumpuoju laikotarpiu:** README struktūroje atnaujinti arba sukurti minimalų DEPLOYMENT.md.
-5. **Viduriuoju laikotarpiu:** JavaScript iš `index.html` ištraukti į `app.js` ir lintinti per ESLint.
-6. **Viduriuoju laikotarpiu:** CI pridėti pa11y tikrinimą ir `privatumas.html`.
+1. ~~**Dabar:** Pridėti `npm test` į CI~~ — **atlikta:** CI vykdo `npm test`.
+2. ~~**Dabar:** Console production~~ — **atlikta:** index.html neturi console.
+3. ~~**Trumpuoju laikotarpiu:** DEPLOYMENT.md~~ — **atlikta:** DEPLOYMENT.md egzistuoja.
+4. ~~**Deploy:** BASE_PATH GitHub Pages~~ — **atlikta (2026-03-09):** deploy workflow build žingsnyje nustatytas `BASE_PATH=/marketingas`, canonical ir hreflang teisingi.
+5. **Pasirinktinai:** Pašalinti arba išskirti nenaudojamą modal/form CSS; privatumas.html „atgal“ nuoroda – išsaugoti locale (žr. planą).
+6. **Viduriuoju laikotarpiu:** JavaScript iš `index.html` ištraukti į `app.js` ir lintinti per ESLint (arba palikti kaip yra).
 
 ---
 
@@ -163,4 +157,4 @@ Dabartinis kodas įrašytas kaip **legacy golden standard**. Toliau keičiame **
 
 ---
 
-**Paskutinis atnaujinimas:** 2026-02-18
+**Paskutinis atnaujinimas:** 2026-03-09 (deploy ruoštis: BASE_PATH, CHANGELOG 1.1.0, išspręstų punktų pažymėjimas)

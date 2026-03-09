@@ -1,0 +1,242 @@
+/**
+ * Build locale pages: generates lt/index.html and en/index.html from root index.html.
+ * LT = Lithuanian (default), EN = English (replacements applied).
+ * Run: node scripts/build-locale-pages.js
+ * Optional: BASE_PATH=/marketingas/ for GitHub Pages subpath.
+ */
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.join(__dirname, '..');
+const INDEX_PATH = path.join(ROOT, 'index.html');
+const BASE_PATH = (process.env.BASE_PATH || '').replace(/\/?$/, ''); // e.g. '' or '/marketingas'
+
+function readIndex() {
+  const html = fs.readFileSync(INDEX_PATH, 'utf8');
+  if (!html) throw new Error('index.html not found or empty');
+  return html;
+}
+
+function ensureDir(dirPath) {
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+}
+
+/** Insert canonical + hreflang after viewport meta */
+function insertSeo(html, locale) {
+  const base = BASE_PATH ? BASE_PATH + '/' : '';
+  const canonical = base + (locale === 'lt' ? 'lt/' : 'en/');
+  const insert = [
+    `<link rel="canonical" href="${canonical}">`,
+    `<link rel="alternate" hreflang="lt" href="${base}lt/">`,
+    `<link rel="alternate" hreflang="en" href="${base}en/">`,
+    `<link rel="alternate" hreflang="x-default" href="${base}lt/">`
+  ].join('\n    ');
+  return html.replace(
+    /<meta name="viewport" content="[^"]*">/,
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n    ' + insert
+  );
+}
+
+/** Fix asset paths for pages inside lt/ or en/ */
+function fixAssetPaths(html) {
+  return html
+    .replace(/href="favicon\.svg"/g, 'href="../favicon.svg"')
+    .replace(/href="privatumas\.html"/g, 'href="../privatumas.html"');
+}
+
+/** EN static text replacements (order: more specific first where needed) */
+const EN_REPLACEMENTS = [
+  // Skip & meta
+  ['Pereiti prie turinio', 'Skip to content'],
+  ['<title>Turinio DI sistema – rinkodaros vadovams</title>', '<title>Content AI System – for Marketing Leads</title>'],
+  // Hero
+  ['aria-label="Pilna Promptų anatomija – interaktyvus mokymas (atidaroma naujame lange)"', 'aria-label="Full Prompt Anatomy – interactive training (opens in new tab)"'],
+  ['aria-label="Mini rinkodaros DI sistema, Lead generator versija"', 'aria-label="Mini marketing AI system, Lead generator version"'],
+  // Footer product link (before generic "Promptų anatomija" so full paragraph matches)
+  ['<p class="footer-product-link">Tai Spin-off Nr. 2 iš „Promptų anatomijos“. Pilnas interaktyvus mokymas ir kiti kursai: <a href="https://www.promptanatomy.app/" target="_blank" rel="noopener noreferrer">Promptų anatomija →</a></p>', '<p class="footer-product-link">This is Spin-off No. 2 from Prompt Anatomy. Full interactive training and other courses: <a href="https://www.promptanatomy.app/" target="_blank" rel="noopener noreferrer">Prompt Anatomy →</a></p>'],
+  ['<span id="footer-email-label">El. paštas:</span>', '<span id="footer-email-label">Email:</span>'],
+  ['Promptų anatomija', 'Prompt Anatomy'],
+  ['Turinio DI sistema<br>rinkodaros vadovams', 'Content AI System<br>for Marketing Leads'],
+  ['Per 45 min. susikursi turinio variklį, kuris dirba kasdien.', 'In 45 min you\'ll build a content engine that works every day.'],
+  ['aria-label="Gauti nemokamai – pereiti prie promptų"', 'aria-label="Get free – go to prompts"'],
+  ['Gauti nemokamai', 'Get free'],
+  ['aria-label="Prisijunk prie bendruomenės – pereiti prie WhatsApp ir nuorodų"', 'aria-label="Join community – go to WhatsApp and links"'],
+  ['Prisijunk prie bendruomenės', 'Join the community'],
+  // Objectives
+  ['<span aria-hidden="true">🎯</span> Ką realiai gausi', '<span aria-hidden="true">🎯</span> What you actually get'],
+  ['Per 3/4 val. turėsi aiškią turinio sistemą, 100 turinio vienetų ir 30 d. planą', 'In 3/4 h you\'ll have a clear content system, 100 content units and a 30-day plan'],
+  ['Generuosi turinį pagal 4 principus', 'Generate content by 4 principles'],
+  ['Testuosi ir optimizuosi pagal aiškius matavimo rodiklius', 'Test and optimize by clear metrics'],
+  ['Dirbsi uždaru ciklu: Planuok → Kurk → Platink → Matuok → Spręsk', 'Work in a closed loop: Plan → Create → Distribute → Measure → Decide'],
+  // Instructions
+  ['Kaip naudoti šią biblioteką', 'How to use this library'],
+  ['aria-label="Orientacinis laikas: 3–5 min per žingsnį"', 'aria-label="Estimated time: 3–5 min per step"'],
+  ['Pasirink promptą ir spausk ant jo – tekstas pažymėsis', 'Select a prompt and click it – text will be selected'],
+  ['Spausk <strong>„Kopijuoti promptą"</strong> arba <code>Ctrl+C</code> / <code>Cmd+C</code>', 'Click <strong>"Copy prompt"</strong> or <code>Ctrl+C</code> / <code>Cmd+C</code>'],
+  ['Įklijuok į ChatGPT, Claude ar kitą DI (dirbtinio intelekto) įrankį', 'Paste into ChatGPT, Claude or another AI tool'],
+  ['Pakeisk <code>[auditorija]</code>, <code>[galvos skausmas]</code>, <code>[unikalus pardavimo pasiūlymas]</code>, <code>[kanalas]</code> ir kitus laukus savo duomenimis – ir gauk rezultatą', 'Replace <code>[audience]</code>, <code>[pain point]</code>, <code>[unique selling proposition]</code>, <code>[channel]</code> and other placeholders with your data – and get the result'],
+  // Progress
+  ['Panaudojai 0 iš 10 promptų', 'You used 0 of 10 prompts'],
+  ['aria-label="Progresas: 0 iš 10 promptų"', 'aria-label="Progress: 0 of 10 prompts"'],
+  // Prompt 1
+  ['<div class="category">Pradžia</div>', '<div class="category">Start</div>'],
+  ['<h2 class="prompt-title">30 dienų turinio sistema</h2>', '<h2 class="prompt-title">30-day content system</h2>'],
+  ['<p class="prompt-desc">Sukurk 30 dienų turinio planą pagal 4 turinio principus</p>', '<p class="prompt-desc">Create a 30-day content plan by 4 content principles</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 1"', 'aria-label="Select and copy prompt 1"'],
+  ['aria-label="Informacija: promptas 1"', 'aria-label="Information: prompt 1"'],
+  ['<strong>Branduolys:</strong>', '<strong>Core:</strong>'],
+  ['<p>4 principai = balansas: autoritetas, problema, įrodymas, pasiūlymas.</p>', '<p>4 principles = balance: authority, problem, proof, offer.</p>'],
+  ['Nukopijuok ir įklijuok į ChatGPT arba Claude – tai šio žingsnio tikslas.', 'Copy and paste into ChatGPT or Claude – that\'s the goal of this step.'],
+  ['aria-label="Kopijuoti promptą 1 į mainų atmintinę"', 'aria-label="Copy prompt 1 to clipboard"'],
+  ['<span>Kopijuoti promptą</span>', '<span>Copy prompt</span>'],
+  ['aria-label="Pažymėti, kad atlikai šį žingsnį"', 'aria-label="Mark as done"'],
+  ['<span>Pažymėjau kaip atlikau</span>', '<span>Mark as done</span>'],
+  // Prompt 2
+  ['<h2 class="prompt-title">Viena idėja → 7 formatai</h2>', '<h2 class="prompt-title">One idea → 7 formats</h2>'],
+  ['<p class="prompt-desc">Vieną idėją paversk į 7 skirtingus formatus</p>', '<p class="prompt-desc">Turn one idea into 7 different formats</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 2"', 'aria-label="Select and copy prompt 2"'],
+  ['aria-label="Informacija: promptas 2"', 'aria-label="Information: prompt 2"'],
+  ['<strong>Vienos idėjos daug formatų:</strong>', '<strong>One idea, many formats:</strong>'],
+  ['<p>1 idėja = 7 vienetų. Laikas sutaupomas, nuoseklumas išlaikomas.</p>', '<p>1 idea = 7 units. Time saved, consistency kept.</p>'],
+  ['Įklijuok į ChatGPT arba Claude ir pakeisk laukus savo duomenimis.', 'Paste into ChatGPT or Claude and replace placeholders with your data.'],
+  ['aria-label="Kopijuoti promptą 2 į mainų atmintinę"', 'aria-label="Copy prompt 2 to clipboard"'],
+  // Prompt 3
+  ['<h2 class="prompt-title">LinkedIn Autoriteto Kūrimas</h2>', '<h2 class="prompt-title">LinkedIn authority building</h2>'],
+  ['<p class="prompt-desc">150–200 žodžių postas su įžanginiu kabliuku, 3 punktais, pavyzdžiu ir raginimu veikti</p>', '<p class="prompt-desc">150–200 word post with hook, 3 points, example and call to action</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 3"', 'aria-label="Select and copy prompt 3"'],
+  ['aria-label="Informacija: promptas 3"', 'aria-label="Information: prompt 3"'],
+  ['<strong>Autoritetas:</strong>', '<strong>Authority:</strong>'],
+  ['<p>Įrodymai + konkretūs punktai = pasitikėjimas ir reakcija.</p>', '<p>Proof + concrete points = trust and engagement.</p>'],
+  ['aria-label="Kopijuoti promptą 3 į mainų atmintinę"', 'aria-label="Copy prompt 3 to clipboard"'],
+  // Prompt 4
+  ['<h2 class="prompt-title">30 sek. video scenarijus</h2>', '<h2 class="prompt-title">30 sec video script</h2>'],
+  ['<p class="prompt-desc">Sukurti video – lengviau dar nebuvo!</p>', '<p class="prompt-desc">Create video – easier than ever!</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 4"', 'aria-label="Select and copy prompt 4"'],
+  ['aria-label="Informacija: promptas 4"', 'aria-label="Information: prompt 4"'],
+  ['<strong>Trumpas formatas:</strong>', '<strong>Short format:</strong>'],
+  ['<p>2 sekundės = liks arba slinks toliau. Įžūgis – esmė.</p>', '<p>2 seconds = stay or scroll. The hook is key.</p>'],
+  ['Nukopijuok, įklijuok į DI įrankį ir pakeisk [tema], [pavyzdys] savo duomenimis.', 'Copy, paste into AI tool and replace [topic], [example] with your data.'],
+  ['aria-label="Kopijuoti promptą 4 į mainų atmintinę"', 'aria-label="Copy prompt 4 to clipboard"'],
+  // Prompt 5
+  ['<h2 class="prompt-title">Kasdienė analizė (Veikla→Sprendimas)</h2>', '<h2 class="prompt-title">Daily analysis (Action→Decision)</h2>'],
+  ['<p class="prompt-desc">Iš rodiklių suprask: kas neveikia, kodėl, ką daryti</p>', '<p class="prompt-desc">From metrics understand: what doesn\'t work, why, what to do</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 5"', 'aria-label="Select and copy prompt 5"'],
+  ['aria-label="Informacija: promptas 5"', 'aria-label="Information: prompt 5"'],
+  ['<strong>Uždaras ciklas:</strong>', '<strong>Closed loop:</strong>'],
+  ['<p>Rodikliai be veiksmų = stovėjimas vietoje. Duomenys → sprendimai.</p>', '<p>Metrics without action = standing still. Data → decisions.</p>'],
+  ['aria-label="Kopijuoti promptą 5 į mainų atmintinę"', 'aria-label="Copy prompt 5 to clipboard"'],
+  // Prompt 6
+  ['<div class="category">Įgūdžiai</div>', '<div class="category">Skills</div>'],
+  ['<h2 class="prompt-title">Prieštaravimų apdorojimo įrankis</h2>', '<h2 class="prompt-title">Objection handling tool</h2>'],
+  ['<p class="prompt-desc">Iš klientų prieštaravimų sukurk turinį, kuris juos neutralizuoja</p>', '<p class="prompt-desc">From customer objections create content that neutralises them</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 6"', 'aria-label="Select and copy prompt 6"'],
+  ['aria-label="Informacija: promptas 6"', 'aria-label="Information: prompt 6"'],
+  ['<strong>Konversija:</strong>', '<strong>Conversion:</strong>'],
+  ['<p>Realūs klausimai + atsakymai = mažesnė trintis, didesnis pasitikėjimas.</p>', '<p>Real questions + answers = less friction, more trust.</p>'],
+  ['Įklijuok į ChatGPT arba Claude – pakeisk prieštaravimus ir kontekstą.', 'Paste into ChatGPT or Claude – replace objections and context.'],
+  ['aria-label="Kopijuoti promptą 6 į mainų atmintinę"', 'aria-label="Copy prompt 6 to clipboard"'],
+  // Prompt 7
+  ['<h2 class="prompt-title">Lead generator postas + DM seka</h2>', '<h2 class="prompt-title">Lead generator post + DM sequence</h2>'],
+  ['<p class="prompt-desc">Lead generator postas + 4 žinučių seka</p>', '<p class="prompt-desc">Lead generator post + 4-message sequence</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 7"', 'aria-label="Select and copy prompt 7"'],
+  ['aria-label="Informacija: promptas 7"', 'aria-label="Information: prompt 7"'],
+  ['<strong>Potencialūs klientai:</strong>', '<strong>Leads:</strong>'],
+  ['<p>Seka: sekėjas → klientas. Struktūra didina konversiją.</p>', '<p>Sequence: follower → customer. Structure increases conversion.</p>'],
+  ['aria-label="Kopijuoti promptą 7 į mainų atmintinę"', 'aria-label="Copy prompt 7 to clipboard"'],
+  // Prompt 8
+  ['<h2 class="prompt-title">Kliento istorijos struktūra</h2>', '<h2 class="prompt-title">Customer story structure</h2>'],
+  ['<p class="prompt-desc">Iš duomenų sukurk kliento istoriją</p>', '<p class="prompt-desc">From data create a customer story</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 8"', 'aria-label="Select and copy prompt 8"'],
+  ['aria-label="Informacija: promptas 8"', 'aria-label="Information: prompt 8"'],
+  ['<strong>Įrodymai:</strong>', '<strong>Proof:</strong>'],
+  ['<p>Skaičiai + procesas = kredibilitetas ir konversija.</p>', '<p>Numbers + process = credibility and conversion.</p>'],
+  ['Nukopijuok ir įklijuok – įrašyk kliento duomenis ir gauk struktūrizuotą istoriją.', 'Copy and paste – enter customer data and get a structured story.'],
+  ['aria-label="Kopijuoti promptą 8 į mainų atmintinę"', 'aria-label="Copy prompt 8 to clipboard"'],
+  // Prompt 9
+  ['<div class="category">Plėtra</div>', '<div class="category">Growth</div>'],
+  ['<h2 class="prompt-title">Temų grupė</h2>', '<h2 class="prompt-title">Topic cluster</h2>'],
+  ['<p class="prompt-desc">Pagrindinė tema + 8 subtemos, vidinės nuorodos</p>', '<p class="prompt-desc">Main topic + 8 subtopics, internal links</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 9"', 'aria-label="Select and copy prompt 9"'],
+  ['aria-label="Informacija: promptas 9"', 'aria-label="Information: prompt 9"'],
+  ['aria-label="Kopijuoti promptą 9 į mainų atmintinę"', 'aria-label="Copy prompt 9 to clipboard"'],
+  // Prompt 10
+  ['<div class="category">Viskas kartu</div>', '<div class="category">All together</div>'],
+  ['<h2 class="prompt-title">Pagrindinis promptas (valdymo centras)</h2>', '<h2 class="prompt-title">Main prompt (control centre)</h2>'],
+  ['<p class="prompt-desc">Vienas integruotas planas: turinys, vienos idėjos daug formatų, testavimas, veiksmai</p>', '<p class="prompt-desc">One integrated plan: content, one idea many formats, testing, actions</p>'],
+  ['aria-label="Pasirinkti ir kopijuoti promptą 10"', 'aria-label="Select and copy prompt 10"'],
+  ['aria-label="Informacija: promptas 10"', 'aria-label="Information: prompt 10"'],
+  ['<strong>Valdymo centras:</strong>', '<strong>Control centre:</strong>'],
+  ['<p>Viskas vienoje vietoje: 30 d. planas, 1→7, testavimas, prioritetai.</p>', '<p>Everything in one place: 30-day plan, 1→7, testing, priorities.</p>'],
+  ['Šis promptas apima viską – nukopijuok, įklijuok ir pildyk savo verslo laukus.', 'This prompt covers everything – copy, paste and fill your business fields.'],
+  ['aria-label="Kopijuoti promptą 10 į mainų atmintinę"', 'aria-label="Copy prompt 10 to clipboard"'],
+  // Next steps
+  ['<h2 id="next-steps-title">Kas toliau?</h2>', '<h2 id="next-steps-title">What next?</h2>'],
+  ['Geriausia eiti iš eilės nuo 1 iki 10. Paspaudę nuorodą pereisi prie atitinkamo prompto.', 'Best to go in order from 1 to 10. Click a link to jump to that prompt.'],
+  ['<a href="#block1">1. 30 dienų turinio sistema</a>', '<a href="#block1">1. 30-day content system</a>'],
+  ['<a href="#block2">2. Viena idėja → 7 formatai</a>', '<a href="#block2">2. One idea → 7 formats</a>'],
+  ['<a href="#block3">3. LinkedIn Autoriteto Kūrimas</a>', '<a href="#block3">3. LinkedIn authority building</a>'],
+  ['<a href="#block4">4. 30 sek. video scenarijus</a>', '<a href="#block4">4. 30 sec video script</a>'],
+  ['<a href="#block5">5. Kasdienė analizė (Veikla→Sprendimas)</a>', '<a href="#block5">5. Daily analysis (Action→Decision)</a>'],
+  ['<a href="#block6">6. Prieštaravimų apdorojimas</a>', '<a href="#block6">6. Objection handling</a>'],
+  ['<a href="#block7">7. Lead generator postas + DM seka</a>', '<a href="#block7">7. Lead generator post + DM sequence</a>'],
+  ['<a href="#block8">8. Kliento istorijos struktūra</a>', '<a href="#block8">8. Customer story structure</a>'],
+  ['<a href="#block9">9. Temų grupė</a>', '<a href="#block9">9. Topic cluster</a>'],
+  ['<a href="#block10">10. Pagrindinis promptas (valdymo centras)</a>', '<a href="#block10">10. Main prompt (control centre)</a>'],
+  // Community
+  ['<h2 id="community-title">Nori daugiau?<br>Prisijunk prie WhatsApp grupės.</h2>', '<h2 id="community-title">Want more?<br>Join the WhatsApp group.</h2>'],
+  ['<p>Bendros diskusijos, patarimai ir naujienos apie promptus ir DI.</p>', '<p>Shared discussions, tips and news about prompts and AI.</p>'],
+  ['aria-label="Atidaryti Promptų anatomija WhatsApp grupę naujame lange"', 'aria-label="Open Prompt Anatomy WhatsApp group in new tab"'],
+  ['Prisijungti prie WhatsApp grupės', 'Join WhatsApp group'],
+  ['aria-label="Pilna Promptų anatomija – interaktyvus mokymas (atidaroma naujame lange)"', 'aria-label="Full Prompt Anatomy – interactive training (opens in new tab)"'],
+  ['Promptų anatomija →', 'Prompt Anatomy →'],
+  // Footer
+  ['<h3>Sėkmės rinkodaroje <span aria-hidden="true">🚀</span></h3>', '<h3>Success in marketing <span aria-hidden="true">🚀</span></h3>'],
+  ['<p>Nepamiršk pakeisti <strong>[auditorija]</strong>, <strong>[galvos skausmas]</strong>, <strong>[unikalus pardavimo pasiūlymas]</strong>, <strong>[kanalas]</strong> ir kitus laukus savo duomenimis</p>', '<p>Remember to replace <strong>[audience]</strong>, <strong>[pain point]</strong>, <strong>[unique selling proposition]</strong>, <strong>[channel]</strong> and other placeholders with your data</p>'],
+  ['<span class="tag" role="listitem"><span aria-hidden="true">📣</span> Rinkodara</span>', '<span class="tag" role="listitem"><span aria-hidden="true">📣</span> Marketing</span>'],
+  ['<span class="tag" role="listitem"><span aria-hidden="true">📚</span> 10 promptų</span>', '<span class="tag" role="listitem"><span aria-hidden="true">📚</span> 10 prompts</span>'],
+  ['<span class="tag" role="listitem"><span aria-hidden="true">⚡</span> Veiksmų fokusas</span>', '<span class="tag" role="listitem"><span aria-hidden="true">⚡</span> Action focus</span>'],
+  ['<span class="tag" role="listitem"><span aria-hidden="true">🎯</span> Potencialūs klientai ir rodikliai</span>', '<span class="tag" role="listitem"><span aria-hidden="true">🎯</span> Leads and metrics</span>'],
+  ['<p>&copy; 2026 Tomas Staniulis. Mokymų medžiaga. Visos teisės saugomos. <a href="privatumas.html">Privatumas</a></p>', '<p>&copy; 2026 Tomas Staniulis. Training material. All rights reserved. <a href="../privatumas.html">Privacy</a></p>'],
+  // Toast & hidden
+  ['aria-label="Kopijavimo pranešimas"', 'aria-label="Copy notification"'],
+  ['<span>Nukopijuota.</span>', '<span>Copied.</span>'],
+  ['aria-label="Kopijuojamo teksto laukas"', 'aria-label="Text to copy field"'],
+  // Lang switcher
+  ['aria-label="Kalbos pasirinkimas"', 'aria-label="Language selection"'],
+  ['aria-label="Perjungti į lietuvių kalbą"', 'aria-label="Switch to Lithuanian"']
+];
+
+function applyEnReplacements(html) {
+  let out = html;
+  for (const [from, to] of EN_REPLACEMENTS) {
+    out = out.split(from).join(to);
+  }
+  return out;
+}
+
+function buildLocale(locale) {
+  let html = readIndex();
+  html = html.replace(/<html lang="lt">/, '<html lang="' + locale + '">');
+  if (locale === 'en') {
+    html = applyEnReplacements(html);
+  }
+  html = insertSeo(html, locale);
+  html = fixAssetPaths(html);
+  return html;
+}
+
+function main() {
+  ensureDir(path.join(ROOT, 'lt'));
+  ensureDir(path.join(ROOT, 'en'));
+  const ltHtml = buildLocale('lt');
+  const enHtml = buildLocale('en');
+  fs.writeFileSync(path.join(ROOT, 'lt', 'index.html'), ltHtml, 'utf8');
+  fs.writeFileSync(path.join(ROOT, 'en', 'index.html'), enHtml, 'utf8');
+  console.log('Built lt/index.html and en/index.html');
+}
+
+main();

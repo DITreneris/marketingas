@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-    <a href="index.html" class="back">← Grįžti į biblioteką</a>
+    <a href="index.html" class="back" id="back-link">← Grįžti į biblioteką</a>
     <h1>Privatumo politika</h1>
     <p><strong>DI Promptų biblioteka</strong> (Turinio DI sistema rinkodaros vadovui) – minimali aplikacija. Trumpai apie tavo duomenis.</p>
 
@@ -35,6 +35,19 @@
     <h2>Jei vėliau bus forma</h2>
     <p>Jei įjungsime kontaktų formą ar panašią formą, ši politika bus atnaujinta – aiškiai nurodysime, ką renkame ir kaip naudojame.</p>
 
-    <p style="margin-top: 2rem;"><a href="index.html">← Grįžti į DI Promptų biblioteką</a></p>
+    <p style="margin-top: 2rem;"><a href="index.html" id="back-link-footer">← Grįžti į DI Promptų biblioteką</a></p>
+    <script>
+        (function() {
+            var ref = typeof document !== 'undefined' && document.referrer ? document.referrer : '';
+            var path = ref.split('?')[0].split('#')[0];
+            var backHref = 'index.html';
+            if (/\/lt(?:\/|$)/.test(path)) backHref = 'lt/';
+            else if (/\/en(?:\/|$)/.test(path)) backHref = 'en/';
+            var el = document.getElementById('back-link');
+            var elFoot = document.getElementById('back-link-footer');
+            if (el) el.setAttribute('href', backHref);
+            if (elFoot) elFoot.setAttribute('href', backHref);
+        })();
+    </script>
 </body>
 </html>

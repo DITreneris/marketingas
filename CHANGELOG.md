@@ -6,8 +6,17 @@ Formatas pagal [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), versija
 
 ## [Nereleisuota]
 
+- (bus įrašyta prieš kitą release)
+
+---
+
+## [1.1.0] - 2026-03-09
+
 ### Prideta
 
+- **Privatumas.html „atgal“ nuorodos (2026-03-09):** Jei vartotojas atėjo iš `/lt/` ar `/en/`, mygtukai „Grįžti“ nukreipia atgal į atitinkamą locale (pagal `document.referrer`), kad neprarastų kalbos.
+- **Footer el. paštas (2026-03-09):** Pridėtas el. paštas footer'yje – info@promptanatomy.app (mailto nuoroda); LT etiketė „El. paštas:“, EN „Email:“; CSS .footer-email; build skripte ir applyStaticLocaleText() EN lokalizacija.
+- **LT/EN lokalizacija (2026-03):** Path-based puslapiai `/lt/` ir `/en/` – build skriptas `scripts/build-locale-pages.js` generuoja `lt/index.html` ir `en/index.html` iš root `index.html`; canonical ir hreflang SEO; runtime locale sprendimas (path → query → localStorage → navigator), `uiText(lt, en)`, `applyStaticLocaleText()`; kalbos perjungiklis (LT/EN mygtukai header'yje) su navigacija ir hash išsaugojimu; dinaminiai stringai (toast, progress, klaidos) per `uiText`. Žr. [LT_EN_UI_UX_REPORT.md](LT_EN_UI_UX_REPORT.md). Testai: structure.test.js tikrina lt/en failus ir lang; deploy workflow paleidžia `npm run build` prieš upload.
 - **Pedagoginė specifikacija (2026-02-19):** docs/PEDAGOGINES_SPECIFIKACIJA.md – pedagoginiai tikslai, auditorija, terminologija ir paaiškinimai, „paprasta kalba“ kriterijai, vartotojo kelionė. docs/DOCUMENTATION.md – į inventorių įtraukti PEDAGOGINES_SPECIFIKACIJA.md ir TURINIO_AUDITAS_DETALUS.md.
 - **Spin-off Nr. 2:** Rinkodaros vadovo AI operacinė sistema – 10 promptų (30 dienų turinys, Repurpose, LinkedIn, 30s video, Performance→Sprendimas, Objection Handling, Lead Magnet+DM, Case Study, Topical Cluster, MASTER PROMPT).
 - **Oranžinė CTA paletė:** Pagrindinė spalvų paletė pakeista į oranžinę (`--accent-primary`, `--cta-bg`, hero gradientas) dėl aukštesnio CTA; STYLEGUIDE.md atnaujintas.
@@ -15,11 +24,12 @@ Formatas pagal [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), versija
 - Deploy: GitHub Pages workflow (.github/workflows/deploy.yml), DEPLOYMENT.md.
 - QA standartas: docs/QA_STANDARTAS.md su nuoroda į [DITreneris/spinoff01](https://github.com/DITreneris/spinoff01).
 - Gyvo testavimo dokumentacija: docs/TESTAVIMAS.md (scenarijai ir žurnalas).
-- Ryšys su pagrindiniu produktu: badge „Promptų anatomija“ → https://ditreneris.github.io/anatomija/, nuorodos footer ir community skyriuje.
+- Ryšys su pagrindiniu produktu: badge „Promptų anatomija“, community CTA ir footer nuorodos → https://www.promptanatomy.app/ (anksčiau ditreneris.github.io/anatomija).
 - Favicon: favicon.svg (SVG, „P“ ant teal fono), nuorodos index.html ir privatumas.html.
 
 ### Pakeista
 
+- **Promptų anatomija nuoroda ir terminologija (2026-03-09):** Pagrindinė nuoroda „Promptų anatomija“ (hero badge, community antrinis CTA, footer) pakeista į https://www.promptanatomy.app/. Terminologija: LT – DI (dirbtinis intelektas), EN – AI; pataisyta badge aria-label LT „AI“→„DI“, EN title/h1 „Content DI System“→„Content AI System“; rašyba „Linkedin“→„LinkedIn“ LT. Build skripte footer-product-link pakeitimas perkeltas prieš bendrą „Promptų anatomija“→„Prompt Anatomy“, kad EN footer būtų pilnai anglų kalba. README nuorodos atnaujintos į promptanatomy.app. Žr. docs/GILI_ANALIZE_LT_EN_TERMINOLOGIJA.md.
 - **Poliravimas – UI/UX ir a11y (2026-02-19):** Spacing: suvienodinta sekcijų margin-bottom (prompt 32px), prompt-header/footer padding 32px. Focus: paliktas tik `:focus-visible` form-input, .btn, .code-block; outline-offset hero CTA ir outline mygtukų 2px. Transitions: .next-steps-links a, .cta-secondary – pridėtas transition hover būsenoms. ARIA: progreso juosta – aria-label „Progresas: X iš 10 promptų“ (atnaujinama JS), info-box – „Informacija: promptas N“ (N 1–10). Mažų ekranų (375px) .footer padding 24px 16px. STYLEGUIDE.md sinchronizuotas su implementacija: hero vertikalus gradientas, spalvos #c75515/#b54f14, hover translateY(-1px), numerio badge color var(--white), community CTA hover; pridėta border-radius skalė (4.8).
 - **Lead generator (2026-02-19):** „Nemokamo vediklio“ / „vediklis“ pakeista į „Lead generator“ – vediklis šioje aplikacijoje netinka. index.html (antraštė, aprašymas, prompt7, next-steps, footer, aria-label), README, docs/PEDAGOGINES_SPECIFIKACIJA.md.
 - **Promptų ir turinio draugiškumas (2026-02-19):** TURINIO_AUDITAS ir pedagoginė spec. įgyvendinti: objectives (lead'us→potencialius klientus), žodynėlis (hook, CTR, reach, B2B), promptų antraštės/aprašymai (30s Short-Form→30 sek. video, MASTER PROMPT→Pagrindinis promptas), promptų tekste (Carousel/Landing hero→lietuviškai, lead generation/CMO/spamo→lietuviški atitikmenys, B2B paaiškintas), CTA tekstai varijuoti, next-steps ir footer (MASTER PROMPT, Lead magnet→Nemokamo vediklio, CTA fokusas→Veiksmų fokusas). Aria-label: „lead magnet versija“→„nemokamo vediklio versija“. README ir privatumas.html – žargonas pakeistas į lietuviškus atitikmenis, DI paaiškintas, localStorage (naršyklės vietinė atmintinė), „panašiai“→„panašią formą“.
@@ -35,6 +45,8 @@ Formatas pagal [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), versija
 
 ### Taisyta
 
+- **Deploy ir SEO (2026-03-09):** GitHub Pages deploy workflow – build žingsnyje nustatytas `BASE_PATH=/marketingas`, kad sugeneruoti `lt/` ir `en/` puslapiai turėtų teisingus canonical ir hreflang URL (`/marketingas/lt/`, `/marketingas/en/`).
+- **CI ir pa11y (2026-02-19):** GitHub Actions – Chromium „No usable sandbox“: į CI workflow įdėtas `continue-on-error: true` pa11y žingsniui (workflow lieka žalias); .pa11yrc.json ir package.json „pa11y“ – Chrome paleidimo argumentai (`--no-sandbox`, `--disable-setuid-sandbox`, `--disable-dev-shm-usage`). DEPLOYMENT.md – troubleshooting atnaujintas: a11y pilnai tikrinamas lokaliai.
 - Badge „Promptų anatomija“: paspaudimo zona (min-height/min-width 44px), z-index ir cursor, kad nuoroda būtų aiškiai paspaudžiama.
 - A11y WCAG2AA: community skyriaus nuorodos „Promptų anatomija“ kontrastas (teksto spalva #040404).
 

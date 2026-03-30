@@ -30,7 +30,7 @@
 | MVP_ROADMAP.md | Roadmap, tikslai | Curriculum / Orchestrator | Etapų pasikeitimas, prioritetai |
 | INTEGRACIJA.md | Google Sheets, formos | Content / QA | Integracijos žingsniai, konfigūracija |
 | feedback-schema.md | Feedback Store schema | Orchestrator | Schema pakeitimai |
-| privatumas.html | Privatumo politika | Content (juridinė peržiūra atskirai) | Duomenų rinkimo pakeitimai, GDPR |
+| lt/privatumas.html, en/privacy.html | Privatumo politika (LT/EN) | Content (juridinė peržiūra atskirai) | Duomenų rinkimo pakeitimai, GDPR |
 | .github/PULL_REQUEST_TEMPLATE.md | PR šablonas | Orchestrator / QA | Checklist pakeitimai |
 | .github/workflows/ci.yml | CI | QA / Orchestrator | Nauji testai, lint, a11y |
 | .github/workflows/deploy.yml | GitHub Pages deploy | QA / Orchestrator | Deploy žingsniai, environment |

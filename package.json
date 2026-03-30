@@ -7,8 +7,8 @@
     "build": "node scripts/build-locale-pages.js",
     "test": "npm run build && node tests/structure.test.js && npm run lint:html && npm run lint:js",
     "test:structure": "node tests/structure.test.js",
-    "lint:html": "npx html-validator-cli --file index.html",
-    "lint:js": "eslint . --ext .js"
+    "lint:html": "npx html-validator-cli --file index.html && npx html-validator-cli --file lt/index.html && npx html-validator-cli --file lt/privatumas.html && npx html-validator-cli --file en/index.html && npx html-validator-cli --file en/privacy.html",
+    "lint:js": "npx eslint . --ext .js"
   },
   "pa11y": {
     "chromeLaunchConfig": {

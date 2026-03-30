@@ -56,8 +56,10 @@ A11y (pasirinktinai):
 ```bash
 npx serve -s . -l 3000
 # Kitoje terminale:
-npx pa11y http://localhost:3000/ --standard WCAG2AA --ignore "warning"
-npx pa11y http://localhost:3000/privatumas.html --standard WCAG2AA --ignore "warning"
+npx pa11y http://localhost:3000/lt/ --standard WCAG2AA --ignore "warning"
+npx pa11y http://localhost:3000/en/ --standard WCAG2AA --ignore "warning"
+npx pa11y http://localhost:3000/lt/privatumas.html --standard WCAG2AA --ignore "warning"
+npx pa11y http://localhost:3000/en/privacy.html --standard WCAG2AA --ignore "warning"
 ```
 
 ---

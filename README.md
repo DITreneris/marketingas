@@ -70,7 +70,7 @@ Interaktyvi HTML platforma su 10 paruoštų promptų rinkodaros sistemai. Papras
 ## Privatumas
 
 - **Minimali aplikacija:** šiuo metu **nerinkime jokių asmens duomenų**. Visas naudojimas vyksta tik tavo įrenginyje (kopijavimas, „Pažymėjau kaip atlikau“ – localStorage).
-- **Privatumo politika:** [privatumas.html](privatumas.html) – aprašymas, kad duomenų nerinkime; jei vėliau bus įjungta kontaktų forma, bus atnaujinta.
+- **Privatumo politika:** LT [lt/privatumas.html](lt/privatumas.html), EN [en/privacy.html](en/privacy.html) – aprašymas, kad duomenų nerinkime; jei vėliau bus įjungta kontaktų forma, bus atnaujinta.
 
 ## Deployment ir gyvas testavimas
 

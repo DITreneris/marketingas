@@ -6,14 +6,17 @@ Formatas pagal [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), versija
 
 ## [Nereleisuota]
 
-### Pakeista
-
-- **LT→EN UI/UX – statinis tekstas ir promptai (2026-03-09):** Build skripte (EN_REPLACEMENTS): instrukcijų 2 eilutė – sutapdintos kabutės („ “ U+201E/U+201C), kad „Click Copy prompt“ atsirastų EN; laiko etiketė „~3–5 min per žingsnį“ → „~3–5 min per step“; CSS .code-block::before `content` „Spausk čia ir nukopijuok“ → „Click here and copy“. Visi 10 promptų `<pre>` turinių (META, INPUT, OUTPUT) lokalizuoti į EN per build. docs/LEGACY_GOLDEN_STANDARD.md ir LT_EN_UI_UX_REPORT.md atnaujinti.
-- **EN hero – CMO mikro-kopija (2026-03-09):** EN title ir h1 „for Marketing Leads“ → „for Marketing Leaders“ (atitikmuo LT „rinkodaros vadovams“, aiškesnė CMO/vadovų auditorija). Pakeitimas: scripts/build-locale-pages.js (title, h1), index.html (applyStaticLocaleText h1). Kitos „Leads“ vietos (Lead generator, „Leads and metrics“) nekeistos.
-
 ### Prideta
 
-- **Dokumentacija (2026-03-09):** docs/LEGACY_GOLDEN_STANDARD.md atnaujintas į v1.6 – build/deploy (BASE_PATH, scripts/build-locale-pages.js), footer (.footer-email, .footer-product-link), privatumas.html (back-link ID, referrer logika), checklist ir skyrius „privatumas.html (fiksuota)“. CHANGELOG – šis įrašas.
+- **EN promptų tekstas – vienas šaltinis (2026-03-30):** `data/en-prompt-bodies.json` (10 anglų META eilučių). `npm run build` generuoja `js/en-prompt-bodies-inline.js` (`window.__EN_PROMPT_PRE`) ir iš root `index.html` `<pre id="prompt1">`…`prompt10` ištraukia LT tekstą META pakeitimams – nebereikia dubliuoti LT+EN porų `scripts/build-locale-pages.js`. `index.html` įtraukia `js/en-prompt-bodies-inline.js`; lt/en puslapiuose kelias `../js/…`. Struktūros testai: JSON, inline JS, script src. ESLint ignoruoja generuojamą inline failą.
+- **Dokumentacija (2026-03-09):** docs/LEGACY_GOLDEN_STANDARD.md atnaujintas į v1.6 – build/deploy (BASE_PATH, scripts/build-locale-pages.js), footer (.footer-email, .footer-product-link), privatumas.html (back-link ID, referrer logika), checklist ir skyrius „privatumas.html (fiksuota)“.
+
+### Pakeista
+
+- **Bendruomenė: WhatsApp → Telegram (2026-03-30):** Pagrindinis CTA vietoj `chat.whatsapp.com` nukreipia į [Telegram @prompt_anatomy](https://t.me/prompt_anatomy). Pakeista `index.html` (bendruomenės sekcija, hero antrinis CTA `aria-label`, `applyStaticLocaleText()` EN eilutės), `scripts/build-locale-pages.js` (EN statinės poros), sugeneruoti `lt/index.html` ir `en/index.html` per `npm run build`. `tests/structure.test.js` – EN `aria-label` regresijos teiginys. Dokumentacija: STYLEGUIDE.md, docs/TURINIO_AUDITAS_DETALUS.md.
+- **EN UI – likę lietuviški promptai ir a11y (2026-03-30):** Root arba `?lang=en` / `localStorage` EN režime `applyStaticLocaleText()` dabar perrašo ir kopijuojamą `<pre>` turinį (anksčiau likdavo LT, kai `/en/` build’e jau buvo EN). Build: prieš globalų `Promptų anatomija` → `Prompt Anatomy` perkeltas bendruomenės CTA `aria-label`, kad EN nebeliktų hibridinės etiketės; pridėta trūkstama prompto 9 info pastraipa LT→EN.
+- **LT→EN UI/UX – statinis tekstas ir promptai (2026-03-09):** Build skripte (EN_REPLACEMENTS): instrukcijų 2 eilutė – sutapdintos kabutės („ “ U+201E/U+201C), kad „Click Copy prompt“ atsirastų EN; laiko etiketė „~3–5 min per žingsnį“ → „~3–5 min per step“; CSS .code-block::before `content` „Spausk čia ir nukopijuok“ → „Click here and copy“. Visi 10 promptų `<pre>` turinių (META, INPUT, OUTPUT) lokalizuoti į EN per build. docs/LEGACY_GOLDEN_STANDARD.md ir LT_EN_UI_UX_REPORT.md atnaujinti.
+- **EN hero – CMO mikro-kopija (2026-03-09):** EN title ir h1 „for Marketing Leads“ → „for Marketing Leaders“ (atitikmuo LT „rinkodaros vadovams“, aiškesnė CMO/vadovų auditorija). Pakeitimas: scripts/build-locale-pages.js (title, h1), index.html (applyStaticLocaleText h1). Kitos „Leads“ vietos (Lead generator, „Leads and metrics“) nekeistos.
 
 ---
 

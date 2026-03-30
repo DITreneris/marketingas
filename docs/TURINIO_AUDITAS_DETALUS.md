@@ -115,7 +115,7 @@
 |---|-------|-------------------|----------|------------|---------|
 | 42 | index.html:1990 | `(Lead magnet versija)` | Žargonas | `(Nemokamo vediklio versija)` | Content |
 | 43 | index.html:1993 | `CTA fokusas` | Žargonas – tag'e | `Veiksmų fokusas` arba palikti (glosarė paaiškino) | Content |
-| 44 | index.html:1997 | `Atidaryti Promptų anatomija WhatsApp grupę` | aria-label – „Promptų anatomija“ gali būti neaišku naujiems | Galima palikti | UI/UX |
+| 44 | index.html (community CTA) | `Atidaryti Promptų anatomija Telegram grupę` | aria-label – „Promptų anatomija“ gali būti neaišku naujiems | Galima palikti | UI/UX |
 
 ---
 

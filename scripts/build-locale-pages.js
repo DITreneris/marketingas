@@ -1,6 +1,7 @@
 /**
  * Build locale pages: generates lt/index.html and en/index.html from root index.html.
- * LT = Lithuanian (default), EN = English (replacements applied).
+ * Also writes js/en-prompt-bodies-inline.js from data/en-prompt-bodies.json (single EN source).
+ * LT = Lithuanian (default), EN = English (replacements applied; META LT taken from index <pre>).
  * Run: node scripts/build-locale-pages.js
  * Optional: BASE_PATH=/marketingas/ for GitHub Pages subpath.
  */
@@ -25,6 +26,45 @@ function ensureDir(dirPath) {
   }
 }
 
+const DATA_DIR = path.join(ROOT, 'data');
+const EN_PROMPT_BODIES_PATH = path.join(DATA_DIR, 'en-prompt-bodies.json');
+const JS_DIR = path.join(ROOT, 'js');
+const EN_PROMPT_INLINE_JS_PATH = path.join(JS_DIR, 'en-prompt-bodies-inline.js');
+
+function loadEnPromptBodies() {
+  const raw = fs.readFileSync(EN_PROMPT_BODIES_PATH, 'utf8');
+  const arr = JSON.parse(raw);
+  if (!Array.isArray(arr) || arr.length !== 10) {
+    throw new Error('data/en-prompt-bodies.json must be a JSON array of exactly 10 strings');
+  }
+  return arr;
+}
+
+/** LT <pre> inner text from root index.html, prompt1..prompt10 (order). */
+function extractLtPreBodiesFromHtml(html) {
+  const out = [];
+  for (let i = 1; i <= 10; i++) {
+    const re = new RegExp(`<pre class="code-text" id="prompt${i}">([\\s\\S]*?)</pre>`, '');
+    const m = html.match(re);
+    if (!m) {
+      throw new Error(`extractLtPreBodiesFromHtml: missing <pre id="prompt${i}">`);
+    }
+    out.push(m[1].replace(/\r\n/g, '\n').replace(/\r/g, '\n').trimEnd());
+  }
+  return out;
+}
+
+function writeEnPromptInlineJs(enBodies) {
+  ensureDir(JS_DIR);
+  const content =
+    "'use strict';\nwindow.__EN_PROMPT_PRE = " +
+    JSON.stringify(enBodies) +
+    ';\n';
+  fs.writeFileSync(EN_PROMPT_INLINE_JS_PATH, content, 'utf8');
+}
+
+const EN_PROMPT_BODIES = loadEnPromptBodies();
+
 /** Insert canonical + hreflang after viewport meta */
 function insertSeo(html, locale) {
   const base = BASE_PATH ? BASE_PATH + '/' : '';
@@ -45,11 +85,12 @@ function insertSeo(html, locale) {
 function fixAssetPaths(html) {
   return html
     .replace(/href="favicon\.svg"/g, 'href="../favicon.svg"')
-    .replace(/href="privatumas\.html"/g, 'href="../privatumas.html"');
+    .replace(/href="privatumas\.html"/g, 'href="../privatumas.html"')
+    .replace(/src="js\//g, 'src="../js/');
 }
 
-/** EN static text replacements (order: more specific first where needed) */
-const EN_REPLACEMENTS = [
+/** EN static text replacements (META blocks come from index LT + data/en-prompt-bodies.json) */
+const EN_REPLACEMENTS_PREFIX = [
   // Skip & meta
   ['Pereiti prie turinio', 'Skip to content'],
   ['<title>Turinio DI sistema – rinkodaros vadovams</title>', '<title>Content AI System – for Marketing Leaders</title>'],
@@ -59,12 +100,14 @@ const EN_REPLACEMENTS = [
   // Footer product link (before generic "Promptų anatomija" so full paragraph matches)
   ['<p class="footer-product-link">Tai Spin-off Nr. 2 iš „Promptų anatomijos“. Pilnas interaktyvus mokymas ir kiti kursai: <a href="https://www.promptanatomy.app/" target="_blank" rel="noopener noreferrer">Promptų anatomija →</a></p>', '<p class="footer-product-link">This is Spin-off No. 2 from Prompt Anatomy. Full interactive training and other courses: <a href="https://www.promptanatomy.app/" target="_blank" rel="noopener noreferrer">Prompt Anatomy →</a></p>'],
   ['<span id="footer-email-label">El. paštas:</span>', '<span id="footer-email-label">Email:</span>'],
+  // Exact strings with "Promptų anatomija" before global replace below (order matters)
+  ['aria-label="Atidaryti Promptų anatomija Telegram grupę naujame lange"', 'aria-label="Open Prompt Anatomy Telegram group in new tab"'],
   ['Promptų anatomija', 'Prompt Anatomy'],
   ['Turinio DI sistema<br>rinkodaros vadovams', 'Content AI System<br>for Marketing Leaders'],
   ['Per 45 min. susikursi turinio variklį, kuris dirba kasdien.', 'In 45 min you\'ll build a content engine that works every day.'],
   ['aria-label="Gauti nemokamai – pereiti prie promptų"', 'aria-label="Get free – go to prompts"'],
   ['Gauti nemokamai', 'Get free'],
-  ['aria-label="Prisijunk prie bendruomenės – pereiti prie WhatsApp ir nuorodų"', 'aria-label="Join community – go to WhatsApp and links"'],
+  ['aria-label="Prisijunk prie bendruomenės – pereiti prie Telegram ir nuorodų"', 'aria-label="Join community – go to Telegram and links"'],
   ['Prisijunk prie bendruomenės', 'Join the community'],
   // Objectives
   ['<span aria-hidden="true">🎯</span> Ką realiai gausi', '<span aria-hidden="true">🎯</span> What you actually get'],
@@ -84,18 +127,10 @@ const EN_REPLACEMENTS = [
   ['Pakeisk <code>[auditorija]</code>, <code>[galvos skausmas]</code>, <code>[unikalus pardavimo pasiūlymas]</code>, <code>[kanalas]</code> ir kitus laukus savo duomenimis – ir gauk rezultatą', 'Replace <code>[audience]</code>, <code>[pain point]</code>, <code>[unique selling proposition]</code>, <code>[channel]</code> and other placeholders with your data – and get the result'],
   // Progress
   ['Panaudojai 0 iš 10 promptų', 'You used 0 of 10 prompts'],
-  ['aria-label="Progresas: 0 iš 10 promptų"', 'aria-label="Progress: 0 of 10 prompts"'],
-  // Prompt 1–10: full <pre> body content LT → EN (order: prompt 1 first so IDs match)
-  ['META: Tu esi rinkodaros strategas. Tikslas: 30 dienų planas pagal 4 principus (Autoritetas, Problema, Pavyzdys, Pasiūlymas).\n\nINPUT: Auditorija [ ], galvos skausmas [ ], unikalus pardavimo pasiūlymas [ ], kanalas [ ]. Kiekvienai dienai – vienas iš 4 principų; matomi matavimo rodikliai.\n\nOUTPUT: Lentelė/sąrašas – 30 dienų: tema, įžanginis kabliukas, formatas, raginimas veikti, matavimo rodikliai. LT arba EN; konkretus tonas.', 'META: You are a marketing strategist. Goal: 30-day plan by 4 principles (Authority, Problem, Proof, Offer).\n\nINPUT: Audience [ ], pain point [ ], unique selling proposition [ ], channel [ ]. For each day – one of 4 principles; visible metrics.\n\nOUTPUT: Table/list – 30 days: topic, hook, format, call to action, metrics. LT or EN; concrete tone.'],
-  ['META: Tu esi turinio strategas. Tikslas: 1 idėja → 7 formatų (ta pati žinutė, skirtingi kanalai).\n\nINPUT: Idėja [ ]. Ta pati branduolinė žinutė; pritaikyta kanalui.\n\nOUTPUT: 7 blokai – LinkedIn, karuselė, 30s video, el. laiškas, titulinis ekranas, reklama, 3 įžanginiai kabliukai. LT arba EN; konkretus tonas.', 'META: You are a content strategist. Goal: 1 idea → 7 formats (same message, different channels).\n\nINPUT: Idea [ ]. Same core message; adapted to channel.\n\nOUTPUT: 7 blocks – LinkedIn, carousel, 30s video, email, hero screen, ad, 3 hooks. LT or EN; concrete tone.'],
-  ['META: Tu esi LinkedIn/autoriteto specialistas. Tikslas: postas B2B skaitytojams su įrodymais.\n\nINPUT: Tema [ ], pavyzdys/skaičius [ ]. 150–200 žodžių; be tuščių frazių.\n\nOUTPUT: 1 postas – įžanginis kabliukas, 3 punktai, 1 pavyzdys, raginimas veikti. LT arba EN; įžūlus, pagrįstas.', 'META: You are a LinkedIn/authority specialist. Goal: post for B2B readers with proof.\n\nINPUT: Topic [ ], example/number [ ]. 150–200 words; no filler.\n\nOUTPUT: 1 post – hook, 3 points, 1 example, call to action. LT or EN; bold, evidence-based.'],
-  ['META: Tu esi video scenarijų autorius (Reels/TikTok/Shorts). Tikslas: 30 s scenarijus – sustabdyti žiūrovą, gauti reakciją.\n\nINPUT: Tema [ ], pavyzdys [ ]. ~30 s; įžanginis kabliukas 0–2 s – pirmos sekundės sprendžia.\n\nOUTPUT: Laiko žymės – 0–2 s įžanginis kabliukas, 3 punktai (~8–10 s kiekvienam), pavyzdys, raginimas veikti. LT arba EN; greitas, aiškus.', 'META: You are a video script writer (Reels/TikTok/Shorts). Goal: 30s script – stop the viewer, get a reaction.\n\nINPUT: Topic [ ], example [ ]. ~30s; hook 0–2s – first seconds decide.\n\nOUTPUT: Timestamps – 0–2s hook, 3 points (~8–10s each), example, call to action. LT or EN; fast, clear.'],
-  ['META: Tu esi analitikas. Tikslas: iš rodiklių – veiksmų planas (\u201Eką daryti rytoj\u201C).\n\nINPUT: Rodikliai – skaičiai, kanalai, periodas [ ]. Kontekstas: ką bandėte, tikslai [ ]. Paremta duomenimis.\n\nOUTPUT: 4 punktai – (1) Kas neveikia, (2) Priežastis (hipotezė), (3) Ką testuoti, (4) Ką stabdyti. LT arba EN; konkretus, veiksmo orientuotas.', 'META: You are an analyst. Goal: from metrics – action plan ("what to do tomorrow").\n\nINPUT: Metrics – numbers, channels, period [ ]. Context: what you tried, goals [ ]. Data-backed.\n\nOUTPUT: 4 points – (1) What doesn\'t work, (2) Reason (hypothesis), (3) What to test, (4) What to stop. LT or EN; concrete, action-oriented.'],
-  ['META: Tu esi konversijos/turinio specialistas. Tikslas: turinys, neutralizuojantis prieštaravimus – mažesnė trintis, didesnis pasitikėjimas.\n\nINPUT: Prieštaravimų sąrašas [ ], produktas/pasiūlymas [ ]. Kiekvienas vienetas – vienas prieštaravimas; įtikinamai.\n\nOUTPUT: 10 vienetų – postai/el. laiškai/landing, prieštaravimas + argumentai. Trumpas aprašymas + žinutė. LT arba EN; įtikinamas, empatiškas.', 'META: You are a conversion/content specialist. Goal: content that neutralises objections – less friction, more trust.\n\nINPUT: List of objections [ ], product/offer [ ]. Each unit – one objection; persuasive.\n\nOUTPUT: 10 units – posts/emails/landing, objection + arguments. Short description + message. LT or EN; persuasive, empathetic.'],
-  ['META: Tu esi lead/konversijų specialistas. Tikslas: postas + 4 žinutės tiems, kurie augina lead\'us ir nori vesti iš sekėjo į klientą.\n\nINPUT: Lead generator [ kas duodama, ką sprendžia ] [ ], auditorija [ ]. Postas – vienas raginimas veikti; seka: pristatyti → kvalifikacija → vertė → pasiūlymas.\n\nOUTPUT: (1) Postas: įžanginis kabliukas, nauda, raginimas veikti. (2) 4 žinutės (tekstas + raginimas veikti kiekvienai). LT arba EN; naudingas, aiškus tonas.', 'META: You are a lead/conversion specialist. Goal: post + 4 messages for those growing leads and moving follower to customer.\n\nINPUT: Lead generator [ what you give, what it solves ] [ ], audience [ ]. Post – one call to action; sequence: intro → qualification → value → offer.\n\nOUTPUT: (1) Post: hook, benefit, call to action. (2) 4 messages (copy + CTA each). LT or EN; useful, clear tone.'],
-  ['META: Tu esi turinio/pardavimų specialistas. Tikslas: iš duomenų – struktūrizuota kliento istorija (kredibilitetas, konversija).\n\nINPUT: Klientas [ ], problema [ ], sprendimas [ ], procesas [ ], rezultatai (skaičiai/citatos) [ ]. Rezultatai – konkretūs.\n\nOUTPUT: 6 sekcijos – Problema, Sprendimas, Procesas, Rezultatas, Pagrindinės mintys, raginimas veikti. Su skaičiais kur įmanoma. LT arba EN; įtikinamas tonas.', 'META: You are a content/sales specialist. Goal: from data – structured customer story (credibility, conversion).\n\nINPUT: Customer [ ], problem [ ], solution [ ], process [ ], results (numbers/quotes) [ ]. Results – concrete.\n\nOUTPUT: 6 sections – Problem, Solution, Process, Result, Key takeaways, call to action. With numbers where possible. LT or EN; persuasive tone.'],
-  ['META: Tu esi SEO/turinio specialistas. Tikslas: temų struktūra (pagrindinė + 8 subtemos) autoritetui ir organiniam pasiekiamumui.\n\nINPUT: Pagrindinė tema [ ], niša/vertė [ ]. 8 subtemos, logiškai susietos; vidinės nuorodos.\n\nOUTPUT: (1) 1 pagrindinė tema – pavadinimas, aprašymas, raginimas veikti. (2) 8 subtemos – pavadinimai, ryšys su pagrindine. (3) Nuorodų logika. LT arba EN.', 'META: You are an SEO/content specialist. Goal: topic structure (pillar + 8 subtopics) for authority and organic reach.\n\nINPUT: Pillar topic [ ], niche/value [ ]. 8 subtopics, logically linked; internal links.\n\nOUTPUT: (1) 1 pillar topic – title, description, call to action. (2) 8 subtopics – titles, link to pillar. (3) Link logic. LT or EN.'],
-  ['META: Tu esi rinkodaros strategas. Tikslas: vienas „valdymo centro" planas – turinys, 1→7 formatų, testavimas, prioritetai.\n\nINPUT: Verslas [ ], auditorija [ ], galvos skausmas [ ], unikalus pardavimo pasiūlymas [ ], tikslas [ ], kanalai [ ], duomenys (rodikliai, prieštaravimai, istorijos) [ ]. Konkretūs teiginiai, matuojamas raginimas veikti.\n\nOUTPUT: 6 blokai – (1) 30 d. struktūra, (2) 5 turinio vienetai šiai savaitei, (3) 1 idėja→7 formatų, (4) 3 hipotezės, (5) Rodiklių interpretavimas, (6) 3 veiksmai rytoj. LT arba EN; konkretus tonas.', 'META: You are a marketing strategist. Goal: one "control centre" plan – content, 1→7 formats, testing, priorities.\n\nINPUT: Business [ ], audience [ ], pain point [ ], unique selling proposition [ ], goal [ ], channels [ ], data (metrics, objections, stories) [ ]. Concrete claims, measurable call to action.\n\nOUTPUT: 6 blocks – (1) 30-day structure, (2) 5 content units this week, (3) 1 idea→7 formats, (4) 3 hypotheses, (5) Metrics interpretation, (6) 3 actions tomorrow. LT or EN; concrete tone.'],
+  ['aria-label="Progresas: 0 iš 10 promptų"', 'aria-label="Progress: 0 of 10 prompts"']
+];
+
+const EN_REPLACEMENTS_SUFFIX = [
   // Prompt 1
   ['<div class="category">Pradžia</div>', '<div class="category">Start</div>'],
   ['<h2 class="prompt-title">30 dienų turinio sistema</h2>', '<h2 class="prompt-title">30-day content system</h2>'],
@@ -176,6 +211,7 @@ const EN_REPLACEMENTS = [
   ['<p class="prompt-desc">Pagrindinė tema + 8 subtemos, vidinės nuorodos</p>', '<p class="prompt-desc">Main topic + 8 subtopics, internal links</p>'],
   ['aria-label="Pasirinkti ir kopijuoti promptą 9"', 'aria-label="Select and copy prompt 9"'],
   ['aria-label="Informacija: promptas 9"', 'aria-label="Information: prompt 9"'],
+  ['<p>Pagrindinė tema + subtemos = pasiekiamumas ir eksperto pozicija.</p>', '<p>Main topic + subtopics = reach and expert position.</p>'],
   ['aria-label="Kopijuoti promptą 9 į mainų atmintinę"', 'aria-label="Copy prompt 9 to clipboard"'],
   // Prompt 10
   ['<div class="category">Viskas kartu</div>', '<div class="category">All together</div>'],
@@ -201,12 +237,9 @@ const EN_REPLACEMENTS = [
   ['<a href="#block9">9. Temų grupė</a>', '<a href="#block9">9. Topic cluster</a>'],
   ['<a href="#block10">10. Pagrindinis promptas (valdymo centras)</a>', '<a href="#block10">10. Main prompt (control centre)</a>'],
   // Community
-  ['<h2 id="community-title">Nori daugiau?<br>Prisijunk prie WhatsApp grupės.</h2>', '<h2 id="community-title">Want more?<br>Join the WhatsApp group.</h2>'],
+  ['<h2 id="community-title">Nori daugiau?<br>Prisijunk prie Telegram grupės.</h2>', '<h2 id="community-title">Want more?<br>Join the Telegram group.</h2>'],
   ['<p>Bendros diskusijos, patarimai ir naujienos apie promptus ir DI.</p>', '<p>Shared discussions, tips and news about prompts and AI.</p>'],
-  ['aria-label="Atidaryti Promptų anatomija WhatsApp grupę naujame lange"', 'aria-label="Open Prompt Anatomy WhatsApp group in new tab"'],
-  ['Prisijungti prie WhatsApp grupės', 'Join WhatsApp group'],
-  ['aria-label="Pilna Promptų anatomija – interaktyvus mokymas (atidaroma naujame lange)"', 'aria-label="Full Prompt Anatomy – interactive training (opens in new tab)"'],
-  ['Promptų anatomija →', 'Prompt Anatomy →'],
+  ['Prisijungti prie Telegram grupės', 'Join Telegram group'],
   // Footer
   ['<h3>Sėkmės rinkodaroje <span aria-hidden="true">🚀</span></h3>', '<h3>Success in marketing <span aria-hidden="true">🚀</span></h3>'],
   ['<p>Nepamiršk pakeisti <strong>[auditorija]</strong>, <strong>[galvos skausmas]</strong>, <strong>[unikalus pardavimo pasiūlymas]</strong>, <strong>[kanalas]</strong> ir kitus laukus savo duomenimis</p>', '<p>Remember to replace <strong>[audience]</strong>, <strong>[pain point]</strong>, <strong>[unique selling proposition]</strong>, <strong>[channel]</strong> and other placeholders with your data</p>'],
@@ -224,9 +257,29 @@ const EN_REPLACEMENTS = [
   ['aria-label="Perjungti į lietuvių kalbą"', 'aria-label="Switch to Lithuanian"']
 ];
 
+function buildMetaReplacementsFromIndex(html) {
+  const ltBodies = extractLtPreBodiesFromHtml(html);
+  return ltBodies.map((lt, i) => {
+    const en = EN_PROMPT_BODIES[i];
+    if (typeof en !== 'string') {
+      throw new Error('Missing EN prompt body at index ' + i);
+    }
+    return [lt, en];
+  });
+}
+
+function getEnReplacementsForHtml(html) {
+  return [
+    ...EN_REPLACEMENTS_PREFIX,
+    ...buildMetaReplacementsFromIndex(html),
+    ...EN_REPLACEMENTS_SUFFIX
+  ];
+}
+
 function applyEnReplacements(html) {
+  const list = getEnReplacementsForHtml(html);
   let out = html;
-  for (const [from, to] of EN_REPLACEMENTS) {
+  for (const [from, to] of list) {
     out = out.split(from).join(to);
   }
   return out;
@@ -244,13 +297,14 @@ function buildLocale(locale) {
 }
 
 function main() {
+  writeEnPromptInlineJs(EN_PROMPT_BODIES);
   ensureDir(path.join(ROOT, 'lt'));
   ensureDir(path.join(ROOT, 'en'));
   const ltHtml = buildLocale('lt');
   const enHtml = buildLocale('en');
   fs.writeFileSync(path.join(ROOT, 'lt', 'index.html'), ltHtml, 'utf8');
   fs.writeFileSync(path.join(ROOT, 'en', 'index.html'), enHtml, 'utf8');
-  console.log('Built lt/index.html and en/index.html');
+  console.log('Built lt/index.html, en/index.html, js/en-prompt-bodies-inline.js');
 }
 
 main();

@@ -12,6 +12,8 @@ const INDEX_PATH = path.join(__dirname, '..', 'index.html');
 const PRIVATUMAS_PATH = path.join(__dirname, '..', 'privatumas.html');
 const LT_INDEX_PATH = path.join(__dirname, '..', 'lt', 'index.html');
 const EN_INDEX_PATH = path.join(__dirname, '..', 'en', 'index.html');
+const EN_PROMPT_BODIES_JSON = path.join(__dirname, '..', 'data', 'en-prompt-bodies.json');
+const EN_PROMPT_INLINE_JS = path.join(__dirname, '..', 'js', 'en-prompt-bodies-inline.js');
 
 function readFile(filePath) {
   try {
@@ -105,6 +107,50 @@ function run() {
   else failed++;
   if (enHtml && assert(enHtml.includes('rel="canonical"') && enHtml.includes('hreflang="en"'), 'en/index.html turi canonical ir hreflang')) passed++;
   else failed++;
+
+  // --- Vienas šaltinis EN promptų kūnams (data + generuojamas JS) ---
+  const enBodiesRaw = readFile(EN_PROMPT_BODIES_JSON);
+  let enBodiesArr = null;
+  if (enBodiesRaw) {
+    try {
+      enBodiesArr = JSON.parse(enBodiesRaw);
+    } catch (_) {
+      enBodiesArr = null;
+    }
+  }
+  if (assert(enBodiesArr !== null && Array.isArray(enBodiesArr) && enBodiesArr.length === 10, 'data/en-prompt-bodies.json – masyvas iš 10 eilučių')) passed++;
+  else failed++;
+  const enInlineJs = readFile(EN_PROMPT_INLINE_JS);
+  if (assert(
+    enInlineJs !== null && enInlineJs.includes('window.__EN_PROMPT_PRE') && enInlineJs.includes("'use strict'"),
+    'js/en-prompt-bodies-inline.js egzistuoja (npm run build)'
+  )) passed++;
+  else failed++;
+  if (assert(html.includes('src="js/en-prompt-bodies-inline.js"'), 'index.html įtraukia js/en-prompt-bodies-inline.js')) passed++;
+  else failed++;
+  if (assert(enHtml !== null && enHtml.includes('src="../js/en-prompt-bodies-inline.js"'), 'en/index.html – santykinis kelias į en-prompt-bodies-inline.js')) passed++;
+  else failed++;
+  if (assert(ltHtml !== null && ltHtml.includes('src="../js/en-prompt-bodies-inline.js"'), 'lt/index.html – santykinis kelias į en-prompt-bodies-inline.js')) passed++;
+  else failed++;
+
+  // --- EN puslapis: regresija – matomas turinys be LT likučių (build + EN_REPLACEMENTS) ---
+  if (enHtml) {
+    if (assert(
+      !enHtml.includes('Pagrindinė tema + subtemos = pasiekiamumas'),
+      'en/index.html: prompt 9 info be LT pastraipos'
+    )) passed++;
+    else failed++;
+    if (assert(
+      enHtml.includes('Main topic + subtopics = reach and expert position'),
+      'en/index.html: prompt 9 info EN pastraipa'
+    )) passed++;
+    else failed++;
+    if (assert(
+      enHtml.includes('aria-label="Open Prompt Anatomy Telegram group in new tab"'),
+      'en/index.html: Telegram CTA pilnas EN aria-label'
+    )) passed++;
+    else failed++;
+  }
 
   console.log('\n---');
   console.log(`Rezultatas: ${passed} praeina, ${failed} nepraeina.`);
